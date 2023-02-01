@@ -29,17 +29,18 @@ que la búsqueda se basa exclusivamente en los valores de la función objetivo.
 representaciones de sus elementos.
 -  Múltiple: procesan simultáneamente un conjunto de candidatos.
 - Estocástica referida tanto a las fases de selección como a las de transformación.
-`t=0;`
-`Generar poblacion inicial(P(t));`
-`Evaluar población(P(t));`
-`mientras (t<Num_max_gen) y no CondTermina() {`
-`t++;`
-`Poblacion(t) = Selección(P(t-1));`
-`Reproducción(P(t));`
-`Mutacion(P(t));`
-`Evaluar población(P(t));`
-`}`
-
+```java
+t=0;
+//Generar poblacion inicial(P(t));
+//Evaluar población(P(t));
+while (t<Num_max_gen) y no CondTermina() {
+t++;
+Poblacion(t) = Selección(P(t-1));
+Reproducción(P(t));
+Mutacion(P(t));
+Evaluar_población(P(t));
+}`
+```
 ## Esquema General
 ## Representacion
 ### Individuos
