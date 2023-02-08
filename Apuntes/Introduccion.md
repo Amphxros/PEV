@@ -9,4 +9,4 @@
 ### Tema 5: Fundamentos matemáticos.
 ### Tema 6: Algoritmos evolutivos: otras representaciones más complejas. 
 ### Tema 7: Programación genética + Gramáticas evolutivas.
-### Tema 8: Extensiones de los algoritmos evolutivos: ACO, PSO, CRO, Multiobjetivo, AE Paralelos, A. Meméticos, etc
+### Tema 8: Extensiones de los algoritmos evolutivos: ACO, PSO, CRO, Multiobjetivo, AE Paralelos, A.Meméticos, etc
