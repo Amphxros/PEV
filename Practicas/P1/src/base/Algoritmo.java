@@ -13,6 +13,9 @@ public abstract class Algoritmo {
 	private int tamTorneo;
 	private Individuo elMejor;
 	private int pos_mejor;
+	
+	private Selection.Type seleccion;
+	
 
 	private CrossType crossType;
 	
@@ -31,7 +34,7 @@ public abstract class Algoritmo {
 		}
 	}
 
-	protected void createPoblation() {
+	protected void createPopulation() {
 
 	}
 
