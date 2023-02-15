@@ -3,7 +3,7 @@ package base;
 public class Selection {
 
 	public enum Type {
-		Proporcional, MuestreoUniversalEstoclastico, Truncamiento, Torneo, Ranking, Restos
+		Proporcional, MuestreoUniversalEstoclastico, Truncamiento, TorneoDeterministico, TorneoProbabilistico, Ranking, Restos
 	}
 
 	public static Individuo[] Proporcional(Individuo[] poblacion, double[] fitness) {
@@ -55,12 +55,10 @@ public class Selection {
 
 		// Array nuevo con el resultado de seleccion
 		Individuo[] seleccion = new Individuo[size];
-		
-		
+
 		double offset = 1 / size;
-		
+
 		double r = Math.random() * offset;
-		
 
 		for (int i = 0; i < size; i++) {
 
@@ -77,8 +75,7 @@ public class Selection {
 
 			seleccion[i] = poblacion[c];
 		}
-		
-		
+
 		return seleccion;
 	}
 
@@ -87,16 +84,80 @@ public class Selection {
 		return null;
 	}
 
-	public static Individuo[] Torneo(Individuo[] poblacion, double[] fitness, int k) {
-		
-		
-		int size = poblacion.length;
-		
-		
-		
-		
+	public static Individuo[] TorneoDeterministico(Individuo[] poblacion, double[] fitness, int k) {
 
-		return null;
+		int size = poblacion.length;
+
+		Individuo[] seleccion = new Individuo[size];
+
+		for (int i = 0; i < size; i++) {
+
+			int[] muestra = new int[k];
+			for (int c = 0; i < k; c++) {
+
+				int idx = (int) Math.floor(Math.random() * size);
+				muestra[c] = idx;
+			}
+
+			// Fase de seleccion
+			int seleccionado = muestra[0];
+			for (int c = 1; c < k; c++) {
+
+				if (fitness[muestra[c]] > fitness[seleccionado]) {
+					seleccionado = muestra[c];
+				}
+			}
+
+			seleccion[i] = poblacion[seleccionado];
+
+		}
+
+		return seleccion;
+	}
+
+	public static Individuo[] TorneoProbabilistico(Individuo[] poblacion, double[] fitness, int k, double p) {
+
+		int size = poblacion.length;
+
+		Individuo[] seleccion = new Individuo[size];
+
+		for (int i = 0; i < size; i++) {
+
+			int[] muestra = new int[k];
+			for (int c = 0; i < k; c++) {
+
+				int idx = (int) Math.floor(Math.random() * size);
+				muestra[c] = idx;
+			}
+
+			// Fase de seleccion
+			int seleccionado = muestra[0];
+
+			if (Math.random() > p) {
+
+				for (int c = 1; c < k; c++) {
+
+					if (fitness[muestra[c]] > fitness[seleccionado]) {
+						seleccionado = muestra[c];
+					}
+				}
+
+			} else {
+
+				for (int c = 1; c < k; c++) {
+
+					if (fitness[muestra[c]] < fitness[seleccionado]) {
+						seleccionado = muestra[c];
+					}
+				}
+			}
+
+			seleccion[i] = poblacion[seleccionado];
+
+		}
+
+		return seleccion;
+
 	}
 
 	public static Individuo[] Ranking(Individuo[] poblacion, double[] fitness) {
