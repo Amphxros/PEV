@@ -1,5 +1,7 @@
 package base;
 
+import base.Factorys.CrossFactory;
+
 public abstract class Algoritmo {
 
 	private final int tamPoblacion;
@@ -12,11 +14,14 @@ public abstract class Algoritmo {
 	private Individuo elMejor;
 	private int pos_mejor;
 
-	public Algoritmo(int tamPoblacion, int maxGeneraciones, double probCruce, double probMutation) {
+	private CrossType crossType;
+	
+	public Algoritmo(int tamPoblacion, int maxGeneraciones, double probCruce, double probMutation, CrossType crossType) {
 		this.maxGeneraciones = maxGeneraciones;
 		this.tamPoblacion = tamPoblacion;
 		this.probCruce = probCruce;
 		this.probMutacion = probMutation;
+		this.crossType= crossType;
 	}
 
 	public void run() {
@@ -34,8 +39,18 @@ public abstract class Algoritmo {
 
 	}
 
-	protected void cross() {
-
+	protected void CrossOver() {
+		switch(this.crossType) {
+		case Monopunto:
+			CrossFactory.getInstance().MonopointCrossing();
+			break;
+		case Multipunto:
+			CrossFactory.getInstance().MultipointCrossing();
+			break;
+		case Uniforme:
+			CrossFactory.getInstance().UniformCrossing();
+			break;
+		}
 	}
 
 }
