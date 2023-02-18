@@ -2,7 +2,7 @@ package base;
 
 
 
-public abstract class Algoritmo {
+public abstract class Algoritmo<T> {
 
 	private final int tamPoblacion;
 	private Individuo[] poblacion;
@@ -46,6 +46,7 @@ public abstract class Algoritmo {
 	protected void CrossOver() {
 		switch (crossing) {
 		case Mono:
+			
 			break;
 		case Multiple:
 			break;

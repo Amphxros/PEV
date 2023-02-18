@@ -13,16 +13,34 @@ public class Crossing {
 		}
 		
 		//second part:  A to childB and B to childA
-		for(int j=crossOverPoint; j< parentA.getCromosomes().length; j++) {
+		for(int j=crossOverPoint; j< parentA.getCromosomes().size(); j++) {
 			childA.crossOver(parentB, j);
 			childB.crossOver(parentA, j);
 		}
 		
 	}
-	public void MultiPointCrossOver() {
+	public <T> void MultiPointCrossOver() {
 		
 	}
-	public void UniformCrossOver() {
+	public <T> void UniformCrossOver(Individuo<T>[] population, int tam, double probability) {
+		Individuo<T> childA, childB;
+		double prob;
+		int numSelect=0;
+		int selected[]= new int[tam];
 		
+		for (int i=0;i<tam;i++) {
+			prob=Math.random();
+			if(prob<probability) {
+				selected[numSelect]=i;
+				numSelect++;
+			}
+		}
+		
+		
+		if(numSelect%2!=0) numSelect--;
+		
+		for(int i=0;i<numSelect;i++) {
+			
+		}
 	}
 }
