@@ -1,4 +1,4 @@
-package base;
+package base.Genes;
 
 public abstract class Gen<T>{
 	private T allele;
