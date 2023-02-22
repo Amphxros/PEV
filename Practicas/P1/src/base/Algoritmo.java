@@ -16,7 +16,7 @@ public abstract class Algoritmo<T> {
 	
 	protected Selection.Type seleccion;
 	protected Crossing.Type crossing;
-	
+	private Crossing mCrossingInstance;
 
 
 	
@@ -25,13 +25,17 @@ public abstract class Algoritmo<T> {
 		this.tamPoblacion = tamPoblacion;
 		this.probCruce = probCruce;
 		this.probMutacion = probMutation;
+		mCrossingInstance= new Crossing();
 	
 	}
 
 	public void run() {
 
+		createPopulation();
 		for (int i = 0; i < maxGeneraciones; i++) {
-
+			selection();
+			crossOver();
+			mutate();
 		}
 	}
 
@@ -43,7 +47,7 @@ public abstract class Algoritmo<T> {
 	
 	}
 
-	protected void CrossOver() {
+	protected void crossOver() {
 		switch (crossing) {
 		case Mono:
 			
@@ -53,6 +57,10 @@ public abstract class Algoritmo<T> {
 		case Uniform:
 			break;
 		}
+	}
+	
+	protected void mutate() {
+		
 	}
 
 }

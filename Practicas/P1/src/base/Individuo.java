@@ -4,10 +4,10 @@ import java.util.ArrayList;
 
 import base.Genes.Gen;
 
-public class Individuo<T> {
+public abstract class Individuo<T> {
 
 	int[] tamGenes;
-	private ArrayList<Gen<T>> cromosoma; //genotipo
+	protected Cromosoma<Gen<T>> cromosoma;
 	int tam_Cromosoma;
 	private double apt;
 	private double punct;
@@ -19,7 +19,8 @@ public class Individuo<T> {
 	protected double tolerance;
 
 	public Individuo(double tolerance, int id, int numGenes) {
-		this.cromosoma= new ArrayList<>(numGenes);
+		this.tam_Cromosoma=numGenes;
+		this.cromosoma= new Cromosoma<Gen<T>>(numGenes);
 		this.tolerance=tolerance;
 		this.id=id;
 		this.tam_Cromosoma=numGenes;
@@ -28,44 +29,79 @@ public class Individuo<T> {
 	}
 	
 	public Individuo(Algoritmo<T> problema) {
-		this.cromosoma= new ArrayList<>();
+		this.cromosoma=  new Cromosoma<Gen<T>>();
 		
 	}
 	
-	public ArrayList<Gen<T>> getCromosomes() {
+	public Cromosoma<Gen<T>> getCromosomes() {
 		return cromosoma;
 	}
 	
 	public Gen<T> getGen(int pos) {
-		return cromosoma.get(pos);
+		return cromosoma.getGen(pos);
+	}
+	public int getID() {
+		return this.id;
 	}
 	
 	public void crossOver(Individuo<T> parent, int position) {
 		int index=0;
 		int pos = getGenIndex(index ,position);
-		this.cromosoma.add(index, null); // TODO change null for calculated Individual
+		this.cromosoma.setGen(null, index); // TODO change null for calculated Individual
 		
 	}
 	
 	private int getGenIndex(int ind,int pos) {
-		int posAcum= this.cromosoma.get(ind).length();
+		int posAcum= this.cromosoma.getGen(ind).length();
 		while(posAcum < pos &&posAcum<this.tam_Cromosoma) {
 			ind++;
-			posAcum+=this.cromosoma.get(ind).length();
+			posAcum+=this.cromosoma.getGen(ind).length();
 		}
-		return pos - (posAcum - this.cromosoma.get(ind).length());
+		return pos - (posAcum - this.cromosoma.getGen(ind).length());
 	}
 	
 	
 	public void mutate(int position) {
 		int index=0;
 		int pos = getGenIndex(index ,position);
-		this.cromosoma.add(index, null); // TODO change null for calculated Individual
+		this.cromosoma.setGen(null, index); // TODO change null for calculated Individual
 
 	}
-	public void evaluateSelf() {
-		
+	public abstract void evaluateSelf();
+	
+	public abstract boolean maximize();
+	
+	public int getCromosomeLength(){
+		int l = 0;
+		for (int i = 0; i < this.cromosoma.getLength(); i++){
+			l += this.cromosoma.getGen(i).length();
+		}
+		return l;
 	}
 
+	
+	public double getFitness(){
+		return this.fitness;
+	}
+	
+	public void setFitness(double fitness){
+		this.fitness = fitness;
+	}
+	
+	
+	public double getTolerance() {
+		return tolerance;
+	}
+
+	public void setTolerance(double tolerance) {
+		this.tolerance = tolerance;
+	}
+	
+	public double getAptitud() {
+		return apt;
+	}
+	public void setAptitud(double apt) {
+		this.apt=apt;
+	}
 
 } 

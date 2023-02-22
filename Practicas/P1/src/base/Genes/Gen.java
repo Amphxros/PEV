@@ -1,9 +1,9 @@
 package base.Genes;
 
 public abstract class Gen<T>{
-	private T allele;
+	protected T allele;
 	protected int dimGen;
-	
+	protected int min, max;
 	protected Gen() {}
 	
 	public Gen(Gen<T> other) {
@@ -17,6 +17,7 @@ public abstract class Gen<T>{
 	public int length() {
 		return dimGen;
 	}
+	
 	public void setAllele(T allele) {
 		this.allele= allele;
 	}

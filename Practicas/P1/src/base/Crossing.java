@@ -1,11 +1,27 @@
 package base;
 
+import java.util.ArrayList;
+
 public class Crossing {
 	public enum Type{
 		Mono, Multiple, Uniform
 	}
-	public <T> void MonopointCrossOver(Individuo<T> parentA, Individuo<T> parentB, Individuo<T>childA, Individuo<T> childB, int crossOverPoint) {
-		// first part: A to childA and B to childB
+	public <T> void MonopointCrossOver(ArrayList<Individuo<T>> population, int crossOverPoint) {
+	
+		Individuo<T> parentA;
+		Individuo<T> parentB;
+		Individuo<T>childA;
+		Individuo<T> childB;
+		
+		int nGenes = population.get(0).getCromosomeLength();
+		double tolerancia = population.get(0).getTolerance();
+		int idFuncion = population.get(0).getID();
+		int selected[] = new int[population.size()]; 
+		int n = 0;
+		
+		/*
+		 * // first part: A to childA and B to childB
+		 
 		for(int i=0;i<crossOverPoint; i++) {
 			//cross children
 			childA.crossOver(parentA, i);
@@ -17,6 +33,10 @@ public class Crossing {
 			childA.crossOver(parentB, j);
 			childB.crossOver(parentA, j);
 		}
+		
+		*/
+		//childA.setFitness(childA.evaluateSelf());
+		//childB.setFitness(childB.evaluateSelf());
 		
 	}
 	public <T> void MultiPointCrossOver() {
@@ -40,7 +60,18 @@ public class Crossing {
 		if(numSelect%2!=0) numSelect--;
 		
 		for(int i=0;i<numSelect;i++) {
-			
+			//child A= ...
+			//child B= ...
+			prob = (int) Math.random() * 2;
+			if(prob==1) {
+				//childA.crossOver(population[numSelected[i]], j);
+				//childB.crossOver(population[numSelected[i+1]],j);
+				
+			}
+			else {
+				//childB.crossOver(population[numSelected[i]], j);
+				//childA.crossOver(population[numSelected[i+1]],j);
+			}
 		}
 	}
 }
