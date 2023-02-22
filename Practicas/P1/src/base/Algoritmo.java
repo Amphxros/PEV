@@ -1,6 +1,8 @@
 package base;
 
-public abstract class Algoritmo {
+
+
+public abstract class Algoritmo<T> {
 
 	private final int tamPoblacion;
 	private Individuo[] poblacion;
@@ -12,20 +14,30 @@ public abstract class Algoritmo {
 	private Individuo elMejor;
 	private int pos_mejor;
 	
-	private Selection.Type seleccion;
-	
+	protected Selection.Type seleccion;
+	protected Crossing.Type crossing;
+	private Crossing mCrossingInstance;
 
+
+	
 	public Algoritmo(int tamPoblacion, int maxGeneraciones, double probCruce, double probMutation) {
 		this.maxGeneraciones = maxGeneraciones;
 		this.tamPoblacion = tamPoblacion;
 		this.probCruce = probCruce;
 		this.probMutacion = probMutation;
+		mCrossingInstance= new Crossing();
+	
 	}
 
 	public void run() {
 
+		createPopulation();
+		evaluate();
 		for (int i = 0; i < maxGeneraciones; i++) {
-
+			selection();
+			crossOver();
+			mutate();
+			evaluate();
 		}
 	}
 
@@ -34,11 +46,26 @@ public abstract class Algoritmo {
 	}
 
 	protected void selection() {
-
+	
 	}
 
-	protected void cross() {
-
+	protected void crossOver() {
+		switch (crossing) {
+		case Mono:
+			
+			break;
+		case Multiple:
+			break;
+		case Uniform:
+			break;
+		}
+	}
+	
+	protected void mutate() {
+		
+	}
+	protected void evaluate() {
+		
 	}
 
 }
