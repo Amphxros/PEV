@@ -3,9 +3,11 @@ package base;
 import java.util.ArrayList;
 
 public class Crossing {
+	
 	public enum Type{
-		Mono, Multiple, Uniform
+		Mono, Multiple, Uniform, Aritmetic, Linear, Geometric, SBX
 	}
+	
 	public <T> void MonopointCrossOver(ArrayList<Individuo<T>> population, int crossOverPoint) {
 	
 		Individuo<T> parentA;

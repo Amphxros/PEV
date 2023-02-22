@@ -32,10 +32,12 @@ public abstract class Algoritmo<T> {
 	public void run() {
 
 		createPopulation();
+		evaluate();
 		for (int i = 0; i < maxGeneraciones; i++) {
 			selection();
 			crossOver();
 			mutate();
+			evaluate();
 		}
 	}
 
@@ -60,6 +62,9 @@ public abstract class Algoritmo<T> {
 	}
 	
 	protected void mutate() {
+		
+	}
+	protected void evaluate() {
 		
 	}
 

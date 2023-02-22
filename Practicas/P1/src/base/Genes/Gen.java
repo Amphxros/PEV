@@ -3,7 +3,6 @@ package base.Genes;
 public abstract class Gen<T>{
 	protected T allele;
 	protected int dimGen;
-	protected int min, max;
 	protected Gen() {}
 	
 	public Gen(Gen<T> other) {

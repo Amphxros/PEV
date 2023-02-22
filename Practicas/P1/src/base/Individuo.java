@@ -13,7 +13,7 @@ public abstract class Individuo<T> {
 	private double punct;
 	private double punctAcum;
 	
-	protected double fenotype; //fenotipo
+	protected int fenotype; //fenotipo
 	protected double fitness; //fitness
 	protected int id; //id for different functions
 	protected double tolerance;
@@ -102,6 +102,10 @@ public abstract class Individuo<T> {
 	}
 	public void setAptitud(double apt) {
 		this.apt=apt;
+	}
+	
+	public int getFenotype() {
+		return fenotype;
 	}
 
 } 
