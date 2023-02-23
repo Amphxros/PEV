@@ -1,4 +1,4 @@
-package base.Genes;
+package Common.Genes;
 
 public class BooleanGen extends Gen<Boolean> {
 	

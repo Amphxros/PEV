@@ -1,8 +1,6 @@
-package base;
+package Common;
 
 import java.util.ArrayList;
-
-import base.Genes.Gen;
 
 public class Cromosoma<T>{
 	int[] tamGenes;

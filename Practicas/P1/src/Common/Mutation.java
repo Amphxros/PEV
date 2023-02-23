@@ -1,4 +1,4 @@
-package base;
+package Common;
 
 public class Mutation {
 	public enum Type{

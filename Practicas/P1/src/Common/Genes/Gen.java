@@ -1,4 +1,4 @@
-package base.Genes;
+package Common.Genes;
 
 public abstract class Gen<T>{
 	protected T allele;

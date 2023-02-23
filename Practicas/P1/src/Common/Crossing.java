@@ -1,4 +1,4 @@
-package base;
+package Common;
 
 import java.util.ArrayList;
 
@@ -12,7 +12,7 @@ public class Crossing {
 	
 		Individuo<T> parentA;
 		Individuo<T> parentB;
-		Individuo<T>childA;
+		Individuo<T> childA;
 		Individuo<T> childB;
 		
 		int nGenes = population.get(0).getCromosomeLength();

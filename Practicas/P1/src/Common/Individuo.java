@@ -1,13 +1,13 @@
-package base;
+package Common;
 
 import java.util.ArrayList;
 
-import base.Genes.Gen;
+import Common.Genes.Gen;
 
 public abstract class Individuo<T> {
 
 	int[] tamGenes;
-	protected Cromosoma<Gen<T>> cromosoma;
+	protected Cromosoma<Common.Genes.Gen<T>> cromosoma;
 	int tam_Cromosoma;
 	private double apt;
 	private double punct;
@@ -20,7 +20,7 @@ public abstract class Individuo<T> {
 
 	public Individuo(double tolerance, int id, int numGenes) {
 		this.tam_Cromosoma=numGenes;
-		this.cromosoma= new Cromosoma<Gen<T>>(numGenes);
+		this.cromosoma= new Cromosoma<Common.Genes.Gen<T>>(numGenes);
 		this.tolerance=tolerance;
 		this.id=id;
 		this.tam_Cromosoma=numGenes;
@@ -29,15 +29,15 @@ public abstract class Individuo<T> {
 	}
 	
 	public Individuo(Algoritmo<T> problema) {
-		this.cromosoma=  new Cromosoma<Gen<T>>();
+		this.cromosoma=  new Cromosoma<Common.Genes.Gen<T>>();
 		
 	}
 	
-	public Cromosoma<Gen<T>> getCromosomes() {
+	public Cromosoma<Common.Genes.Gen<T>> getCromosomes() {
 		return cromosoma;
 	}
 	
-	public Gen<T> getGen(int pos) {
+	public Common.Genes.Gen<T> getGen(int pos) {
 		return cromosoma.getGen(pos);
 	}
 	public int getID() {
