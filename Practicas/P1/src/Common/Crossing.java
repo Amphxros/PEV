@@ -10,10 +10,7 @@ public class Crossing {
 	
 	public <T> void MonopointCrossOver(ArrayList<Individuo<T>> population, int crossOverPoint) {
 	
-		Individuo<T> parentA;
-		Individuo<T> parentB;
-		Individuo<T> childA;
-		Individuo<T> childB;
+		
 		
 		int nGenes = population.get(0).getCromosomeLength();
 		double tolerancia = population.get(0).getTolerance();

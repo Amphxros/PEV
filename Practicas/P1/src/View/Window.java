@@ -1,7 +1,10 @@
 package View;
 
 import java.awt.BorderLayout;
+import java.awt.Dimension;
 import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
@@ -23,19 +26,30 @@ public class Window extends JFrame{
 		setSize(width, height);
 		setVisible(true);
 		this.setLayout(new BorderLayout());
-		JPanel central = new JPanel(new BorderLayout());
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		JPanel right= new JPanel(new BorderLayout());
-		add(central,  BorderLayout.CENTER);
-		add(right, BorderLayout.WEST);
-		
+		JPanel bottom= new JPanel(new BorderLayout());
+		  
 
+		add(right, BorderLayout.WEST);
+		add(bottom, BorderLayout.SOUTH);
+		
 		JLabel selectionTypeLabel = new JLabel("Tipo de selección");
 		selectionTypeLabel.setHorizontalAlignment(SwingConstants.LEFT);
-		right.setLayout(new GridLayout(3, 3, 3, 3));
+		right.setLayout(new GridLayout(20,20,0,0));
 		right.add(selectionTypeLabel);
 		
 		JComboBox selectionTypeComboBox = new JComboBox();
-		selectionTypeComboBox.setModel(new DefaultComboBoxModel(new String[] {"Ruleta", "Estocástico", "T-Determinístico", "T-Probabilístico"}));
+		selectionTypeComboBox.setModel(new DefaultComboBoxModel(new String[] {
+				"Proporcional(ruleta)", 
+				"MuestreoUniversalEstoclastico",
+				"Truncamiento",
+				"TorneoDeterministico",
+				"TorneoProbabilistico",
+				"Ranking",
+				"Restos"
+				}
+		));
 		right.add(selectionTypeComboBox);
 		
 		JLabel crossTypeLabel = new JLabel("Tipo de cruce");
@@ -62,18 +76,45 @@ public class Window extends JFrame{
 		lblSeleccionaProblema.setHorizontalAlignment(SwingConstants.LEFT);
 		problemPanel.add(lblSeleccionaProblema);
 		
-		JComboBox selectionTypeComboBox_1 = new JComboBox();
-		selectionTypeComboBox_1.setModel(new DefaultComboBoxModel(new String[] {"P1 - Funcion 1", "P1 - Funcion 2", "P1 - Funcion 3", "P1 - Funcion 4", "P1 - Funcion 5"}));
-		problemPanel.add(selectionTypeComboBox_1);
+		JComboBox problemBox = new JComboBox();
+		problemBox.setModel(new DefaultComboBoxModel(new String[] {
+				"P1 - Funcion 1",
+				"P1 - Funcion 2",
+				"P1 - Funcion 3",
+				"P1 - Funcion 4",
+				"P1 - Funcion 5"
+				//add more here
+				}
+		));
+		problemPanel.add(problemBox);
 		right.add(problemPanel);
+
 		
+
+	    JButton boton = new JButton("Calcula grafica");
+		boton.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
 	
-	}
+			}
+		});
+		bottom.add(boton, BorderLayout.EAST);
+
+		
+		double[] x = { 1, 2, 3, 4, 5, 6 };
+		double[] y = { 45, 89, 6, 32, 63, 12 };
+
+		// create your PlotPanel (you can use it as a JPanel)
 	
-	public Plot2DPanel createPanel() {
 		Plot2DPanel plot = new Plot2DPanel();
-		plot.setAxisLabels("Generacion","Fitness");
-		
-		return plot;
+		plot.setSize(new Dimension(1000,1000));
+		plot.setAxisLabels("generaciones", "fitness");
+	
+		add(plot);
+	    
+	    
 	}
+	
+	
+	
 }
