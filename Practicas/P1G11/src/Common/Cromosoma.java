@@ -21,5 +21,8 @@ public class Cromosoma<T>{
 	public int getLength() {
 		return this.genes.size();
 	}
+	public T[] getCromosome(){
+		return (T[]) genes.toArray(); 
+	}
 	
 }

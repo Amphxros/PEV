@@ -42,7 +42,9 @@ public abstract class Algoritmo<T> {
 	}
 
 	protected void createPopulation() {
-
+		for(int i=0;i<this.tamPoblacion; i++) {
+			
+		}
 	}
 
 	protected void selection() {

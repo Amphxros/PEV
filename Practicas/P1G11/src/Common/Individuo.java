@@ -79,6 +79,9 @@ public abstract class Individuo<T> {
 		return l;
 	}
 
+	public int getCromosomeArraySize() {
+		return cromosoma.getLength();
+	}
 	
 	public double getFitness(){
 		return this.fitness;
