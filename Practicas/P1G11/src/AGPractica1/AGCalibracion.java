@@ -19,6 +19,11 @@ public class AGCalibracion extends Algoritmo {
 	@Override
 	protected void createPopulation() {
 		// TODO Auto-generated method stub
+		poblacion= new IndividuoCalibracion[this.tamPoblacion];
+		
+		for(int i=0;i<this.tamPoblacion; i++) {
+			poblacion[i]= new IndividuoCalibracion(1,1,1);
+		}
 		
 	}
 

@@ -4,10 +4,10 @@ package Common;
 
 public abstract class Algoritmo {
 
-	private final int tamPoblacion;
+	protected final int tamPoblacion;
 	protected Individuo[] poblacion;
-	protected double[] fitness;
-	protected double[] generations;
+	protected final double[] fitness;
+	protected final double[] generations;
 	protected final int maxGeneraciones;
 	protected double probCruce;
 	protected double probMutacion;
