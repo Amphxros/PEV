@@ -3,6 +3,9 @@ import javax.swing.JFrame;
 import javax.swing.WindowConstants;
 import org.math.plot.Plot2DPanel;
 import org.math.plot.plots.LinePlot;
+
+import AGPractica1.AGCalibracion;
+
 import java.awt.EventQueue;
 
 import javax.swing.BorderFactory;
@@ -52,8 +55,11 @@ import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 
 import java.awt.SystemColor;
+import Common.Algoritmo;
 public class Mainframe extends JFrame  {
 	
+		
+
 		private JPanel window;
 		
 		private JTextField numGenTF;
@@ -85,6 +91,14 @@ public class Mainframe extends JFrame  {
 		{
 			plot.resetMapData();
 		    plot.addLinePlot(name, c, xy);
+		}
+		
+		private void plot(double[] x,double [] y, Color c, String name)
+		{
+			plot.resetMapData();
+			
+			plot.resetMapData();
+		    plot.addLinePlot(name, c,x,y);
 		}
 		
 		/**
@@ -208,17 +222,65 @@ public class Mainframe extends JFrame  {
 			problemPanel.add(lblSelectProblema);
 			
 			JComboBox problemTypeComboBox = new JComboBox();
-			problemTypeComboBox.setModel(new DefaultComboBoxModel(new String[] {"P1 - Funcion 1", "P1 - Funcion 2", "P1 - Funcion 3", "P1 - Funcion 4", "P1 - Funcion 5"}));
+			problemTypeComboBox.setModel(new DefaultComboBoxModel(new String[] {
+					"P1 - Funcion 1", 
+					"P1 - Funcion 2", 
+					"P1 - Funcion 3", 
+					"P1 - Funcion 4", 
+					"P1 - Funcion 5"
+					
+				}
+			));
 			problemPanel.add(problemTypeComboBox);
 			
 			//BUTTONS 
 			JButton executeButton = new JButton("Ejecutar");
 			executeButton.addActionListener(new ActionListener() {
-
+				
 				@Override
 				public void actionPerformed(ActionEvent e) {
 					// TODO Auto-generated method stub
-					System.out.println("Jineta montse");
+		
+					int tamPoblacion = Integer.parseInt(numGenTF.getText());
+					int nGeneraciones = Integer.parseInt(numGenTF.getText());
+					
+					double probCruce= Double.parseDouble(crossProbabilityTF.getText());
+					double probMutacion= Double.parseDouble(mutationProbabilityTF.getText());
+				
+					int crossingType= crossTypeComboBox.getSelectedIndex();
+					int selectionType= selectionTypeComboBox.getSelectedIndex();
+					
+					
+					switch(problemTypeComboBox.getSelectedIndex()) {
+					case 0:
+						System.out.println("Calibracion");
+						AGCalibracion ag= new AGCalibracion(tamPoblacion,nGeneraciones,probCruce,probMutacion);
+						ag.setCrossing(crossingType);
+						ag.setSelection(selectionType);
+						ag.run();
+						
+						
+						//pillamos los valores
+						plot(ag.getGenerations(), ag.getFitness(),lightRed,"Calibre");
+						break;
+					case 1:
+						System.out.println("GrieWank");
+						break;
+					case 2:
+						System.out.println("Styblinski-tang");
+						break;
+					case 3:
+						System.out.println("Michalewicz --A");
+						break;
+					case 4:
+						System.out.println("Michalewicz --B");
+						break;
+					default:
+						break;
+					}
+					
+					
+					
 				
 				}
 				

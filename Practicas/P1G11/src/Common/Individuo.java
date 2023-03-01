@@ -28,10 +28,6 @@ public abstract class Individuo<T> {
 		
 	}
 	
-	public Individuo(Algoritmo<T> problema) {
-		this.cromosoma=  new Cromosoma<Common.Genes.Gen<T>>();
-		
-	}
 	
 	public Cromosoma<Common.Genes.Gen<T>> getCromosomes() {
 		return cromosoma;
