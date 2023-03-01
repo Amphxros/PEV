@@ -49,6 +49,46 @@ public abstract class Algoritmo<T> {
 
 	protected void selection() {
 	
+		Individuo[] seleccionados = null;
+		
+		switch(seleccion) {
+
+		case Proporcional:
+			seleccionados = Selection.Proporcional(poblacion, fitness);
+			break;
+		case MuestreoUniversalEstoclastico:
+			seleccionados = Selection.MuestreoUniversalEstoclastico(seleccionados, fitness);
+			break;
+		case Truncamiento:
+			seleccionados = Selection.Truncamiento(seleccionados, fitness);
+			break;
+		case TorneoDeterministico:
+			seleccionados = Selection.TorneoDeterministico(seleccionados, fitness, tamTorneo);
+			break;
+		case TorneoProbabilistico:
+			
+			double p = 0.5;
+			seleccionados = Selection.TorneoProbabilistico(seleccionados, fitness, tamTorneo , p);
+			break;
+		case Ranking:
+			
+			seleccionados = Selection.Ranking(seleccionados, fitness);
+			break;
+		case Restos:
+			seleccionados = Selection.Restos(seleccionados, fitness);
+			break;
+		}
+		
+		
+		
+		//Para testear
+		
+		for(int i = 0; i < seleccionados.length; i++)
+		{
+			System.out.println(seleccionados[i].fitness);
+		}
+		
+		
 	}
 
 	protected void crossOver() {
@@ -60,6 +100,7 @@ public abstract class Algoritmo<T> {
 			break;
 		case Uniform:
 			break;
+			
 		}
 	}
 	
