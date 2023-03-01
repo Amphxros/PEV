@@ -2,17 +2,18 @@ package Common;
 
 
 
-public abstract class Algoritmo<T> {
+public abstract class Algoritmo {
 
-	private final int tamPoblacion;
-	private Individuo[] poblacion;
-	private double[] fitness;
-	private final int maxGeneraciones;
-	private double probCruce;
-	private double probMutacion;
-	private int tamTorneo;
-	private Individuo elMejor;
-	private int pos_mejor;
+	protected final int tamPoblacion;
+	protected Individuo[] poblacion;
+	protected final double[] fitness;
+	protected final double[] generations;
+	protected final int maxGeneraciones;
+	protected double probCruce;
+	protected double probMutacion;
+	protected int tamTorneo;
+	protected Individuo elMejor;
+	protected int pos_mejor;
 	
 	protected Selection.Type seleccion;
 	protected Crossing.Type crossing;
@@ -26,13 +27,29 @@ public abstract class Algoritmo<T> {
 		this.probCruce = probCruce;
 		this.probMutacion = probMutation;
 		mCrossingInstance= new Crossing();
+		
+		generations= new double[this.maxGeneraciones];
+		fitness= new double[this.maxGeneraciones];
+
+		for(int i=0;i<this.maxGeneraciones;i++) {
+			generations[i]=i; //axis X
+			fitness[i]=0;
+		}
 	
 	}
 
+	public void setSelection(int index) {
+		seleccion= Selection.Type.values()[index];
+	}
+	public void setCrossing(int index) {
+		crossing= Crossing.Type.values()[index];
+	}
+	
 	public void run() {
 
 		createPopulation();
 		evaluate();
+		
 		for (int i = 0; i < maxGeneraciones; i++) {
 			selection();
 			crossOver();
@@ -41,11 +58,7 @@ public abstract class Algoritmo<T> {
 		}
 	}
 
-	protected void createPopulation() {
-		for(int i=0;i<this.tamPoblacion; i++) {
-			
-		}
-	}
+	protected abstract void createPopulation();
 
 	protected void selection() {
 	
@@ -94,7 +107,7 @@ public abstract class Algoritmo<T> {
 	protected void crossOver() {
 		switch (crossing) {
 		case Mono:
-			
+			mCrossingInstance.MonopointCrossOver(poblacion, probCruce, 1);
 			break;
 		case Multiple:
 			break;
@@ -107,8 +120,13 @@ public abstract class Algoritmo<T> {
 	protected void mutate() {
 		
 	}
-	protected void evaluate() {
-		
-	}
+	protected abstract void evaluate();
 
+	public double[] getGenerations() {
+		return this.generations;
+	}
+	
+	public double[] getFitness() {
+		return this.fitness;
+	}
 }
