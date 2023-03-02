@@ -79,6 +79,7 @@ public abstract class Individuo<T> {
 		return cromosoma.getLength();
 	}
 	
+	
 	public double getFitness(){
 		return this.fitness;
 	}
@@ -86,7 +87,6 @@ public abstract class Individuo<T> {
 	public void setFitness(double fitness){
 		this.fitness = fitness;
 	}
-	
 	
 	public double getTolerance() {
 		return tolerance;

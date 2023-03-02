@@ -5,7 +5,7 @@ public class Mutation {
 		Uniform, NonUniform
 	}
 	
-	void mutateUniform() {
+	void mutateUniform(Individuo[] population, double probMutation) {
 		
 	}
 	void mutateNonUniform() {

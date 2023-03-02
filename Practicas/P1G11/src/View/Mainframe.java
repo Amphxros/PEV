@@ -95,7 +95,6 @@ public class Mainframe extends JFrame  {
 		
 		private void plot(double[] x,double [] y, Color c, String name)
 		{
-			plot.resetMapData();
 			
 			plot.resetMapData();
 		    plot.addLinePlot(name, c,x,y);
@@ -172,7 +171,7 @@ public class Mainframe extends JFrame  {
 			
 			JComboBox crossTypeComboBox = new JComboBox();
 			crossTypeComboBox.setModel(new DefaultComboBoxModel(new String[] {
-				"Cruce Monopunto"
+				"Cruce Monopunto",
 				
 				}
 			));
@@ -196,12 +195,12 @@ public class Mainframe extends JFrame  {
 			mutationTypeLabel.setHorizontalAlignment(SwingConstants.LEFT);
 			mutationPanel.add(mutationTypeLabel);
 			
-			JComboBox mutationTypeTextField = new JComboBox();
-			mutationTypeTextField.setModel(new DefaultComboBoxModel(new String[] {
+			JComboBox mutationTypeComboBox = new JComboBox();
+			mutationTypeComboBox.setModel(new DefaultComboBoxModel(new String[] {
 				"Mutación básica"
 				}
 			));
-			mutationPanel.add(mutationTypeTextField);
+			mutationPanel.add(mutationTypeComboBox);
 			
 			JLabel mutationProbLabel = new JLabel("% Mutación");
 			mutationPanel.add(mutationProbLabel);
@@ -249,18 +248,20 @@ public class Mainframe extends JFrame  {
 				
 					int crossingType= crossTypeComboBox.getSelectedIndex();
 					int selectionType= selectionTypeComboBox.getSelectedIndex();
-					
+					int mutationType= mutationTypeComboBox.getSelectedIndex();
 					
 					switch(problemTypeComboBox.getSelectedIndex()) {
 					case 0:
 						System.out.println("Calibracion");
 						AGCalibracion ag= new AGCalibracion(tamPoblacion,nGeneraciones,probCruce,probMutacion);
+						//sets the selection, crossing and mutation parameters
 						ag.setCrossing(crossingType);
 						ag.setSelection(selectionType);
+						ag.setMutation(mutationType);
+						
+						//runs the algoritm
 						ag.run();
-						
-						
-						//pillamos los valores
+						//puts them in the graphic plot
 						plot(ag.getGenerations(), ag.getFitness(),lightRed,"Calibre");
 						break;
 					case 1:

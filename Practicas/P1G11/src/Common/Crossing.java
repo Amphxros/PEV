@@ -22,14 +22,13 @@ public class Crossing {
 				Individuo childB= population[i + 1];
 				
 				int length= childA.getCromosomeArraySize();
-				
 				double aux= 1 + rnd.nextDouble()*(length-2);
-				
-				
 				int point=(int)aux;
 				
 				for(int j=point;j<length;j++) {
 					//TODO swap genes here
+					childA.crossOver(childB, j);
+					childB.crossOver(childA, j);
 				}
 				//set the crossed ones
 				crossed[i]=childA;
@@ -48,8 +47,10 @@ public class Crossing {
 	public <T> void MultiPointCrossOver() {
 		
 	}
-	public <T> void UniformCrossOver(Individuo<T>[] population, double probability) {
-	
+	public <T> Individuo[] UniformCrossOver(Individuo<T>[] population, double probability) {
+		Individuo[] crossed= new Individuo[population.length];
+		
+		return crossed;
 		
 	}
 }

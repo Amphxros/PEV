@@ -17,8 +17,9 @@ public abstract class Algoritmo {
 	
 	protected Selection.Type seleccion;
 	protected Crossing.Type crossing;
+	protected Mutation.Type mutation;
+	
 	private Crossing mCrossingInstance;
-
 
 	
 	public Algoritmo(int tamPoblacion, int maxGeneraciones, double probCruce, double probMutation) {
@@ -118,7 +119,11 @@ public abstract class Algoritmo {
 	}
 	
 	protected void mutate() {
-		
+		switch(mutation) {
+		case Uniform:
+			break;
+			
+		}
 	}
 	protected abstract void evaluate();
 
@@ -128,5 +133,10 @@ public abstract class Algoritmo {
 	
 	public double[] getFitness() {
 		return this.fitness;
+	}
+
+	protected void createElite() {
+		// TODO Auto-generated method stub
+		
 	}
 }
