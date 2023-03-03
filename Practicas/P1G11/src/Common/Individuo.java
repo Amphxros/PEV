@@ -62,16 +62,14 @@ public abstract class Individuo<T> {
 	}
 	
 	
-	public void mutate(Random rnd, double probMutacion) {
+	public void mutate(Random rnd, double probability) {
 		int index=0;
 		
 	}
 	
-	protected abstract boolean mutateGene(int pos, Random rnd, double mutation_chance);
+	protected abstract boolean mutateSelf(int pos, Random rnd, double probability);
 	protected abstract void calculateFenotype();
-		
 	public abstract void evaluateSelf();
-	
 	public abstract boolean maximize();
 	
 	public int getCromosomeLength(){
@@ -110,7 +108,7 @@ public abstract class Individuo<T> {
 		this.apt=apt;
 	}
 	
-	public double[] getFenotypes() {
+	public double[] getFenotype() {
 		return fenotype;
 	}
 

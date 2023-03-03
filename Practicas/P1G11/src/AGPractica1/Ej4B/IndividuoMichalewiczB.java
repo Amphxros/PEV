@@ -6,13 +6,18 @@ import Common.Individuo;
 
 public class IndividuoMichalewiczB extends Individuo<Double>{
 
-	public IndividuoMichalewiczB(double tolerance, int id, int numGenes) {
+	private final int dimension;
+	public IndividuoMichalewiczB(int dimension,double tolerance, int id, int numGenes) {
 		super(tolerance, id, numGenes);
+		this.dimension=dimension;
 		// TODO Auto-generated constructor stub
+		for(int i=0;i<numGenes;i++) {
+			
+		}
 	}
 
 	@Override
-	protected boolean mutateGene(int pos, Random rnd, double mutation_chance) {
+	protected boolean mutateSelf(int pos, Random rnd, double probability) {
 		// TODO Auto-generated method stub
 		return false;
 	}

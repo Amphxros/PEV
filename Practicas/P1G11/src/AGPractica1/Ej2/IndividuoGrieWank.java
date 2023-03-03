@@ -12,12 +12,16 @@ public class IndividuoGrieWank extends Individuo<Integer>{
 	
 	public IndividuoGrieWank(double tolerance, int id, int numGenes) {
 		super(tolerance, id, numGenes);
+		Random rnd= new Random();
 		// TODO Auto-generated constructor stub
+		for(int i=0;i<numGenes;i++) {
+			
+		}
 		
 	}
 
 	@Override
-	protected boolean mutateGene(int pos, Random rnd, double mutation_chance) {
+	protected boolean mutateSelf(int pos, Random rnd, double mutation_chance) {
 		// TODO Auto-generated method stub
 		return false;
 	}
@@ -32,8 +36,7 @@ public class IndividuoGrieWank extends Individuo<Integer>{
 
 	@Override
 	public void evaluateSelf() {
-		final double fitness_;
-		
+		final double fitness_;	
 		fitness_=Double.MIN_VALUE;
 		setFitness(fitness_);
 		System.out.println("Ejer 2: Wrong fitness params.");

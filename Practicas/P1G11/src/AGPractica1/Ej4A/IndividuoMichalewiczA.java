@@ -5,14 +5,22 @@ import java.util.Random;
 import Common.Individuo;
 
 public class IndividuoMichalewiczA extends Individuo<Integer> {
-
-	public IndividuoMichalewiczA(double tolerance, int id, int numGenes) {
+	final double min=0;
+	final double max=Math.PI;
+	final int dimension;
+	final int m=10;
+	
+	public IndividuoMichalewiczA(int dimension,double tolerance, int id, int numGenes) {
 		super(tolerance, id, numGenes);
+		this.dimension=dimension;
 		// TODO Auto-generated constructor stub
+		for(int i=0;i<numGenes;i++) {
+			
+		}
 	}
 
 	@Override
-	protected boolean mutateGene(int pos, Random rnd, double mutation_chance) {
+	protected boolean mutateSelf(int pos, Random rnd, double probability) {
 		// TODO Auto-generated method stub
 		return false;
 	}

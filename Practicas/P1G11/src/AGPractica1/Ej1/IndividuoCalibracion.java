@@ -18,7 +18,11 @@ public class IndividuoCalibracion extends Individuo<Integer>{
 	public IndividuoCalibracion(double tolerance, int id, int numGenes) {
 		super(tolerance, id, numGenes);
 		// TODO Auto-generated constructor stub
+		fenotype= new double[2];
+		fenotype[0]=fenotype[1]=Double.MIN_VALUE;
+		for(int i=0;i<numGenes;i++) {
 			
+		}
 	
 	}
 
@@ -29,7 +33,7 @@ public class IndividuoCalibracion extends Individuo<Integer>{
 			double x1= fenotype[0];
 			double x2= fenotype[1];
 			
-			fitness_=(21.5 + x1*Math.sin(4*Math.PI*x1)) + x2*Math.sin(20*Math.PI*x2); //f(x1 , x2) = 21.5 + x1.sin(4π x1)+x2.sin(20π x2) : 
+			fitness_=(21.5 + x1*Math.sin(4*Math.PI*x1)) + x2*Math.sin(20*Math.PI*x2); //f(x1 , x2) = 21.5 + x1.sin(4π x1)+x2.sin(20π x2)
 		}
 		else {
 			fitness_=Double.MIN_VALUE;
@@ -42,15 +46,15 @@ public class IndividuoCalibracion extends Individuo<Integer>{
 	@Override
 	public boolean maximize() {
 		// TODO Auto-generated method stub
-		return false;
+		return true;
 	}
 
 	@Override
-	protected boolean mutateGene(int pos, Random rnd, double mutation_chance) {
+	protected boolean mutateSelf(int pos, Random rnd, double probability) {
 		boolean changed=false;
 			if(0<=pos && pos<cromosoma.getLength()) {
 				for(int i=0; i<this.cromosoma.getGen(pos).length();i++) {
-					if(rnd.nextDouble()<mutation_chance) {
+					if(rnd.nextDouble()<probability) {
 						this.cromosoma.getGen(pos).setAllele(rnd.nextBoolean(),i);
 						changed=true;
 					}
@@ -62,7 +66,9 @@ public class IndividuoCalibracion extends Individuo<Integer>{
 	@Override
 	protected void calculateFenotype() {
 		// TODO Auto-generated method stub
-		
+		for(int i=0;i<fenotype.length; i++) {
+			
+		}
 	}
 
 }
