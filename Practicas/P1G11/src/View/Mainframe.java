@@ -67,16 +67,16 @@ public class Mainframe extends JFrame  {
 		private JTextField mutationProbabilityTF;
 		private JTextField tamTorneoTF;
 		private JTextField solutionTF;
-		
+		private JTextField dimTF;	
 		
 		private Plot2DPanel plot;
 		
 		NumberFormat numberFormat = NumberFormat.getNumberInstance(Locale.getDefault());
 		DecimalFormat decimalFormat = (DecimalFormat) numberFormat;
 		
-		private final Color lightBlue = new Color(34,205,255);
-		private final Color lightGreen = new Color(67,249,34);
-		private final Color lightRed = new Color(249,34,34);
+		private final Color blue = new Color(104,64,255);
+		private final Color green = new Color(104,255,104);
+		private final Color red = new Color(255,104,104);
 		
 		
 		private void replot()
@@ -84,7 +84,7 @@ public class Mainframe extends JFrame  {
 			plot.resetMapData();
 			double[][] xy = {{1, 2, 3, 4, 5}, {3, 4, 5, 4, 3}};
 		    
-		    plot.addLinePlot("Test Plot", lightBlue, xy);
+		    plot.addLinePlot("Test Plot", blue, xy);
 		}
 		
 		private void plot(double[][] xy, Color c, String name)
@@ -175,6 +175,15 @@ public class Mainframe extends JFrame  {
 				
 				}
 			));
+			
+			JLabel lblDimension = new JLabel("Dimension: ");
+			crossPanel.add(lblDimension);
+			
+			dimTF = new JTextField();
+			dimTF.setText("1");
+			crossPanel.add(tamTorneoTF);
+			tamTorneoTF.setColumns(10);
+			
 			crossPanel.add(crossTypeComboBox);
 			
 			JLabel crossProbabilityLabel = new JLabel("% Cruce");
@@ -189,7 +198,7 @@ public class Mainframe extends JFrame  {
 
 			JPanel mutationPanel = new JPanel();
 			mutationPanel.setBorder(new TitledBorder("Mutacion"));
-			mutationPanel.setLayout(new GridLayout(0, 2, 0, 0));
+			mutationPanel.setLayout(new GridLayout(0, 2, 3, 0));
 			
 			JLabel mutationTypeLabel = new JLabel("Tipo de mutación");
 			mutationTypeLabel.setHorizontalAlignment(SwingConstants.LEFT);
@@ -209,6 +218,14 @@ public class Mainframe extends JFrame  {
 			mutationProbabilityTF.setText("60.0");
 			mutationProbabilityTF.setColumns(10);
 			mutationPanel.add(mutationProbabilityTF);
+
+			JLabel dimensionLabel = new JLabel("Dimension");
+			dimensionLabel.setHorizontalAlignment(SwingConstants.LEFT);
+			
+			dimTF= new JTextField();
+			dimTF.setText("2");
+			mutationPanel.add(dimensionLabel);
+			mutationPanel.add(dimTF);
 			
 			//PROBLEM PANEL
 			
@@ -242,6 +259,7 @@ public class Mainframe extends JFrame  {
 		
 					int tamPoblacion = Integer.parseInt(numGenTF.getText());
 					int nGeneraciones = Integer.parseInt(numGenTF.getText());
+					int dim = Integer.parseInt(dimTF.getText());
 					
 					double probCruce= Double.parseDouble(crossProbabilityTF.getText());
 					double probMutacion= Double.parseDouble(mutationProbabilityTF.getText());
@@ -262,7 +280,7 @@ public class Mainframe extends JFrame  {
 						//runs the algoritm
 						ag.run();
 						//puts them in the graphic plot
-						plot(ag.getGenerations(), ag.getFitness(),lightRed,"Calibre");
+						plot(ag.getGenerations(), ag.getFitness(),red,"Calibre");
 						break;
 					case 1:
 						System.out.println("GrieWank");

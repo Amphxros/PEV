@@ -5,9 +5,15 @@ package Common;
 public abstract class Algoritmo {
 
 	protected final int tamPoblacion;
-	protected Individuo[] poblacion;
+	protected Individuo[] poblacion; 
 	protected final double[] fitness;
-	protected final double[] generations;
+	protected final double[] generations; //eje x
+	protected final double[] aptitud; //eje y1
+	protected final double[] aptitudAbs; //eje y2
+	protected final double[] aptitudMed; //eje y3
+	
+	
+	
 	protected final int maxGeneraciones;
 	protected double probCruce;
 	protected double probMutacion;
@@ -35,10 +41,16 @@ public abstract class Algoritmo {
 		
 		generations= new double[this.maxGeneraciones];
 		fitness= new double[this.maxGeneraciones];
+		aptitud= new double[this.maxGeneraciones];
+		aptitudAbs= new double[this.maxGeneraciones];
+		aptitudMed= new double[this.maxGeneraciones];
 
 		for(int i=0;i<this.maxGeneraciones;i++) {
-			generations[i]=i; //axis X
-			fitness[i]=0;
+			generations[i]=i; 
+			fitness[i]=i;
+			aptitud[i]=0;
+			aptitudAbs[i]=0;
+			aptitudMed[i]=0;
 		}
 	
 	}
@@ -78,30 +90,27 @@ public abstract class Algoritmo {
 			seleccionados = Selection.Proporcional(poblacion, fitness);
 			break;
 		case MuestreoUniversalEstoclastico:
-			seleccionados = Selection.MuestreoUniversalEstoclastico(seleccionados, fitness);
+			seleccionados = Selection.MuestreoUniversalEstoclastico(poblacion, fitness);
 			break;
 		case Truncamiento:
-			seleccionados = Selection.Truncamiento(seleccionados, fitness);
+			seleccionados = Selection.Truncamiento(poblacion, fitness);
 			break;
 		case TorneoDeterministico:
-			seleccionados = Selection.TorneoDeterministico(seleccionados, fitness, tamTorneo);
+			seleccionados = Selection.TorneoDeterministico(poblacion, fitness, tamTorneo);
 			break;
 		case TorneoProbabilistico:
 			
 			double p = 0.5;
-			seleccionados = Selection.TorneoProbabilistico(seleccionados, fitness, tamTorneo , p);
+			seleccionados = Selection.TorneoProbabilistico(poblacion, fitness, tamTorneo , p);
 			break;
 		case Ranking:
 			
-			seleccionados = Selection.Ranking(seleccionados, fitness);
+			seleccionados = Selection.Ranking(poblacion, fitness);
 			break;
 		case Restos:
-			seleccionados = Selection.Restos(seleccionados, fitness);
+			seleccionados = Selection.Restos(poblacion, fitness);
 			break;
 		}
-		
-		
-		
 		
 		//Para testear
 		for(int i = 0; i < seleccionados.length; i++)

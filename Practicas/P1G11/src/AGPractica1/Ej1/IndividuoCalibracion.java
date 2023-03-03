@@ -26,6 +26,10 @@ public class IndividuoCalibracion extends Individuo<Integer>{
 	
 	}
 
+	/**
+	 * /**
+	 * Calculate the fitness in this case f(x,y)= 21.5 + x*sen(4πx)+ y*sen(20πy)
+	 */
 	@Override
 	public void evaluateSelf() {
 		final double fitness_;
@@ -49,6 +53,9 @@ public class IndividuoCalibracion extends Individuo<Integer>{
 		return true;
 	}
 
+	/**
+	 * 
+	 */
 	@Override
 	protected boolean mutateSelf(int pos, Random rnd, double probability) {
 		boolean changed=false;
@@ -63,6 +70,9 @@ public class IndividuoCalibracion extends Individuo<Integer>{
 		return changed;
 	}
 
+	/**
+	 * 
+	 */
 	@Override
 	protected void calculateFenotype() {
 		// TODO Auto-generated method stub
