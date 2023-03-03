@@ -20,7 +20,8 @@ public class Mutation {
 		
 		return mutated;
 	}
-	public static void mutateNonUniform(Individuo[] population, double probMutation) {
+	public static Individuo[] mutateNonUniform(Individuo[] population, double probMutation) {
 		//FOR NOW ITS EMPTY
+		return null;
 	}
 }

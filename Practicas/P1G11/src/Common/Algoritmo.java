@@ -87,9 +87,12 @@ public abstract class Algoritmo {
 		*/
 		
 		for (int i = 0; i < maxGeneraciones; i++) {
-			selection();
-			crossOver();
-			mutate();
+			
+			var selected = selection();
+			var crossed = crossOver(selected);
+			var mutated = mutate(crossed);
+			
+			poblacion = mutated;
 			evaluate();
 		}
 	}
@@ -133,34 +136,42 @@ public abstract class Algoritmo {
 		
 	}
 
-	protected void crossOver() {
+	protected Individuo[] crossOver(Individuo[] poblacion) {
+		
+		Individuo[] crossed = null;
 		switch (crossing) {
 		case Mono:
-			Crossing.MonopointCrossOver(poblacion, probCruce, 1);
+			crossed = Crossing.MonopointCrossOver(poblacion, probCruce, 1);
 			break;
 		case Multiple:
 			break;
 		case Uniform:
-			Crossing.UniformCrossOver(poblacion, probCruce);
+			crossed = Crossing.UniformCrossOver(poblacion, probCruce);
 			break;
 			
 		}
+		
+		return crossed;
 	}
 	
-	protected void mutate() {
+	protected Individuo[] mutate(Individuo[] poblacion) {
+		
+		Individuo[] mutated = null;
+		
 		switch(mutation) {
 		case Uniform:
-			Mutation.mutateUniform(poblacion, probMutacion);
+			mutated = Mutation.mutateUniform(poblacion, probMutacion);
 			break;
 		case NonUniform:
-			Mutation.mutateNonUniform(poblacion, probMutacion);
+			mutated = Mutation.mutateNonUniform(poblacion, probMutacion);
 			break;
 		default:
-			Mutation.mutateUniform(poblacion, probMutacion);
+			mutated = Mutation.mutateUniform(poblacion, probMutacion);
 			break;
 				
 			
 		}
+		return mutated;
 	}
 	protected abstract void evaluate();
 
