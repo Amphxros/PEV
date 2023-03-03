@@ -18,18 +18,5 @@ public class Conversions {
 		return decimal;
 	}
 
-	public static double BinaryToDecimal(Cromosoma<Boolean> cromosoma) {
-		// TODO Auto-generated method stub
-		double decimal=0.0f;
-		int index=0;
-		for(Gen<Boolean> allele: cromosoma.getCromosome()) {
-			if(allele.toString()=="1") {
-				decimal+=Math.pow(2,index);
-			}
-			index++;
-		}
-		
-		
-		return decimal;
-	}
 }
+

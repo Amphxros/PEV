@@ -271,7 +271,7 @@ public class Mainframe extends JFrame  {
 						ag.run();
 						//puts them in the graphic plot
 						plot(ag.getGenerations(), ag.getFitness(),red,"Calibre");
-						plot(ag.getFitness(),ag.getGenerations(),green,"Calibra");
+						plot(ag.getGenerations(),ag.getMediumFitness(),green,"Media");
 						
 						break;
 					case 1:

@@ -91,8 +91,8 @@ public class IndividuoCalibracion extends Individuo<Boolean>{
 	@Override
 	protected void calculateFenotype() {
 		// TODO Auto-generated method stub
-		fenotype[0]= minX1 + (maxX1 - minX1) *(Conversions.BinaryToDecimal(this.cromosoma));
-		fenotype[1]= minX2 + (maxX2 - minX2) *(Conversions.BinaryToDecimal(this.cromosoma));
+		fenotype[0]= minX1 + (maxX1 - minX1) *(Conversions.binaryToDecimal(this.cromosoma));
+		fenotype[1]= minX2 + (maxX2 - minX2) *(Conversions.binaryToDecimal(this.cromosoma));
 	}
 
 }

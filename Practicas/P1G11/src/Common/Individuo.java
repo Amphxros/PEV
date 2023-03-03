@@ -47,6 +47,10 @@ public abstract class Individuo<T> {
 	public void crossOver(Individuo<T> parent, int position) {
 		int index=0;
 		
+		Gen<T> gChildren=(Gen<T>)cromosoma.getGen(position);
+		Gen<T> gParent=(Gen<T>)parent.getCromosomes().getGen(position);
+		
+		gChildren.setAllele(gParent.getAllele());
 	}
 	
 	

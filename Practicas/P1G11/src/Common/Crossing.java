@@ -3,6 +3,8 @@ package Common;
 import java.util.ArrayList;
 import java.util.Random;
 
+import Common.Genes.Gen;
+
 public class Crossing {
 	
 	public enum Type{
@@ -39,8 +41,6 @@ public class Crossing {
 				crossed[i]=population[i];
 			}
 		}
-		
-		
 	
 		return crossed;
 	}
@@ -49,7 +49,23 @@ public class Crossing {
 	}
 	public static <T> Individuo[] UniformCrossOver(Individuo<T>[] population, double probability) {
 		Individuo[] crossed= new Individuo[population.length];
-		
+		for(int i=0;i<crossed.length;i++) {
+			var childA= population[i];
+			var childB=population[i + 1];
+			Random rnd= new Random();
+			for(int j=0;j<childA.getCromosomeArraySize();i++) {
+				double rand=rnd.nextDouble();
+				if(rand<probability) {
+					var genA= (Gen<T>)childA.getCromosomes().getGen(j);
+					var auxA=genA.getAllele();
+					var genB= (Gen<T>)childB.getCromosomes().getGen(j);
+					var auxB=genB.getAllele();
+					genA.setAllele(auxB);
+					genB.setAllele(auxA);
+					
+				}
+			}
+		}
 		return crossed;
 		
 	}

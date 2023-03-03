@@ -69,7 +69,7 @@ public abstract class Algoritmo {
 
 		IndividuoCalibracion.static_fitness_ = 1;
 		createPopulation();
-		evaluate();
+		evaluate(0);
 		
 		
 		/*Esto es de testeo de las selecciones
@@ -93,7 +93,7 @@ public abstract class Algoritmo {
 			var mutated = mutate(crossed);
 			
 			poblacion = mutated;
-			evaluate();
+			evaluate(i);
 		}
 	}
 
@@ -173,7 +173,7 @@ public abstract class Algoritmo {
 		}
 		return mutated;
 	}
-	protected abstract void evaluate();
+	protected abstract void evaluate(int currGeneration);
 
 	public double[] getGenerations() {
 		return this.generations;

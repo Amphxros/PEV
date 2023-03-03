@@ -11,11 +11,37 @@ public class AGCalibracion extends Algoritmo {
 	}
 
 	@Override
-	protected void evaluate() {
-		
+	protected void evaluate(int currGeneration) {
+		double sum=0.0;
+		double best_fitness;
+		if(this.isMaximize) {
+			best_fitness=Double.MIN_VALUE;
+		}
+		else {
+			best_fitness=Double.MAX_VALUE;
+		}
 		for(int i=0;i<poblacion.length;i++) {
 			poblacion[i].evaluateSelf();
+			sum+=poblacion[i].getFitness();
+			//calculate the best fitness
+			if((best_fitness < poblacion[i].getFitness() && this.isMaximize) ||(best_fitness > poblacion[i].getFitness() && !this.isMaximize) ) {
+				best_fitness=poblacion[i].getFitness();
+				this.elMejor=poblacion[i];
+				this.pos_mejor=i;
+			}
 		}	
+		
+		this.fitnessMed[currGeneration]=sum/this.poblacion.length;
+		
+		if(currGeneration>0) {
+			this.fitnessAbs[currGeneration]+= this.fitnessAbs[currGeneration] + this.elMejor.getFitness();
+		}
+		else {
+			this.fitnessAbs[currGeneration]= this.elMejor.getFitness();
+		}
+		//resets everything
+		this.elMejor=null;
+		
 		
 	}
 

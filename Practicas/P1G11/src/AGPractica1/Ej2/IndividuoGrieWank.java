@@ -2,9 +2,12 @@ package AGPractica1.Ej2;
 
 import java.util.Random;
 
+import Common.Conversions;
+import Common.Cromosoma;
 import Common.Individuo;
+import Common.Genes.BooleanGen;
 
-public class IndividuoGrieWank extends Individuo<Integer>{
+public class IndividuoGrieWank extends Individuo<Boolean>{
 
 	final double min = -600.0;
 	final double max = 600.0;
@@ -12,13 +15,17 @@ public class IndividuoGrieWank extends Individuo<Integer>{
 	
 	public IndividuoGrieWank(double tolerance, int id, int numGenes) {
 		super(tolerance, id, numGenes);
+		final int tamGenes = this.calculateGenSize(tolerance, min, max);
 		
 		fenotype= new double[dimension];
-
+		this.cromosoma= new Cromosoma(numGenes);
+		
 		Random rnd= new Random();
-		// TODO Auto-generated constructor stub
+	
 		for(int i=0;i<numGenes;i++) {
-			
+			BooleanGen g= new BooleanGen(rnd.nextBoolean());
+			//System.out.print(g.toString());
+			this.cromosoma.setGen(g, i);	
 		}
 		
 	}
@@ -33,7 +40,7 @@ public class IndividuoGrieWank extends Individuo<Integer>{
 	protected void calculateFenotype() {
 		fenotype= new double[this.getCromosomeArraySize()];
 		for(int i=0;i<fenotype.length;i++) {
-			
+			fenotype[i]= min + (max - min) * (Conversions.binaryToDecimal(this.cromosoma)/this.getCromosomeArraySize()) -1;
 		}
 	}
 
