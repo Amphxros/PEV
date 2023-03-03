@@ -13,6 +13,7 @@ public class IndividuoMichalewiczA extends Individuo<Integer> {
 	public IndividuoMichalewiczA(int dimension,double tolerance, int id, int numGenes) {
 		super(tolerance, id, numGenes);
 		this.dimension=dimension;
+		Random rnd= new Random();
 		// TODO Auto-generated constructor stub
 		for(int i=0;i<numGenes;i++) {
 			

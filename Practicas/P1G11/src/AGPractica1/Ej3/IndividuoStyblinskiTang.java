@@ -14,6 +14,7 @@ public class IndividuoStyblinskiTang extends Individuo<Integer>{
 		super(tolerance, id, numGenes);
 		// TODO Auto-generated constructor stub
 		fenotype= new double[dimension];
+		Random rnd= new Random();
 		for(int i=0;i<numGenes;i++) {
 			
 		}
