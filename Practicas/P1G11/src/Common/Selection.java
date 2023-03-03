@@ -11,7 +11,7 @@ public class Selection {
 	}
 
 	//Ruleta
-	public static Individuo[] Proporcional(Individuo[] poblacion, double[] fitness) {
+	public static Individuo[] Proporcional(Individuo[] poblacion) {
 
 		// Tamaño de la poblacion
 		int size = poblacion.length;
@@ -23,14 +23,14 @@ public class Selection {
 		// fitness ponderado
 		double totalFitness = 0;
 		for (int i = 0; i < size; i++) {
-			totalFitness += fitness[i];
+			totalFitness += poblacion[i].fitness;
 		}
 
 		// Calculo probabilidad ponderada
 		double probabilidadPonderada[] = new double[size];
 		for (int i = 0; i < size; i++) {
 
-			probabilidadPonderada[i] = fitness[i] / totalFitness;
+			probabilidadPonderada[i] = poblacion[i].fitness/ totalFitness;
 		}
 
 		for (int i = 0; i < size; i++) {
@@ -53,7 +53,7 @@ public class Selection {
 		return seleccion;
 	}
 
-	public static Individuo[] MuestreoUniversalEstoclastico(Individuo[] poblacion, double[] fitness) {
+	public static Individuo[] MuestreoUniversalEstoclastico(Individuo[] poblacion) {
 
 		// Tamaño de la poblacion
 
@@ -73,9 +73,9 @@ public class Selection {
 			int c = 0;
 			// Buscar el primer elemento del array de fitness que no mayor que el valor
 			// aleatorio
-			while (r > fitness[c]) {
+			while (r > poblacion[c].fitness) {
 
-				r -= fitness[c];
+				r -= poblacion[c].fitness;
 				c++;
 			}
 
@@ -115,7 +115,7 @@ public class Selection {
 		return i + 1;
 	}
 
-	public static Individuo[] Truncamiento(Individuo[] poblacion, double[] fitness) {
+	public static Individuo[] Truncamiento(Individuo[] poblacion) {
 
 		float truncamiento = 20;
 
@@ -146,7 +146,7 @@ public class Selection {
 		return seleccion;
 	}
 
-	public static Individuo[] TorneoDeterministico(Individuo[] poblacion, double[] fitness, int k) {
+	public static Individuo[] TorneoDeterministico(Individuo[] poblacion, int k) {
 
 		int size = poblacion.length;
 
@@ -165,7 +165,7 @@ public class Selection {
 			int seleccionado = muestra[0];
 			for (int c = 1; c < k; c++) {
 
-				if (fitness[muestra[c]] > fitness[seleccionado]) {
+				if (poblacion[muestra[c]].fitness > poblacion[seleccionado].fitness) {
 					seleccionado = muestra[c];
 				}
 			}
@@ -177,7 +177,7 @@ public class Selection {
 		return seleccion;
 	}
 
-	public static Individuo[] TorneoProbabilistico(Individuo[] poblacion, double[] fitness, int k, double p) {
+	public static Individuo[] TorneoProbabilistico(Individuo[] poblacion, int k, double p) {
 
 		int size = poblacion.length;
 
@@ -199,7 +199,7 @@ public class Selection {
 
 				for (int c = 1; c < k; c++) {
 
-					if (fitness[muestra[c]] > fitness[seleccionado]) {
+					if (poblacion[muestra[c]].fitness > poblacion[seleccionado].fitness) {
 						seleccionado = muestra[c];
 					}
 				}
@@ -208,7 +208,7 @@ public class Selection {
 
 				for (int c = 1; c < k; c++) {
 
-					if (fitness[muestra[c]] < fitness[seleccionado]) {
+					if (poblacion[muestra[c]].fitness < poblacion[seleccionado].fitness) {
 						seleccionado = muestra[c];
 					}
 				}
@@ -222,12 +222,12 @@ public class Selection {
 
 	}
 
-	public static Individuo[] Ranking(Individuo[] poblacion, double[] fitness) {
+	public static Individuo[] Ranking(Individuo[] poblacion) {
 
 		return null;
 	}
 
-	public static Individuo[] Restos(Individuo[] poblacion, double[] fitness) {
+	public static Individuo[] Restos(Individuo[] poblacion) {
 
 		// Tamaño de la poblacion
 		int size = poblacion.length;
@@ -239,14 +239,14 @@ public class Selection {
 		// fitness ponderado
 		double totalFitness = 0;
 		for (int i = 0; i < size; i++) {
-			totalFitness += fitness[i];
+			totalFitness += poblacion[i].fitness;
 		}
 
 		// Calculo probabilidad ponderada
 		double probabilidadPonderada[] = new double[size];
 		for (int i = 0; i < size; i++) {
 
-			probabilidadPonderada[i] = fitness[i] / totalFitness;
+			probabilidadPonderada[i] = poblacion[i].fitness / totalFitness;
 		}
 
 		int idx = 0;
@@ -258,7 +258,7 @@ public class Selection {
 			}
 		}
 
-		Individuo[] ruleta = Proporcional(poblacion, fitness);
+		Individuo[] ruleta = Proporcional(poblacion);
 		
 		for(int i = idx; i < size; i++) {
 			

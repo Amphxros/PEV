@@ -12,6 +12,9 @@ public class AGCalibracion extends Algoritmo {
 
 	@Override
 	protected void evaluate() {
+		
+		System.out.println("Tamaño de la poblacion: " + poblacion.length);
+		
 		for(int i=0;i<poblacion.length;i++) {
 			poblacion[i].evaluateSelf();
 		}	
@@ -23,7 +26,7 @@ public class AGCalibracion extends Algoritmo {
 		poblacion= new IndividuoCalibracion[this.tamPoblacion];
 		
 		for(int i=0;i<this.tamPoblacion; i++) {
-			poblacion[i]= new IndividuoCalibracion(0,0,3); //TODO change this a bit
+			poblacion[i]= new IndividuoCalibracion(0.1,i,3); //TODO change this a bit
 		}
 		
 		

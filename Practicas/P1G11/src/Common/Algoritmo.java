@@ -1,6 +1,6 @@
 package Common;
 
-
+import AGPractica1.Ej1.IndividuoCalibracion;
 
 public abstract class Algoritmo {
 
@@ -66,57 +66,66 @@ public abstract class Algoritmo {
 	}
 	public void run() {
 
+		IndividuoCalibracion.static_fitness_ = 0;
 		createPopulation();
 		evaluate();
 		
-		for (int i = 0; i < maxGeneraciones; i++) {
+		
+		var seleccionados = selection();
+		
+		double count = 0;
+		for(int i = 0; i < seleccionados.length; i++) {
+			System.out.println(seleccionados[i].fitness);
+			count+= seleccionados[i].fitness;
+		}
+		
+		System.out.println("Valor medio " + count / seleccionados.length);
+		
+		
+		
+		/*for (int i = 0; i < maxGeneraciones; i++) {
 			selection();
 			crossOver();
 			mutate();
 			evaluate();
-		}
+		}*/
 	}
 
 	protected abstract void createPopulation();
 
-	protected void selection() {
+	protected Individuo[] selection() {
 	
 		Individuo[] seleccionados = null;
 		
 		switch(seleccion) {
 
 		case Proporcional:
-			seleccionados = Selection.Proporcional(poblacion, fitness);
+			seleccionados = Selection.Proporcional(poblacion);
 			break;
 		case MuestreoUniversalEstoclastico:
-			seleccionados = Selection.MuestreoUniversalEstoclastico(poblacion, fitness);
+			seleccionados = Selection.MuestreoUniversalEstoclastico(poblacion);
 			break;
 		case Truncamiento:
-			seleccionados = Selection.Truncamiento(poblacion, fitness);
+			seleccionados = Selection.Truncamiento(poblacion);
 			break;
 		case TorneoDeterministico:
-			seleccionados = Selection.TorneoDeterministico(poblacion, fitness, tamTorneo);
+			seleccionados = Selection.TorneoDeterministico(poblacion, tamTorneo);
 			break;
 		case TorneoProbabilistico:
 			
 			double p = 0.5;
-			seleccionados = Selection.TorneoProbabilistico(poblacion, fitness, tamTorneo , p);
+			seleccionados = Selection.TorneoProbabilistico(poblacion, tamTorneo , p);
 			break;
 		case Ranking:
 			
-			seleccionados = Selection.Ranking(poblacion, fitness);
+			seleccionados = Selection.Ranking(poblacion);
 			break;
 		case Restos:
-			seleccionados = Selection.Restos(poblacion, fitness);
+			seleccionados = Selection.Restos(poblacion);
 			break;
 		}
-		
-		//Para testear
-		for(int i = 0; i < seleccionados.length; i++)
-		{
-			System.out.println(seleccionados[i].fitness);
-		}
-		
+	
+		return seleccionados;
 		
 	}
 

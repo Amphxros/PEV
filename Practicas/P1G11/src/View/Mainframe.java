@@ -63,6 +63,7 @@ public class Mainframe extends JFrame  {
 		private JPanel window;
 		
 		private JTextField numGenTF;
+		private JTextField genSizeTextField;
 		private JTextField crossProbabilityTF;
 		private JTextField mutationProbabilityTF;
 		private JTextField tamTorneoTF;
@@ -114,7 +115,7 @@ public class Mainframe extends JFrame  {
 			
 			JLabel genSizeLabel = new JLabel("Tam. de la población");
 			genSizeLabel.setFont(new Font("Tahoma", Font.BOLD, 11));;
-			JTextField genSizeTextField = new JFormattedTextField(numberFormat);
+			genSizeTextField = new JFormattedTextField(numberFormat);
 			genSizeTextField.setText("100");
 			
 			JLabel numGenLabel = new JLabel("Nº de generaciones");
@@ -245,7 +246,7 @@ public class Mainframe extends JFrame  {
 				public void actionPerformed(ActionEvent e) {
 					// TODO Auto-generated method stub
 		
-					int tamPoblacion = Integer.parseInt(numGenTF.getText());
+					int tamPoblacion = Integer.parseInt(genSizeTextField.getText());
 					int nGeneraciones = Integer.parseInt(numGenTF.getText());
 					int dim = Integer.parseInt(dimTF.getText());
 					

@@ -32,13 +32,18 @@ public class IndividuoCalibracion extends Individuo<Boolean>{
 	
 		for(int i=0;i<numGenes;i++) {
 			BooleanGen g= new BooleanGen(rnd.nextBoolean());
-			System.out.print(g.toString());
+			//System.out.print(g.toString());
 			this.cromosoma.setGen(g, i);
 		}
-		System.out.print(" ");
+		
+		
 	
 	}
 
+	
+	//TODO eliminar esto
+	public static double static_fitness_ = 0;
+	
 	/**
 	 * /**
 	 * Calculate the fitness in this case f(x,y)= 21.5 + x*sen(4πx)+ y*sen(20πy)
@@ -51,13 +56,15 @@ public class IndividuoCalibracion extends Individuo<Boolean>{
 			double x2= fenotype[1];
 			
 			fitness_=(21.5 + x1*Math.sin(4*Math.PI*x1)) + x2*Math.sin(20*Math.PI*x2); //f(x1 , x2) = 21.5 + x1.sin(4π x1)+x2.sin(20π x2)
+			
 		}
 		else {
 			fitness_=Double.MIN_VALUE;
 			System.out.println("Ejer 1: Wrong fitness params.");
 		}
 		
-		setFitness(fitness_);
+		setFitness(static_fitness_++);
+		
 	}
 
 	@Override
