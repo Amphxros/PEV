@@ -177,7 +177,7 @@ public class Mainframe extends JFrame  {
 			JLabel tamTorneolbl = new JLabel("TamTorneo");
 			selectionPanel.add(tamTorneolbl);
 			tamTorneoTF = new JTextField();
-			tamTorneoTF.setText("1");
+			tamTorneoTF.setText("3");
 			tamTorneoTF.setColumns(10);
 			selectionPanel.add(tamTorneolbl);
 			selectionPanel.add(tamTorneoTF);
@@ -256,11 +256,12 @@ public class Mainframe extends JFrame  {
 					int crossingType= crossTypeComboBox.getSelectedIndex();
 					int selectionType= selectionTypeComboBox.getSelectedIndex();
 					int mutationType= mutationTypeComboBox.getSelectedIndex();
+					int tamTorneo = Integer.parseInt(tamTorneoTF.getText());
 					
 					switch(problemTypeComboBox.getSelectedIndex()) {
 					case 0:
 						System.out.println("Calibracion");
-						AGCalibracion ag= new AGCalibracion(tamPoblacion,nGeneraciones,probCruce,probMutacion);
+						AGCalibracion ag= new AGCalibracion(tamPoblacion,nGeneraciones,probCruce,probMutacion, tamTorneo);
 						//sets the selection, crossing and mutation parameters
 						ag.setCrossing(crossingType);
 						ag.setSelection(selectionType);

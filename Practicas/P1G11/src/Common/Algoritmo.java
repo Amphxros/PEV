@@ -33,11 +33,12 @@ public abstract class Algoritmo {
 	 * @param probCruce
 	 * @param probMutation
 	 */
-	public Algoritmo(int tamPoblacion, int maxGeneraciones, double probCruce, double probMutation) {
+	public Algoritmo(int tamPoblacion, int maxGeneraciones, double probCruce, double probMutation, int tamTorneo) {
 		this.maxGeneraciones = maxGeneraciones;
 		this.tamPoblacion = tamPoblacion;
 		this.probCruce = probCruce;
 		this.probMutacion = probMutation;
+		this.tamTorneo = tamTorneo;
 		
 		generations= new double[this.maxGeneraciones];
 		fitness= new double[this.maxGeneraciones];
@@ -66,7 +67,7 @@ public abstract class Algoritmo {
 	}
 	public void run() {
 
-		IndividuoCalibracion.static_fitness_ = 0;
+		IndividuoCalibracion.static_fitness_ = 1;
 		createPopulation();
 		evaluate();
 		
@@ -109,6 +110,7 @@ public abstract class Algoritmo {
 			seleccionados = Selection.Truncamiento(poblacion);
 			break;
 		case TorneoDeterministico:
+			
 			seleccionados = Selection.TorneoDeterministico(poblacion, tamTorneo);
 			break;
 		case TorneoProbabilistico:

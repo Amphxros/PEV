@@ -4,16 +4,14 @@ import Common.Algoritmo;
 
 public class AGCalibracion extends Algoritmo {
 
-	public AGCalibracion(int tamPoblacion, int maxGeneraciones, double probCruce, double probMutation) {
-		super(tamPoblacion, maxGeneraciones, probCruce, probMutation);
+	public AGCalibracion(int tamPoblacion, int maxGeneraciones, double probCruce, double probMutation, int tamTorneo) {
+		super(tamPoblacion, maxGeneraciones, probCruce, probMutation, tamTorneo);
 		// TODO Auto-generated constructor stub
 		
 	}
 
 	@Override
 	protected void evaluate() {
-		
-		System.out.println("Tamaño de la poblacion: " + poblacion.length);
 		
 		for(int i=0;i<poblacion.length;i++) {
 			poblacion[i].evaluateSelf();

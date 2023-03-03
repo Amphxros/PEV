@@ -42,7 +42,7 @@ public class IndividuoCalibracion extends Individuo<Boolean>{
 
 	
 	//TODO eliminar esto
-	public static double static_fitness_ = 0;
+	public static double static_fitness_ = 1;
 	
 	/**
 	 * /**

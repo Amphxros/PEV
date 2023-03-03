@@ -10,17 +10,9 @@ public class Selection {
 		Restos
 	}
 
-	//Ruleta
-	public static Individuo[] Proporcional(Individuo[] poblacion) {
-
-		// Tamaño de la poblacion
+	
+	static double[] ProbabilidadPonderada(Individuo[] poblacion) {
 		int size = poblacion.length;
-
-		// Array nuevo con el resultado de seleccion
-		Individuo[] seleccion = new Individuo[size];
-
-		// Calcular el fitness total de todos los individuos para poder calcular el
-		// fitness ponderado
 		double totalFitness = 0;
 		for (int i = 0; i < size; i++) {
 			totalFitness += poblacion[i].fitness;
@@ -32,6 +24,21 @@ public class Selection {
 
 			probabilidadPonderada[i] = poblacion[i].fitness/ totalFitness;
 		}
+		
+		return probabilidadPonderada;
+	}
+	
+	//Ruleta
+	public static Individuo[] Proporcional(Individuo[] poblacion) {
+
+		// Tamaño de la poblacion
+		int size = poblacion.length;
+
+		// Array nuevo con el resultado de seleccion
+		Individuo[] seleccion = new Individuo[size];
+
+		// Calculo probabilidad ponderada
+		double probabilidadPonderada[] = ProbabilidadPonderada(poblacion);		
 
 		for (int i = 0; i < size; i++) {
 
@@ -62,8 +69,11 @@ public class Selection {
 		// Array nuevo con el resultado de seleccion
 		Individuo[] seleccion = new Individuo[size];
 
-		double offset = 1 / size;
+		double offset = 1.0 / size;
 
+		var probabilidadPonderada = ProbabilidadPonderada(poblacion);
+		
+		//Se calcula un numero aleatorio entre el 0 y el offset
 		double r = Math.random() * offset;
 
 		for (int i = 0; i < size; i++) {
@@ -73,9 +83,9 @@ public class Selection {
 			int c = 0;
 			// Buscar el primer elemento del array de fitness que no mayor que el valor
 			// aleatorio
-			while (r > poblacion[c].fitness) {
+			while (r2 > probabilidadPonderada[c]) {
 
-				r -= poblacion[c].fitness;
+				r2 -= probabilidadPonderada[c];
 				c++;
 			}
 
@@ -99,7 +109,7 @@ public class Selection {
 		int i = (begin - 1);
 
 		for (int j = begin; j < end; j++) {
-			if (poblacion[j].fitness <= pivot) {
+			if (poblacion[j].fitness > pivot) {
 				i++;
 
 				Individuo swapTemp = poblacion[i];
@@ -122,7 +132,7 @@ public class Selection {
 		Individuo[] ordenado = poblacion.clone();
 
 		// Ordenar
-		quickSort(ordenado, 0, ordenado.length);
+		quickSort(ordenado, 0, ordenado.length - 1);
 
 		Individuo[] seleccion = new Individuo[poblacion.length];
 		// Seleccionar el 20% superior 5 veces
@@ -155,7 +165,7 @@ public class Selection {
 		for (int i = 0; i < size; i++) {
 
 			int[] muestra = new int[k];
-			for (int c = 0; i < k; c++) {
+			for (int c = 0; c < k; c++) {
 
 				int idx = (int) Math.floor(Math.random() * size);
 				muestra[c] = idx;
@@ -186,7 +196,7 @@ public class Selection {
 		for (int i = 0; i < size; i++) {
 
 			int[] muestra = new int[k];
-			for (int c = 0; i < k; c++) {
+			for (int c = 0; c < k; c++) {
 
 				int idx = (int) Math.floor(Math.random() * size);
 				muestra[c] = idx;
@@ -234,21 +244,9 @@ public class Selection {
 
 		// Array nuevo con el resultado de seleccion
 		Individuo[] seleccion = new Individuo[size];
-
-		// Calcular el fitness total de todos los individuos para poder calcular el
-		// fitness ponderado
-		double totalFitness = 0;
-		for (int i = 0; i < size; i++) {
-			totalFitness += poblacion[i].fitness;
-		}
-
-		// Calculo probabilidad ponderada
-		double probabilidadPonderada[] = new double[size];
-		for (int i = 0; i < size; i++) {
-
-			probabilidadPonderada[i] = poblacion[i].fitness / totalFitness;
-		}
-
+		
+		var probabilidadPonderada = ProbabilidadPonderada(poblacion);
+		
 		int idx = 0;
 
 		for (int i = 0; i < size; i++) {
