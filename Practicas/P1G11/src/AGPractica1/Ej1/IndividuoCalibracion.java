@@ -2,28 +2,40 @@ package AGPractica1.Ej1;
 
 import java.util.Random;
 
+import Common.Conversions;
+import Common.Cromosoma;
 import Common.Individuo;
+import Common.Genes.BooleanGen;
+import Common.Genes.Gen;
 
-public class IndividuoCalibracion extends Individuo<Integer>{
+public class IndividuoCalibracion extends Individuo<Boolean>{
 
 	// x1 = 11.625 y x2 = 5.726 x1∈ [-3.0,12.1] x2∈ [4.1,5.8]
-	final double minX1=-3.000;
-	final double maxX1=12.100;
+	private final double minX1=-3.000;
+	private final double maxX1=12.100;
 
-	final double minX2=4.100;
-	final double maxX2=5.800;
+	private final double minX2=4.100;
+	private final double maxX2=5.800;
 	
 	
 	
 	public IndividuoCalibracion(double tolerance, int id, int numGenes) {
 		super(tolerance, id, numGenes);
 		// TODO Auto-generated constructor stub
-		Random rnd= new Random();
+		final int tamX1=this.calculateGenSize(this.tolerance, minX1, maxX1);
+		final int tamX2=this.calculateGenSize(this.tolerance, minX2, maxX2);
+		
 		fenotype= new double[2];
 		fenotype[0]=fenotype[1]=Double.MIN_VALUE;
+		this.cromosoma= new Cromosoma(numGenes);
+		Random rnd= new Random();
+	
 		for(int i=0;i<numGenes;i++) {
-			//cromosoma.setGen(rnd.nextInt((int)minX1,(int)maxX1), i);
+			BooleanGen g= new BooleanGen(rnd.nextBoolean());
+			System.out.print(g.toString());
+			this.cromosoma.setGen(g, i);
 		}
+		System.out.print(" ");
 	
 	}
 
@@ -61,12 +73,7 @@ public class IndividuoCalibracion extends Individuo<Integer>{
 	protected boolean mutateSelf(int pos, Random rnd, double probability) {
 		boolean changed=false;
 			if(0<=pos && pos<cromosoma.getLength()) {
-				for(int i=0; i<this.cromosoma.getGen(pos).length();i++) {
-					if(rnd.nextDouble()<probability) {
-						this.cromosoma.getGen(pos).setAllele(rnd.nextBoolean(),i);
-						changed=true;
-					}
-				}
+				
 			}
 		return changed;
 	}
@@ -77,9 +84,8 @@ public class IndividuoCalibracion extends Individuo<Integer>{
 	@Override
 	protected void calculateFenotype() {
 		// TODO Auto-generated method stub
-		for(int i=0;i<fenotype.length; i++) {
-			
-		}
+		fenotype[0]= minX1 + (maxX1 - minX1) *(Conversions.BinaryToDecimal(this.cromosoma));
+		fenotype[1]= minX2 + (maxX2 - minX2) *(Conversions.BinaryToDecimal(this.cromosoma));
 	}
 
 }

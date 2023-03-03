@@ -8,9 +8,8 @@ public abstract class Algoritmo {
 	protected Individuo[] poblacion; 
 	protected final double[] fitness;
 	protected final double[] generations; //eje x
-	protected final double[] aptitud; //eje y1
-	protected final double[] aptitudAbs; //eje y2
-	protected final double[] aptitudMed; //eje y3
+	protected final double[] fitnessAbs; //eje y2
+	protected final double[] fitnessMed; //eje y3
 	
 	
 	
@@ -24,6 +23,7 @@ public abstract class Algoritmo {
 	protected Selection.Type seleccion;
 	protected Crossing.Type crossing;
 	protected Mutation.Type mutation;
+	protected boolean isMaximize=false;
 	
 
 	/**
@@ -41,16 +41,15 @@ public abstract class Algoritmo {
 		
 		generations= new double[this.maxGeneraciones];
 		fitness= new double[this.maxGeneraciones];
-		aptitud= new double[this.maxGeneraciones];
-		aptitudAbs= new double[this.maxGeneraciones];
-		aptitudMed= new double[this.maxGeneraciones];
+		
+		fitnessAbs= new double[this.maxGeneraciones];
+		fitnessMed= new double[this.maxGeneraciones];
 
 		for(int i=0;i<this.maxGeneraciones;i++) {
 			generations[i]=i; 
 			fitness[i]=1;
-			aptitud[i]=0;
-			aptitudAbs[i]=0;
-			aptitudMed[i]=0;
+			fitnessAbs[i]=0;
+			fitnessMed[i]=0;
 		}
 	
 	}
@@ -129,6 +128,7 @@ public abstract class Algoritmo {
 		case Multiple:
 			break;
 		case Uniform:
+			Crossing.UniformCrossOver(poblacion, probCruce);
 			break;
 			
 		}
@@ -137,7 +137,15 @@ public abstract class Algoritmo {
 	protected void mutate() {
 		switch(mutation) {
 		case Uniform:
+			Mutation.mutateUniform(poblacion, probMutacion);
 			break;
+		case NonUniform:
+			Mutation.mutateNonUniform(poblacion, probMutacion);
+			break;
+		default:
+			Mutation.mutateUniform(poblacion, probMutacion);
+			break;
+				
 			
 		}
 	}
@@ -149,6 +157,14 @@ public abstract class Algoritmo {
 	
 	public double[] getFitness() {
 		return this.fitness;
+	}
+	
+	public double[] getAbsFitness() {
+		return this.fitnessAbs;
+	}
+	
+	public double[] getMediumFitness() {
+		return this.fitnessMed;
 	}
 
 	protected void createElite() {

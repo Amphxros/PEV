@@ -173,12 +173,12 @@ public class Mainframe extends JFrame  {
 			crossPanel.add(crossProbabilityTF);
 			crossProbabilityTF.setColumns(10);
 			
-			JLabel tamTorneo = new JLabel("TamTorneo");
-			selectionPanel.add(tamTorneo);
+			JLabel tamTorneolbl = new JLabel("TamTorneo");
+			selectionPanel.add(tamTorneolbl);
 			tamTorneoTF = new JTextField();
 			tamTorneoTF.setText("1");
 			tamTorneoTF.setColumns(10);
-			selectionPanel.add(tamTorneo);
+			selectionPanel.add(tamTorneolbl);
 			selectionPanel.add(tamTorneoTF);
 			
 			

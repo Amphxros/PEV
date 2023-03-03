@@ -10,6 +10,12 @@ public abstract class Gen<T>{
 		this.dimGen=other.dimGen;
 	}
 	
+	public Gen(T allele) {
+		this.allele=allele;
+		
+	}
+	
+	
 	public T getAllele() {
 		return allele;
 	}

@@ -7,7 +7,7 @@ public class Mutation {
 		Uniform, NonUniform
 	}
 	
-	public Individuo[] mutateUniform(Individuo[] population, double probMutation) {
+	public static Individuo[] mutateUniform(Individuo[] population, double probMutation) {
 		Individuo[] mutated= new Individuo[population.length];
 		Random rnd=new Random();
 		for(int i=0;i<mutated.length;i++) {
@@ -20,7 +20,7 @@ public class Mutation {
 		
 		return mutated;
 	}
-	void mutateNonUniform() {
-		
+	public static void mutateNonUniform(Individuo[] population, double probMutation) {
+		//FOR NOW ITS EMPTY
 	}
 }

@@ -14,7 +14,7 @@ public class AGCalibracion extends Algoritmo {
 	protected void evaluate() {
 		for(int i=0;i<poblacion.length;i++) {
 			poblacion[i].evaluateSelf();
-		}
+		}	
 		
 	}
 

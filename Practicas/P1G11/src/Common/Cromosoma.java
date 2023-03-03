@@ -2,27 +2,27 @@ package Common;
 
 import java.util.ArrayList;
 
+import Common.Genes.Gen;
+
 public class Cromosoma<T>{
 	int[] tamGenes;
-	private ArrayList<T> genes;
-	public Cromosoma() {
-		
-	}
+	private Gen<T>[] genes;
+	
 	public Cromosoma(int numGenes) {
-		genes= new ArrayList<T>(numGenes);
+		genes=(Gen<T>[]) new Gen[numGenes]; 
 	}
 	public T getGen(int index) {
-		return this.genes.get(index);
+		return (T) this.genes[index];
 	}
-	public void setGen(T gen, int index) {
-		this.genes.add(index, gen);
+	public void setGen(Gen<T> gen, int index) {
+		this.genes[index]=(Gen<T>)gen;
 	}
 	
 	public int getLength() {
-		return this.genes.size();
+		return this.genes.length;
 	}
-	public T[] getCromosome(){
-		return (T[]) genes.toArray(); 
+	public Gen<T>[] getCromosome(){
+		return (Gen<T>[]) genes;
 	}
 	
 }
