@@ -28,9 +28,18 @@ public class Crossing {
 				int point=(int)aux;
 				
 				for(int j=point;j<length;j++) {
-					//TODO swap genes here
-					childA.crossOver(childB, j);
-					childB.crossOver(childA, j);
+					//swap genes
+					var genA= (Gen<T>)childA.getCromosomes().getGen(j);
+					var auxA=genA.getAllele();
+					
+					var genB= (Gen<T>)childB.getCromosomes().getGen(j);
+					var auxB=genB.getAllele();
+					
+					genA.setAllele(auxB);
+					genB.setAllele(auxA);
+					
+					
+					
 				}
 				//set the crossed ones
 				crossed[i]=childA;
@@ -44,7 +53,7 @@ public class Crossing {
 	
 		return crossed;
 	}
-	public static <T> void MultiPointCrossOver() {
+	public static <T> void MultiPointCrossOver(Individuo[] population, double probability, int numPoints) {
 		
 	}
 	public static <T> Individuo[] UniformCrossOver(Individuo<T>[] population, double probability) {
@@ -58,8 +67,10 @@ public class Crossing {
 				if(rand<probability) {
 					var genA= (Gen<T>)childA.getCromosomes().getGen(j);
 					var auxA=genA.getAllele();
+					
 					var genB= (Gen<T>)childB.getCromosomes().getGen(j);
 					var auxB=genB.getAllele();
+					
 					genA.setAllele(auxB);
 					genB.setAllele(auxA);
 					

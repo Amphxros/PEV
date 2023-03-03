@@ -89,11 +89,21 @@ public abstract class Algoritmo {
 		for (int i = 0; i < maxGeneraciones; i++) {
 			
 			var selected = selection();
+			for(int j = 0; j < selected.length; j++) {
+				selected[j].print();
+				System.out.print(" ");
+			}
+			System.out.print("\n");
 			var crossed = crossOver(selected);
+			for(int j = 0; j < crossed.length; j++) {
+				crossed[j].print();
+				System.out.print(" ");
+			}
+			System.out.print("\n");
 			var mutated = mutate(crossed);
 			
 			poblacion = mutated;
-			evaluate(i);
+			//evaluate(i);
 		}
 	}
 

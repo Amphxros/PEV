@@ -43,18 +43,11 @@ public abstract class Individuo<T> {
 	public int getID() {
 		return this.id;
 	}
-	
-	public void crossOver(Individuo<T> parent, int position) {
-		int index=0;
-		
-		Gen<T> gChildren=(Gen<T>)cromosoma.getGen(position);
-		Gen<T> gParent=(Gen<T>)parent.getCromosomes().getGen(position);
-		
-		gChildren.setAllele(gParent.getAllele());
+	public void print() {
+		for(int i=0;i<this.getCromosomeArraySize();i++) {
+			System.out.print(this.cromosoma.getGen(i).toString());
+		}
 	}
-	
-	
-	
 	
 	public void mutate(Random rnd, double probability) {
 		int index=0;
