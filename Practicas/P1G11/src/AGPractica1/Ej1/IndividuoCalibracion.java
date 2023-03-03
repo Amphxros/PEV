@@ -18,10 +18,11 @@ public class IndividuoCalibracion extends Individuo<Integer>{
 	public IndividuoCalibracion(double tolerance, int id, int numGenes) {
 		super(tolerance, id, numGenes);
 		// TODO Auto-generated constructor stub
+		Random rnd= new Random();
 		fenotype= new double[2];
 		fenotype[0]=fenotype[1]=Double.MIN_VALUE;
 		for(int i=0;i<numGenes;i++) {
-			
+			//cromosoma.setGen(rnd.nextInt((int)minX1,(int)maxX1), i);
 		}
 	
 	}

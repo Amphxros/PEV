@@ -9,7 +9,7 @@ public abstract class Individuo<T> {
 
 	
 	protected double[] tamGenes;
-	protected Cromosoma<Common.Genes.Gen<T>> cromosoma;
+	protected Cromosoma<Gen<T>> cromosoma;
 	int tam_Cromosoma;
 	private double apt;
 	private double punct;

@@ -47,7 +47,7 @@ public abstract class Algoritmo {
 
 		for(int i=0;i<this.maxGeneraciones;i++) {
 			generations[i]=i; 
-			fitness[i]=i;
+			fitness[i]=1;
 			aptitud[i]=0;
 			aptitudAbs[i]=0;
 			aptitudMed[i]=0;

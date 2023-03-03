@@ -82,9 +82,7 @@ public class Mainframe extends JFrame  {
 		private void replot()
 		{
 			plot.resetMapData();
-			double[][] xy = {{1, 2, 3, 4, 5}, {3, 4, 5, 4, 3}};
-		    
-		    plot.addLinePlot("Test Plot", blue, xy);
+			
 		}
 		
 		private void plot(double[][] xy, Color c, String name)
@@ -96,7 +94,7 @@ public class Mainframe extends JFrame  {
 		private void plot(double[] x,double [] y, Color c, String name)
 		{
 			
-			plot.resetMapData();
+			
 		    plot.addLinePlot(name, c,x,y);
 		}
 		
@@ -147,18 +145,7 @@ public class Mainframe extends JFrame  {
 			}));
 			
 			selectionPanel.add(selectionTypeComboBox);
-			
-			
-			JLabel tamTorneo = new JLabel("TamTorneo");
-			selectionPanel.add(tamTorneo);
-			
-			
-			tamTorneoTF = new JTextField();
-			tamTorneoTF.setText("1");
-			selectionPanel.add(tamTorneoTF);
-			tamTorneoTF.setColumns(10);
-			
-
+		
 			//CROSS PANEL
 
 			JPanel crossPanel = new JPanel();
@@ -176,14 +163,6 @@ public class Mainframe extends JFrame  {
 				}
 			));
 			
-			JLabel lblDimension = new JLabel("Dimension: ");
-			crossPanel.add(lblDimension);
-			
-			dimTF = new JTextField();
-			dimTF.setText("1");
-			crossPanel.add(tamTorneoTF);
-			tamTorneoTF.setColumns(10);
-			
 			crossPanel.add(crossTypeComboBox);
 			
 			JLabel crossProbabilityLabel = new JLabel("% Cruce");
@@ -193,6 +172,15 @@ public class Mainframe extends JFrame  {
 			crossProbabilityTF.setText("60.0");
 			crossPanel.add(crossProbabilityTF);
 			crossProbabilityTF.setColumns(10);
+			
+			JLabel tamTorneo = new JLabel("TamTorneo");
+			selectionPanel.add(tamTorneo);
+			tamTorneoTF = new JTextField();
+			tamTorneoTF.setText("1");
+			tamTorneoTF.setColumns(10);
+			selectionPanel.add(tamTorneo);
+			selectionPanel.add(tamTorneoTF);
+			
 			
 			//MUTATION PANEL
 
@@ -281,6 +269,8 @@ public class Mainframe extends JFrame  {
 						ag.run();
 						//puts them in the graphic plot
 						plot(ag.getGenerations(), ag.getFitness(),red,"Calibre");
+						plot(ag.getFitness(),ag.getGenerations(),green,"Calibra");
+						
 						break;
 					case 1:
 						System.out.println("GrieWank");
@@ -311,7 +301,7 @@ public class Mainframe extends JFrame  {
 				@Override
 				public void actionPerformed(ActionEvent e) {
 					// TODO Auto-generated method stub
-					System.out.println("re");
+					replot();
 				}
 				
 			});
