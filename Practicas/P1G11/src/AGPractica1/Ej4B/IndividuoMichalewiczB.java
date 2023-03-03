@@ -1,19 +1,14 @@
-package AGPractica1.Ej2;
+package AGPractica1.Ej4B;
 
 import java.util.Random;
 
 import Common.Individuo;
 
-public class IndividuoGrieWank extends Individuo<Integer>{
+public class IndividuoMichalewiczB extends Individuo<Double>{
 
-	final double min = -600.0;
-	final double max = 600.0;
-	final int dimension=2;
-	
-	public IndividuoGrieWank(double tolerance, int id, int numGenes) {
+	public IndividuoMichalewiczB(double tolerance, int id, int numGenes) {
 		super(tolerance, id, numGenes);
 		// TODO Auto-generated constructor stub
-		
 	}
 
 	@Override
@@ -24,19 +19,13 @@ public class IndividuoGrieWank extends Individuo<Integer>{
 
 	@Override
 	protected void calculateFenotype() {
-		fenotype= new double[this.getCromosomeArraySize()];
-		for(int i=0;i<fenotype.length;i++) {
-			
-		}
+		// TODO Auto-generated method stub
+		
 	}
 
 	@Override
 	public void evaluateSelf() {
-		final double fitness_;
-		
-		fitness_=Double.MIN_VALUE;
-		setFitness(fitness_);
-		System.out.println("Ejer 2: Wrong fitness params.");
+		// TODO Auto-generated method stub
 		
 	}
 

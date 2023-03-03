@@ -6,10 +6,12 @@ import Common.Individuo;
 
 public class IndividuoCalibracion extends Individuo<Integer>{
 
-	final double min1=-3.000;
-	final double min2=4.100;
-	final double max1=12.100;
-	final double max2=5.800;
+	// x1 = 11.625 y x2 = 5.726 x1∈ [-3.0,12.1] x2∈ [4.1,5.8]
+	final double minX1=-3.000;
+	final double maxX1=12.100;
+
+	final double minX2=4.100;
+	final double maxX2=5.800;
 	
 	
 	
@@ -27,7 +29,7 @@ public class IndividuoCalibracion extends Individuo<Integer>{
 			double x1= fenotype[0];
 			double x2= fenotype[1];
 			
-			fitness_=(21.5 + x1*Math.sin(4*Math.PI*x1)) + x2*Math.cos(20*Math.PI*x2);
+			fitness_=(21.5 + x1*Math.sin(4*Math.PI*x1)) + x2*Math.sin(20*Math.PI*x2); //f(x1 , x2) = 21.5 + x1.sin(4π x1)+x2.sin(20π x2) : 
 		}
 		else {
 			fitness_=Double.MIN_VALUE;

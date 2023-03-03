@@ -21,7 +21,7 @@ public abstract class Algoritmo {
 	
 
 	/**
-	  
+	 * 
 	 * @param tamPoblacion
 	 * @param maxGeneraciones
 	 * @param probCruce
