@@ -9,7 +9,7 @@ public class Crossing {
 		Mono, Multiple, Uniform, Aritmetic, Linear, Geometric, SBX
 	}
 	
-	public <T> Individuo[] MonopointCrossOver(Individuo[] population, double probability, int numPoints) {
+	public static <T> Individuo[] MonopointCrossOver(Individuo[] population, double probability, int numPoints) {
 	
 		Individuo[] crossed= new Individuo[population.length];
 		Random rnd= new Random();
@@ -44,10 +44,10 @@ public class Crossing {
 	
 		return crossed;
 	}
-	public <T> void MultiPointCrossOver() {
+	public static <T> void MultiPointCrossOver() {
 		
 	}
-	public <T> Individuo[] UniformCrossOver(Individuo<T>[] population, double probability) {
+	public static <T> Individuo[] UniformCrossOver(Individuo<T>[] population, double probability) {
 		Individuo[] crossed= new Individuo[population.length];
 		
 		return crossed;

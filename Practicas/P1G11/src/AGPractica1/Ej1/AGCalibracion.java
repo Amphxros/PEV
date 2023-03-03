@@ -1,4 +1,4 @@
-package AGPractica1;
+package AGPractica1.Ej1;
 
 import Common.Algoritmo;
 
@@ -12,7 +12,9 @@ public class AGCalibracion extends Algoritmo {
 
 	@Override
 	protected void evaluate() {
-		// TODO Auto-generated method stub
+		for(int i=0;i<poblacion.length;i++) {
+			poblacion[i].evaluateSelf();
+		}
 		
 	}
 

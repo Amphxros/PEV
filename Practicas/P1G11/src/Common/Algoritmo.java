@@ -19,15 +19,19 @@ public abstract class Algoritmo {
 	protected Crossing.Type crossing;
 	protected Mutation.Type mutation;
 	
-	private Crossing mCrossingInstance;
 
-	
+	/**
+	  
+	 * @param tamPoblacion
+	 * @param maxGeneraciones
+	 * @param probCruce
+	 * @param probMutation
+	 */
 	public Algoritmo(int tamPoblacion, int maxGeneraciones, double probCruce, double probMutation) {
 		this.maxGeneraciones = maxGeneraciones;
 		this.tamPoblacion = tamPoblacion;
 		this.probCruce = probCruce;
 		this.probMutacion = probMutation;
-		mCrossingInstance= new Crossing();
 		
 		generations= new double[this.maxGeneraciones];
 		fitness= new double[this.maxGeneraciones];
@@ -45,7 +49,10 @@ public abstract class Algoritmo {
 	public void setCrossing(int index) {
 		crossing= Crossing.Type.values()[index];
 	}
-	
+
+	public void setMutacion(int index) {
+		mutation= Mutation.Type.values()[index];
+	}
 	public void run() {
 
 		createPopulation();
@@ -95,8 +102,8 @@ public abstract class Algoritmo {
 		
 		
 		
-		//Para testear
 		
+		//Para testear
 		for(int i = 0; i < seleccionados.length; i++)
 		{
 			System.out.println(seleccionados[i].fitness);
@@ -108,7 +115,7 @@ public abstract class Algoritmo {
 	protected void crossOver() {
 		switch (crossing) {
 		case Mono:
-			mCrossingInstance.MonopointCrossOver(poblacion, probCruce, 1);
+			Crossing.MonopointCrossOver(poblacion, probCruce, 1);
 			break;
 		case Multiple:
 			break;

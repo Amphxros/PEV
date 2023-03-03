@@ -4,7 +4,7 @@ import javax.swing.WindowConstants;
 import org.math.plot.Plot2DPanel;
 import org.math.plot.plots.LinePlot;
 
-import AGPractica1.AGCalibracion;
+import AGPractica1.Ej1.AGCalibracion;
 
 import java.awt.EventQueue;
 
@@ -257,7 +257,7 @@ public class Mainframe extends JFrame  {
 						//sets the selection, crossing and mutation parameters
 						ag.setCrossing(crossingType);
 						ag.setSelection(selectionType);
-						ag.setMutation(mutationType);
+						ag.setMutacion(mutationType);
 						
 						//runs the algoritm
 						ag.run();

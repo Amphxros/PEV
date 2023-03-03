@@ -29,6 +29,10 @@ public abstract class Individuo<T> {
 		
 	}
 	
+	public int calculateGenSize(double tolerance, double min, double max)
+	{
+		return (int) (Math.log10(((max - min) / tolerance) + 1) / Math.log10(2));
+	}
 	
 	public Cromosoma<Common.Genes.Gen<T>> getCromosomes() {
 		return cromosoma;

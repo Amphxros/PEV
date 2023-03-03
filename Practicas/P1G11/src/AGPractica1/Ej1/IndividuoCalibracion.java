@@ -1,10 +1,10 @@
-package AGPractica1;
+package AGPractica1.Ej1;
 
 import java.util.Random;
 
 import Common.Individuo;
 
-public class IndividuoCalibracion extends Individuo<Boolean>{
+public class IndividuoCalibracion extends Individuo<Integer>{
 
 	final double min1=-3.000;
 	final double min2=4.100;
@@ -49,7 +49,7 @@ public class IndividuoCalibracion extends Individuo<Boolean>{
 			if(0<=pos && pos<cromosoma.getLength()) {
 				for(int i=0; i<this.cromosoma.getGen(pos).length();i++) {
 					if(rnd.nextDouble()<mutation_chance) {
-						this.cromosoma.getGen(pos).setAllele(i,rnd.nextBoolean());
+						this.cromosoma.getGen(pos).setAllele(rnd.nextBoolean(),i);
 						changed=true;
 					}
 				}
