@@ -65,6 +65,10 @@ public class Crossing {
 					
 				}
 			}
+			
+			crossed[i]=childA;
+			crossed[i+1]=childB;
+			i++;
 		}
 		return crossed;
 		
