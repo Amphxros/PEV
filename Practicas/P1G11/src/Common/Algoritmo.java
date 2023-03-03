@@ -72,7 +72,9 @@ public abstract class Algoritmo {
 		evaluate();
 		
 		
-		var seleccionados = selection();
+		/*Esto es de testeo de las selecciones
+		 * 
+		 * var seleccionados = selection();
 		
 		double count = 0;
 		for(int i = 0; i < seleccionados.length; i++) {
@@ -82,14 +84,14 @@ public abstract class Algoritmo {
 		
 		System.out.println("Valor medio " + count / seleccionados.length);
 		
+		*/
 		
-		
-		/*for (int i = 0; i < maxGeneraciones; i++) {
+		for (int i = 0; i < maxGeneraciones; i++) {
 			selection();
 			crossOver();
 			mutate();
 			evaluate();
-		}*/
+		}
 	}
 
 	protected abstract void createPopulation();

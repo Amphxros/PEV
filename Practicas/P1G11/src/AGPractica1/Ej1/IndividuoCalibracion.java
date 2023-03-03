@@ -63,7 +63,7 @@ public class IndividuoCalibracion extends Individuo<Boolean>{
 			System.out.println("Ejer 1: Wrong fitness params.");
 		}
 		
-		setFitness(static_fitness_++);
+		setFitness(fitness_);
 		
 	}
 
