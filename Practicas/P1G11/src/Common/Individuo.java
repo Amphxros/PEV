@@ -1,19 +1,21 @@
 package Common;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 import Common.Genes.Gen;
 
 public abstract class Individuo<T> {
 
-	int[] tamGenes;
+	
+	protected double[] tamGenes;
 	protected Cromosoma<Common.Genes.Gen<T>> cromosoma;
 	int tam_Cromosoma;
 	private double apt;
 	private double punct;
 	private double punctAcum;
 	
-	protected int fenotype; //fenotipo
+	protected double[] fenotype; //fenotipo
 	protected double fitness; //fitness
 	protected int id; //id for different functions
 	protected double tolerance;
@@ -24,7 +26,6 @@ public abstract class Individuo<T> {
 		this.tolerance=tolerance;
 		this.id=id;
 		this.tam_Cromosoma=numGenes;
-		
 		
 	}
 	
@@ -57,12 +58,14 @@ public abstract class Individuo<T> {
 	}
 	
 	
-	public void mutate(int position) {
+	public void mutate(Random rnd, double probMutacion) {
 		int index=0;
-		int pos = getGenIndex(index ,position);
-		this.cromosoma.setGen(null, index); // TODO change null for calculated Individual
-
+		
 	}
+	
+	protected abstract boolean mutateGene(int pos, Random rnd, double mutation_chance);
+	protected abstract void calculateFenotype();
+		
 	public abstract void evaluateSelf();
 	
 	public abstract boolean maximize();
@@ -103,7 +106,7 @@ public abstract class Individuo<T> {
 		this.apt=apt;
 	}
 	
-	public int getFenotype() {
+	public double[] getFenotypes() {
 		return fenotype;
 	}
 

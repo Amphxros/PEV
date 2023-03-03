@@ -20,6 +20,14 @@ public abstract class Gen<T>{
 	public void setAllele(T allele) {
 		this.allele= allele;
 	}
+	
+
+	public void setAllele(boolean b,T allele) {
+		if(b) {
+			this.allele= allele;
+		}
+	}
+	
 	public abstract String toString();
 	
 	public boolean equals(Object o) {
