@@ -6,8 +6,8 @@ import Common.Algoritmo;
 public class AlgoritmoStyblinskiTang extends Algoritmo {
 
 	public AlgoritmoStyblinskiTang(int tamPoblacion, int maxGeneraciones, double probCruce, double probMutation,
-			int tamTorneo) {
-		super(tamPoblacion, maxGeneraciones, probCruce, probMutation, tamTorneo);
+			int tamTorneo, boolean elitismo) {
+		super(tamPoblacion, maxGeneraciones, probCruce, probMutation, tamTorneo, elitismo);
 		// TODO Auto-generated constructor stub
 	}
 

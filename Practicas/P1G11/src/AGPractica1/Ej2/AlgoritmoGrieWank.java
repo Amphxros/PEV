@@ -5,8 +5,8 @@ import Common.Algoritmo;
 
 public class AlgoritmoGrieWank extends Algoritmo {
 
-	public AlgoritmoGrieWank(int tamPoblacion, int maxGeneraciones, double probCruce, double probMutation, int tamTorneo) {
-		super(tamPoblacion, maxGeneraciones, probCruce, probMutation, tamTorneo);
+	public AlgoritmoGrieWank(int tamPoblacion, int maxGeneraciones, double probCruce, double probMutation, int tamTorneo, boolean elitismo) {
+		super(tamPoblacion, maxGeneraciones, probCruce, probMutation, tamTorneo, elitismo);
 		// TODO Auto-generated constructor stub
 	}
 

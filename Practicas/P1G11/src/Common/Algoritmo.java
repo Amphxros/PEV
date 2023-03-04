@@ -33,12 +33,13 @@ public abstract class Algoritmo {
 	 * @param probCruce
 	 * @param probMutation
 	 */
-	public Algoritmo(int tamPoblacion, int maxGeneraciones, double probCruce, double probMutation, int tamTorneo) {
+	public Algoritmo(int tamPoblacion, int maxGeneraciones, double probCruce, double probMutation, int tamTorneo, boolean elitismo) {
 		this.maxGeneraciones = maxGeneraciones;
 		this.tamPoblacion = tamPoblacion;
 		this.probCruce = probCruce;
 		this.probMutacion = probMutation;
 		this.tamTorneo = tamTorneo;
+		this.elitism = elitismo;
 		
 		generations= new double[this.maxGeneraciones];
 		fitness= new double[this.maxGeneraciones];
@@ -70,10 +71,15 @@ public abstract class Algoritmo {
 
 		for (int i = 0; i < maxGeneraciones; i++) {
 			
+			var elite = generarElite();
+			
 			var selected = selection();
 			var crossed = crossOver(selected);
 			var mutated = mutate(crossed);
 			
+			if(elitism) {
+				introducirElite(elite);
+			}
 			
 			poblacion = mutated;
 			evaluate(i);
@@ -162,6 +168,42 @@ public abstract class Algoritmo {
 		}
 		return mutated;
 	}
+	
+	
+	public Individuo[] generarElite() {
+		
+		final double elitePercentage = 2;
+		
+		int size = poblacion.length;
+		
+		int eliteSize = (int)Math.floor(size * elitePercentage / 100.0f);
+		
+		Individuo[] elite = new Individuo[eliteSize];
+		
+		Individuo[] poblacionOrdenada = poblacion.clone();
+		Selection.quickSort(poblacionOrdenada, 0, poblacion.length + 1);
+		
+		for(int i = 0; i < eliteSize; i++) {
+			
+			elite[i] = poblacionOrdenada[i];
+		}
+		
+		
+		return elite;
+		
+	}
+	
+	public void introducirElite(Individuo[] elite) {
+		
+		
+		int eliteSize = elite.length;
+		
+		for(int i = 0; i < eliteSize; i++) {
+			
+			poblacion[i] = elite[i];
+		}
+	}
+	
 	protected abstract void evaluate(int currGeneration);
 
 	public double[] getGenerations() {

@@ -6,8 +6,8 @@ import Common.Algoritmo;
 public class AlgoritmoMichalewiczB extends Algoritmo {
 	private final int dimension;
 	public AlgoritmoMichalewiczB(int tamPoblacion, int maxGeneraciones, double probCruce, double probMutation,
-			int tamTorneo,int dimension) {
-		super(tamPoblacion, maxGeneraciones, probCruce, probMutation, tamTorneo);
+			int tamTorneo,int dimension, boolean elitismo) {
+		super(tamPoblacion, maxGeneraciones, probCruce, probMutation, tamTorneo, elitismo);
 		this.dimension=dimension;
 		this.isMaximize=false;
 	}
