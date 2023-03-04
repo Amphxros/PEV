@@ -25,4 +25,12 @@ public class Cromosoma<T>{
 		return (Gen<T>[]) genes;
 	}
 	
+	public String getString() {
+		String s="";
+		for(int i=0;i<this.getLength();i++) {
+			s+=this.genes[i].toString();
+		}
+		return s;
+	}
+	
 }

@@ -28,6 +28,8 @@ public class AlgoritmoGrieWank extends Algoritmo {
 		
 		
 		double sum=0.0;
+		//resets everything
+		this.elMejor=null;
 		double best_fitness;
 		if(this.isMaximize) {
 			best_fitness=Double.MIN_VALUE;
@@ -54,8 +56,7 @@ public class AlgoritmoGrieWank extends Algoritmo {
 		else {
 			this.fitnessAbs[currGeneration]= this.elMejor.getFitness();
 		}
-		//resets everything
-		this.elMejor=null;
+		
 		
 	}
 

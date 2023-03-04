@@ -53,9 +53,11 @@ public abstract class Individuo<T> {
 	public void mutate(Random rnd, double probability) {
 		boolean mutated = false;
 		
-		for (int i=0; i < numGenes && !mutated; i++)
-			mutated = mutateSelf(i, rnd, probability);
-		
+		for (int i=0; i < numGenes ; i++) {
+			if(!mutated) {
+				mutated = mutateSelf(i, rnd, probability);
+			}
+		}
 		if (mutated)
 			calculateFenotype(); // Update fenotype
 	}

@@ -89,7 +89,17 @@ public abstract class Algoritmo {
 		
 		
 		
+		
 	}
+	
+	public int getBestPosition() {
+		return this.pos_mejor;
+	}
+	
+	public String getBestIndividuo() {
+		return this.elMejor.cromosoma.getString();
+	}
+	
 	public void setMaximized(boolean max) {
 		this.isMaximize=max;
 	}

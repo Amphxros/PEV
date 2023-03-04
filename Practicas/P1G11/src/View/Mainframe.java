@@ -393,7 +393,7 @@ executeButton.addActionListener(new ActionListener() {
 						plot(ag.getGenerations(), ag.getFitness(),red,"Calibre");
 						plot(ag.getGenerations(),ag.getMediumFitness(),green,"Media");
 						plot(ag.getGenerations(),ag.getAbsFitness(),blue,"aptAbs");
-						
+						solutionTF.setText("Best is " + ag.getBestPosition() + ": " + ag.getBestIndividuo());
 						break;
 					case 1:
 						System.out.println("GrieWank");
@@ -407,7 +407,7 @@ executeButton.addActionListener(new ActionListener() {
 						plot(ag2.getGenerations(), ag2.getFitness(),red,"Calibre");
 						plot(ag2.getGenerations(),ag2.getMediumFitness(),green,"Media");
 						plot(ag2.getGenerations(),ag2.getAbsFitness(),blue,"aptAbs");
-						
+						solutionTF.setText("Best is " + ag2.getBestPosition() + ": " + ag2.getBestIndividuo());
 						break;
 					case 2:
 						System.out.println("Styblinski-tang");
@@ -421,6 +421,7 @@ executeButton.addActionListener(new ActionListener() {
 						plot(ag3.getGenerations(),ag3.getMediumFitness(),green,"Media");
 						plot(ag3.getGenerations(),ag3.getAbsFitness(),blue,"aptAbs");
 						
+						solutionTF.setText("Best is " + ag3.getBestPosition() + ": " + ag3.getBestIndividuo());
 					
 						break;
 					case 3:
@@ -434,7 +435,8 @@ executeButton.addActionListener(new ActionListener() {
 							plot(ag4A.getGenerations(),ag4A.getFitness(),red,"Calibre");
 							plot(ag4A.getGenerations(),ag4A.getMediumFitness(),green,"Media");
 							plot(ag4A.getGenerations(),ag4A.getAbsFitness(),blue,"aptAbs");
-						break;
+							solutionTF.setText("Best is " + ag4A.getBestPosition() + ": " + ag4A.getBestIndividuo());
+							break;
 					case 4:
 						System.out.println("Michalewicz --B");
 						 AlgoritmoMichalewiczB ag4b= new  AlgoritmoMichalewiczB(tamPoblacion,nGeneraciones,probCruce,probMutacion, tamTorneo,dim, elitism);
@@ -446,7 +448,8 @@ executeButton.addActionListener(new ActionListener() {
 							plot(ag4b.getGenerations(),ag4b.getFitness(),red,"Calibre");
 							plot(ag4b.getGenerations(),ag4b.getMediumFitness(),green,"Media");
 							plot(ag4b.getGenerations(),ag4b.getAbsFitness(),blue,"aptAbs");
-			
+							
+							solutionTF.setText("Best is " + ag4b.getBestPosition() + ": " + ag4b.getBestIndividuo());
 						break;
 					default:
 						break;

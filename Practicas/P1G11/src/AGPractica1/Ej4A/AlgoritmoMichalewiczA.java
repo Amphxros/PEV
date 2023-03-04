@@ -28,6 +28,8 @@ public class AlgoritmoMichalewiczA extends Algoritmo{
 		
 
 		double sum=0.0;
+		//resets everything
+		this.elMejor=null;
 		double best_fitness;
 		if(this.isMaximize) {
 			best_fitness=Double.MIN_VALUE;

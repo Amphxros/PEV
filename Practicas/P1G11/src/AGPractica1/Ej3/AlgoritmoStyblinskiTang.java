@@ -24,6 +24,8 @@ public class AlgoritmoStyblinskiTang extends Algoritmo {
 	protected void evaluate(int currGeneration) {
 		double sum=0.0;
 		double best_fitness;
+		//resets everything
+		this.elMejor=null;
 		if(this.isMaximize) {
 			best_fitness=Double.MIN_VALUE;
 		}
@@ -49,8 +51,7 @@ public class AlgoritmoStyblinskiTang extends Algoritmo {
 		else {
 			this.fitnessAbs[currGeneration]= this.elMejor.getFitness();
 		}
-		//resets everything
-		this.elMejor=null;
+		
 		
 		
 	}
