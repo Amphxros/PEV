@@ -4,6 +4,7 @@ import java.util.Random;
 
 import Common.Cromosoma;
 import Common.Individuo;
+import Common.Genes.BooleanGen;
 import Common.Genes.RealGen;
 
 public class IndividuoMichalewiczB extends Individuo<Double>{
@@ -29,7 +30,10 @@ public class IndividuoMichalewiczB extends Individuo<Double>{
 
 	@Override
 	protected boolean mutateSelf(int pos, Random rnd, double probability) {
-		// TODO Auto-generated method stub
+		if(rnd.nextDouble()<probability) {
+			this.cromosoma.setGen(new RealGen(rnd.nextDouble()*max), pos);
+			return true;
+		}
 		return false;
 	}
 
