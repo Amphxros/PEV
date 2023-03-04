@@ -2,22 +2,30 @@ package AGPractica1.Ej3;
 
 import java.util.Random;
 
+import Common.Conversions;
+import Common.Cromosoma;
 import Common.Individuo;
+import Common.Genes.BooleanGen;
 
-public class IndividuoStyblinskiTang extends Individuo<Integer>{
+public class IndividuoStyblinskiTang extends Individuo<Boolean>{
 
-	final double minX1=-5;
-	final double maxX1=5;
+	final double min=-5;
+	final double max=5;
 	final int dimension=2;
 	
 	public IndividuoStyblinskiTang(double tolerance, int id, int numGenes) {
 		super(tolerance, id, numGenes);
 		// TODO Auto-generated constructor stub
-		fenotype= new double[dimension];
+		this.fenotype= new double[dimension];
+		final int tamGenes = this.calculateGenSize(tolerance, min, max);
+
 		Random rnd= new Random();
-		for(int i=0;i<numGenes;i++) {
-			
+		this.cromosoma= new Cromosoma(dimension);
+		for(int i=0;i<this.cromosoma.getLength();i++) {
+			BooleanGen g= new BooleanGen(rnd.nextBoolean());
+			this.cromosoma.setGen(g, i);	
 		}
+		calculateFenotype();
 		
 	}
 
@@ -30,7 +38,10 @@ public class IndividuoStyblinskiTang extends Individuo<Integer>{
 	@Override
 	protected void calculateFenotype() {
 		// TODO Auto-generated method stub
-	
+		fenotype= new double[dimension];
+		for(int i=0;i<fenotype.length;i++) {
+			fenotype[i]= min + (max - min) * (Conversions.binaryToDecimal(this.cromosoma)/this.getCromosomeArraySize()) -1;
+		}
 				
 	}
 

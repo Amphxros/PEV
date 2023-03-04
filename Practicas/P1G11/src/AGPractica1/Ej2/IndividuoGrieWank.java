@@ -20,8 +20,8 @@ public class IndividuoGrieWank extends Individuo<Boolean>{
 		final int tamGenes = this.calculateGenSize(tolerance, min, max);
 
 		Random rnd= new Random();
-		this.cromosoma= new Cromosoma(tamGenes);
-		for(int i=0;i<tamGenes;i++) {
+		this.cromosoma= new Cromosoma(dimension);
+		for(int i=0;i<this.cromosoma.getLength();i++) {
 			BooleanGen g= new BooleanGen(rnd.nextBoolean());
 			this.cromosoma.setGen(g, i);	
 		}
