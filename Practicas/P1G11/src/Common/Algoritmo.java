@@ -66,45 +66,21 @@ public abstract class Algoritmo {
 		mutation= Mutation.Type.values()[index];
 	}
 	public void run() {
-
-		IndividuoCalibracion.static_fitness_ = 1;
 		createPopulation();
 		evaluate(0);
-		
-		
-		/*Esto es de testeo de las selecciones
-		 * 
-		 * var seleccionados = selection();
-		
-		double count = 0;
-		for(int i = 0; i < seleccionados.length; i++) {
-			System.out.println(seleccionados[i].fitness);
-			count+= seleccionados[i].fitness;
-		}
-		
-		System.out.println("Valor medio " + count / seleccionados.length);
-		
-		*/
-		
+
 		for (int i = 0; i < maxGeneraciones; i++) {
 			
 			var selected = selection();
-			for(int j = 0; j < selected.length; j++) {
-				selected[j].print();
-				System.out.print(" ");
-			}
-			System.out.print("\n");
 			var crossed = crossOver(selected);
-			for(int j = 0; j < crossed.length; j++) {
-				crossed[j].print();
-				System.out.print(" ");
-			}
-			System.out.print("\n");
 			var mutated = mutate(crossed);
 			
+			
 			poblacion = mutated;
-			//evaluate(i);
+			evaluate(i);
 		}
+		
+		
 	}
 
 	protected abstract void createPopulation();

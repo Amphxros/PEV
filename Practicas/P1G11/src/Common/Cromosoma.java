@@ -11,8 +11,8 @@ public class Cromosoma<T>{
 	public Cromosoma(int numGenes) {
 		genes=(Gen<T>[]) new Gen[numGenes]; 
 	}
-	public T getGen(int index) {
-		return (T) this.genes[index];
+	public Gen<T> getGen(int index) {
+		return this.genes[index];
 	}
 	public void setGen(Gen<T> gen, int index) {
 		this.genes[index]=(Gen<T>)gen;

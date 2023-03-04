@@ -54,6 +54,7 @@ public abstract class Individuo<T> {
 		
 	}
 	
+	
 	protected abstract boolean mutateSelf(int pos, Random rnd, double probability);
 	protected abstract void calculateFenotype();
 	public abstract void evaluateSelf();

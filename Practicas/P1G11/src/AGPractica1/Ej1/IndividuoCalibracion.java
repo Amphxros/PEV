@@ -17,32 +17,32 @@ public class IndividuoCalibracion extends Individuo<Boolean>{
 	private final double minX2=4.100;
 	private final double maxX2=5.800;
 	
-	
+	private int tamX1 = 0;
+	private int tamX2 = 0;
 	
 	public IndividuoCalibracion(double tolerance, int id, int numGenes) {
 		super(tolerance, id, numGenes);
 		// TODO Auto-generated constructor stub
-		final int tamX1=this.calculateGenSize(this.tolerance, minX1, maxX1);
-		final int tamX2=this.calculateGenSize(this.tolerance, minX2, maxX2);
+		tamX1 =this.calculateGenSize(this.tolerance, minX1, maxX1);
+		tamX2 =this.calculateGenSize(this.tolerance, minX2, maxX2);
 		
 		fenotype= new double[2];
 		fenotype[0]=fenotype[1]=Double.MIN_VALUE;
-		this.cromosoma= new Cromosoma(numGenes);
+		this.cromosoma= new Cromosoma(tamX1 + tamX2);
 		Random rnd= new Random();
 	
-		for(int i=0;i<numGenes;i++) {
+		//Nota: Num genes realmente no se usa pues depende del tamaño que se calcule entre el maximo y el minimo
+		
+		for(int i = 0 ;i<  tamX1 + tamX2;i++) {
 			BooleanGen g= new BooleanGen(rnd.nextBoolean());
 			//System.out.print(g.toString());
 			this.cromosoma.setGen(g, i);
 		}
 		
-		
+		calculateFenotype();
 	
 	}
 
-	
-	//TODO eliminar esto
-	public static double static_fitness_ = 1;
 	
 	/**
 	 * /**
@@ -54,6 +54,7 @@ public class IndividuoCalibracion extends Individuo<Boolean>{
 		if (fenotype.length == 2) {
 			double x1= fenotype[0];
 			double x2= fenotype[1];
+			
 			
 			fitness_=(21.5 + x1*Math.sin(4*Math.PI*x1)) + x2*Math.sin(20*Math.PI*x2); //f(x1 , x2) = 21.5 + x1.sin(4π x1)+x2.sin(20π x2)
 			
@@ -91,8 +92,23 @@ public class IndividuoCalibracion extends Individuo<Boolean>{
 	@Override
 	protected void calculateFenotype() {
 		// TODO Auto-generated method stub
-		fenotype[0]= minX1 + (maxX1 - minX1) *(Conversions.binaryToDecimal(this.cromosoma));
-		fenotype[1]= minX2 + (maxX2 - minX2) *(Conversions.binaryToDecimal(this.cromosoma));
+		
+		Cromosoma cromosome1 = new Cromosoma(tamX1);
+		Cromosoma cromosome2 = new Cromosoma(tamX2);
+		
+		for(int i = 0; i < tamX1; i++) {
+			
+			
+			cromosome1.setGen(this.cromosoma.getGen(i), i);
+		}
+		
+		for(int i = 0; i < tamX2; i++) {
+			cromosome2.setGen(this.cromosoma.getGen(i + tamX1), i);
+		}
+		
+		
+		fenotype[0]= minX1 + (maxX1 - minX1) *(Conversions.binaryToDecimal(cromosome1)) / (Math.pow(2, tamX1) - 1);
+		fenotype[1]= minX2 + (maxX2 - minX2) *(Conversions.binaryToDecimal(cromosome2))/ (Math.pow(2, tamX2) - 1);
 	}
 
 }
