@@ -86,8 +86,9 @@ public class Mainframe extends JFrame  {
 		
 		private void replot()
 		{
+			plot.removeAllPlots();
 			plot.resetMapData();
-			
+		
 		}
 		
 		private void plot(double[][] xy, Color c, String name)
@@ -260,6 +261,8 @@ public class Mainframe extends JFrame  {
 				public void actionPerformed(ActionEvent e) {
 					// TODO Auto-generated method stub
 					replot();
+					
+					System.out.println("Reiniciar");
 				}
 				
 			});
