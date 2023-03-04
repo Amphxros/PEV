@@ -73,7 +73,7 @@ public class Mainframe extends JFrame  {
 		private JTextField tamTorneoTF;
 		private JTextField solutionTF;
 		private JTextField dimTF;	
-		
+		private JTextField elitismTF;	
 		private Plot2DPanel plot;
 		
 		NumberFormat numberFormat = NumberFormat.getNumberInstance(Locale.getDefault());
@@ -109,7 +109,7 @@ public class Mainframe extends JFrame  {
 		public Mainframe() {
 			super("P1G11 -- PEV");
 			this.setResizable(false);
-			this.setMinimumSize(new Dimension(1280,720));
+			this.setMinimumSize(new Dimension(1920,1080));
 			this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 			this.setLocationRelativeTo(null);
 					
@@ -224,7 +224,7 @@ public class Mainframe extends JFrame  {
 			
 			JPanel problemPanel = new JPanel();
 			problemPanel.setBorder(new TitledBorder("Problema"));
-			problemPanel.setLayout(new GridLayout(0, 2, 0, 0));
+			problemPanel.setLayout(new GridLayout(0, 4, 1, 0));
 			
 			JLabel lblSelectProblema = new JLabel("Selecciona problema");
 			lblSelectProblema.setHorizontalAlignment(SwingConstants.LEFT);
@@ -245,6 +245,13 @@ public class Mainframe extends JFrame  {
 			//BUTTONS 
 			JButton executeButton = new JButton("Ejecutar");
 			
+			JLabel elitismLabel = new JLabel("% elitismo");
+			elitismLabel.setHorizontalAlignment(SwingConstants.LEFT);
+			elitismTF= new JTextField();
+			elitismTF.setText("0");
+			problemPanel.add(elitismLabel);
+			
+			problemPanel.add(elitismTF);
 			
 			JButton restartButton = new JButton("Reiniciar");
 			restartButton.addActionListener(new ActionListener() {
@@ -307,20 +314,20 @@ public class Mainframe extends JFrame  {
 			gl_westPanel.setAutoCreateContainerGaps(true);
 			westSidePanel.setLayout(gl_westPanel);
 			
-			JPanel eastPanel = new JPanel();
-			eastPanel.setBorder(new TitledBorder(null, "Plot", TitledBorder.LEADING, TitledBorder.TOP, null, null));
-			getContentPane().add(eastPanel, BorderLayout.CENTER);
-			eastPanel.setLayout(new BoxLayout(eastPanel, BoxLayout.Y_AXIS));
+			JPanel centerPanel = new JPanel();
+			centerPanel.setBorder(new TitledBorder(null, "Plot", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+			getContentPane().add(centerPanel, BorderLayout.CENTER);
+			centerPanel.setLayout(new BoxLayout(centerPanel, BoxLayout.Y_AXIS));
 			
 			plot = new Plot2DPanel();
 			plot.plotCanvas.setAutoBounds(1);
 			plot.plotCanvas.setAxisLabels(new String[] {"X", "Y"});
 			plot.plotCanvas.setBackground(UIManager.getColor("Button.light"));
-			eastPanel.add(plot);
+			centerPanel.add(plot);
 			replot();
 			
 			JPanel solutionPanel = new JPanel();
-			eastPanel.add(solutionPanel);
+			centerPanel.add(solutionPanel);
 			
 			JLabel solutionLabel = new JLabel("Solution:");
 			solutionLabel.setFont(new Font("Tahoma", Font.BOLD, 11));
@@ -330,6 +337,9 @@ public class Mainframe extends JFrame  {
 			solutionTF.setText("solution here");
 			solutionTF.setEditable(false);
 			solutionTF.setColumns(10);
+			
+			
+			
 			GroupLayout gl_solutionPanel = new GroupLayout(solutionPanel);
 			gl_solutionPanel.setHorizontalGroup(
 				gl_solutionPanel.createParallelGroup(Alignment.LEADING)
@@ -359,7 +369,7 @@ executeButton.addActionListener(new ActionListener() {
 					int tamPoblacion = Integer.parseInt(genSizeTextField.getText().replace(".", ""));
 					int nGeneraciones = Integer.parseInt(numGenTF.getText().replace(".", ""));
 					int dim = Integer.parseInt(dimTF.getText());
-					
+					double elitism= Double.parseDouble(elitismTF.getText());
 					double probCruce= Double.parseDouble(crossProbabilityTF.getText());
 					double probMutacion= Double.parseDouble(mutationProbabilityTF.getText());
 				
