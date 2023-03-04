@@ -15,7 +15,9 @@ public class AlgoritmoGrieWank extends Algoritmo {
 		poblacion= new IndividuoGrieWank[this.tamPoblacion];
 		
 		for(int i=0;i<this.tamPoblacion; i++) {
-			poblacion[i]= new IndividuoGrieWank(0.1,i,3); //TODO change this a bit
+			poblacion[i]= new IndividuoGrieWank(0.1,i,2); //TODO change this a bit
+			
+			
 		}
 		
 	}
@@ -23,6 +25,8 @@ public class AlgoritmoGrieWank extends Algoritmo {
 	
 	@Override
 	protected void evaluate(int currGeneration) {
+		
+		
 		double sum=0.0;
 		double best_fitness;
 		if(this.isMaximize) {
@@ -52,7 +56,6 @@ public class AlgoritmoGrieWank extends Algoritmo {
 		}
 		//resets everything
 		this.elMejor=null;
-		
 		
 	}
 

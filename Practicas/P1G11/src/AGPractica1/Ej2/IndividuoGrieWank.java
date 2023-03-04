@@ -15,18 +15,17 @@ public class IndividuoGrieWank extends Individuo<Boolean>{
 	
 	public IndividuoGrieWank(double tolerance, int id, int numGenes) {
 		super(tolerance, id, numGenes);
+		
+		this.fenotype= new double[dimension];
 		final int tamGenes = this.calculateGenSize(tolerance, min, max);
-		
-		fenotype= new double[dimension];
-		this.cromosoma= new Cromosoma(numGenes);
-		
+
 		Random rnd= new Random();
-	
-		for(int i=0;i<numGenes;i++) {
+		this.cromosoma= new Cromosoma(tamGenes);
+		for(int i=0;i<tamGenes;i++) {
 			BooleanGen g= new BooleanGen(rnd.nextBoolean());
-			//System.out.print(g.toString());
 			this.cromosoma.setGen(g, i);	
 		}
+		calculateFenotype();
 		
 	}
 
@@ -38,7 +37,7 @@ public class IndividuoGrieWank extends Individuo<Boolean>{
 
 	@Override
 	protected void calculateFenotype() {
-		fenotype= new double[this.getCromosomeArraySize()];
+		fenotype= new double[dimension];
 		for(int i=0;i<fenotype.length;i++) {
 			fenotype[i]= min + (max - min) * (Conversions.binaryToDecimal(this.cromosoma)/this.getCromosomeArraySize()) -1;
 		}
@@ -49,21 +48,25 @@ public class IndividuoGrieWank extends Individuo<Boolean>{
 	 */
 	@Override
 	public void evaluateSelf() {
+
 		final double fitness_;	
-		if(fenotype.length==dimension) {
+
+		if(dimension==this.fenotype.length) {
 			double first=0, second=0; 
 			for(int i=0; i<dimension;i++) {
 				first+=Math.pow(fenotype[i],2)/4000; //∑ (xi^2 /4000) 
-				second+=Math.cos(fenotype[i]/Math.sqrt(i)); // ∏(cos (xi/√i)) 
+				second+=Math.cos(fenotype[i]/Math.sqrt(i + 1)); // ∏(cos (xi/√i)) 
 			}
 			
-			fitness_=first - second + 1;
+			fitness_=first - second;
+			setFitness(fitness_);	
 		}
 		else {
 			fitness_=Double.MIN_VALUE;
 			setFitness(fitness_);		
+			System.out.println("Ejer 2: Wrong fitness params.");
+			
 		}
-		System.out.println("Ejer 2: Wrong fitness params.");
 		
 	}
 

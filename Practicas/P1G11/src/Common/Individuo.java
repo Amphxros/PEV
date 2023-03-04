@@ -38,7 +38,7 @@ public abstract class Individuo<T> {
 	}
 	
 	public T getGen(int pos) {
-		return cromosoma.getGen(pos);
+		return (T) cromosoma.getGen(pos);
 	}
 	public int getID() {
 		return this.id;
@@ -47,6 +47,7 @@ public abstract class Individuo<T> {
 		for(int i=0;i<this.getCromosomeArraySize();i++) {
 			System.out.print(this.cromosoma.getGen(i).toString());
 		}
+		System.out.print(" ");
 	}
 	
 	public void mutate(Random rnd, double probability) {

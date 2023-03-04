@@ -23,8 +23,8 @@ public abstract class Algoritmo {
 	protected Selection.Type seleccion;
 	protected Crossing.Type crossing;
 	protected Mutation.Type mutation;
-	protected boolean isMaximize=false;
-	
+	protected boolean isMaximize=true;
+	protected boolean elitism;
 
 	/**
 	 * 
@@ -42,7 +42,6 @@ public abstract class Algoritmo {
 		
 		generations= new double[this.maxGeneraciones];
 		fitness= new double[this.maxGeneraciones];
-		
 		fitnessAbs= new double[this.maxGeneraciones];
 		fitnessMed= new double[this.maxGeneraciones];
 

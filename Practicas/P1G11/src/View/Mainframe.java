@@ -5,6 +5,7 @@ import org.math.plot.Plot2DPanel;
 import org.math.plot.plots.LinePlot;
 
 import AGPractica1.Ej1.AGCalibracion;
+import AGPractica1.Ej2.AlgoritmoGrieWank;
 
 import java.awt.EventQueue;
 
@@ -272,10 +273,22 @@ public class Mainframe extends JFrame  {
 						//puts them in the graphic plot
 						plot(ag.getGenerations(), ag.getFitness(),red,"Calibre");
 						plot(ag.getGenerations(),ag.getMediumFitness(),green,"Media");
+						plot(ag.getGenerations(),ag.getAbsFitness(),blue,"aptAbs");
 						
 						break;
 					case 1:
 						System.out.println("GrieWank");
+						AlgoritmoGrieWank ag2= new AlgoritmoGrieWank(tamPoblacion,nGeneraciones,probCruce,probMutacion, tamTorneo);
+						//sets the selection, crossing and mutation parameters
+						ag2.setCrossing(crossingType);
+						ag2.setSelection(selectionType);
+						ag2.setMutacion(mutationType);
+						ag2.run();
+						//puts them in the graphic plot
+						plot(ag2.getGenerations(), ag2.getFitness(),red,"Calibre");
+						plot(ag2.getGenerations(),ag2.getMediumFitness(),green,"Media");
+						plot(ag2.getGenerations(),ag2.getAbsFitness(),blue,"aptAbs");
+						
 						break;
 					case 2:
 						System.out.println("Styblinski-tang");
