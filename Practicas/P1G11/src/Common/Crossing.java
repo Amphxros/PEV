@@ -84,4 +84,8 @@ public class Crossing {
 		return crossed;
 		
 	}
+	public static <T> Individuo[] AritmeticCrossOver(Individuo<T>[] population, double probability) {
+		return population;
+	}
+
 }

@@ -17,7 +17,7 @@ public class IndividuoStyblinskiTang extends Individuo<Boolean>{
 		super(tolerance, id, numGenes);
 		// TODO Auto-generated constructor stub
 		this.fenotype= new double[dimension];
-		final int tamGenes = this.calculateGenSize(tolerance, min, max);
+		final int tamGenes = this.tamGen(tolerance, min, max);
 
 		Random rnd= new Random();
 		this.cromosoma= new Cromosoma(dimension);
@@ -53,7 +53,7 @@ public class IndividuoStyblinskiTang extends Individuo<Boolean>{
 		// TODO Auto-generated method stub
 		final double fitness_; //new fitness
 		if (fenotype.length == dimension) {
-			// sumatory from 0 to dimension
+			
 			double sum=0.0;
 			for(int i=0;i<dimension;i++) {
 				sum+= (Math.pow(fenotype[i],4)) - (16*Math.pow(fenotype[i], 2)) + 5*fenotype[i];

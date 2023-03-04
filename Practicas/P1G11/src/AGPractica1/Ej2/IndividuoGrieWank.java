@@ -17,7 +17,7 @@ public class IndividuoGrieWank extends Individuo<Boolean>{
 		super(tolerance, id, numGenes);
 		
 		this.fenotype= new double[dimension];
-		final int tamGenes = this.calculateGenSize(tolerance, min, max);
+		final int tamGenes = this.tamGen(tolerance, min, max);
 
 		Random rnd= new Random();
 		this.cromosoma= new Cromosoma(dimension);

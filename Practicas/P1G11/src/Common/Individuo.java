@@ -10,7 +10,7 @@ public abstract class Individuo<T> {
 	
 	protected double[] tamGenes;
 	protected Cromosoma<T> cromosoma;
-	int tam_Cromosoma;
+	protected int numGenes;
 	private double punct;
 	private double punctAcum;
 	
@@ -20,15 +20,15 @@ public abstract class Individuo<T> {
 	protected double tolerance;
 
 	public Individuo(double tolerance, int id, int numGenes) {
-		this.tam_Cromosoma=numGenes;
+		this.numGenes=numGenes;
 		
 		this.tolerance=tolerance;
 		this.id=id;
-		this.tam_Cromosoma=numGenes;
+		this.numGenes=numGenes;
 		
 	}
 	
-	public int calculateGenSize(double tolerance, double min, double max)
+	public int tamGen(double tolerance, double min, double max)
 	{
 		return (int) (Math.log10(((max - min) / tolerance) + 1) / Math.log10(2));
 	}

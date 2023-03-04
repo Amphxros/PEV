@@ -23,8 +23,8 @@ public class IndividuoCalibracion extends Individuo<Boolean>{
 	public IndividuoCalibracion(double tolerance, int id, int numGenes) {
 		super(tolerance, id, numGenes);
 		// TODO Auto-generated constructor stub
-		tamX1 =this.calculateGenSize(this.tolerance, minX1, maxX1);
-		tamX2 =this.calculateGenSize(this.tolerance, minX2, maxX2);
+		tamX1 =this.tamGen(this.tolerance, minX1, maxX1);
+		tamX2 =this.tamGen(this.tolerance, minX2, maxX2);
 		
 		fenotype= new double[2];
 		fenotype[0]=fenotype[1]=Double.MIN_VALUE;

@@ -242,85 +242,7 @@ public class Mainframe extends JFrame  {
 			
 			//BUTTONS 
 			JButton executeButton = new JButton("Ejecutar");
-			executeButton.addActionListener(new ActionListener() {
-				
-				@Override
-				public void actionPerformed(ActionEvent e) {
-					// TODO Auto-generated method stub
-		
-					int tamPoblacion = Integer.parseInt(genSizeTextField.getText());
-					int nGeneraciones = Integer.parseInt(numGenTF.getText());
-					int dim = Integer.parseInt(dimTF.getText());
-					
-					double probCruce= Double.parseDouble(crossProbabilityTF.getText());
-					double probMutacion= Double.parseDouble(mutationProbabilityTF.getText());
-				
-					int crossingType= crossTypeComboBox.getSelectedIndex();
-					int selectionType= selectionTypeComboBox.getSelectedIndex();
-					int mutationType= mutationTypeComboBox.getSelectedIndex();
-					int tamTorneo = Integer.parseInt(tamTorneoTF.getText());
-					
-					switch(problemTypeComboBox.getSelectedIndex()) {
-					case 0:
-						System.out.println("Calibracion");
-						AGCalibracion ag= new AGCalibracion(tamPoblacion,nGeneraciones,probCruce,probMutacion, tamTorneo);
-						//sets the selection, crossing and mutation parameters
-						ag.setCrossing(crossingType);
-						ag.setSelection(selectionType);
-						ag.setMutacion(mutationType);
-						
-						//runs the algoritm
-						ag.run();
-						//puts them in the graphic plot
-						plot(ag.getGenerations(), ag.getFitness(),red,"Calibre");
-						plot(ag.getGenerations(),ag.getMediumFitness(),green,"Media");
-						plot(ag.getGenerations(),ag.getAbsFitness(),blue,"aptAbs");
-						
-						break;
-					case 1:
-						System.out.println("GrieWank");
-						AlgoritmoGrieWank ag2= new AlgoritmoGrieWank(tamPoblacion,nGeneraciones,probCruce,probMutacion, tamTorneo);
-						//sets the selection, crossing and mutation parameters
-						ag2.setCrossing(crossingType);
-						ag2.setSelection(selectionType);
-						ag2.setMutacion(mutationType);
-						ag2.run();
-						//puts them in the graphic plot
-						plot(ag2.getGenerations(), ag2.getFitness(),red,"Calibre");
-						plot(ag2.getGenerations(),ag2.getMediumFitness(),green,"Media");
-						plot(ag2.getGenerations(),ag2.getAbsFitness(),blue,"aptAbs");
-						
-						break;
-					case 2:
-						System.out.println("Styblinski-tang");
-						AlgoritmoStyblinskiTang ag3= new AlgoritmoStyblinskiTang(tamPoblacion,nGeneraciones,probCruce,probMutacion, tamTorneo);
-						ag3.setCrossing(crossingType);
-						ag3.setSelection(selectionType);
-						ag3.setMutacion(mutationType);
-						ag3.run();
-					
-						plot(ag3.getGenerations(), ag3.getFitness(),red,"Calibre");
-						plot(ag3.getGenerations(),ag3.getMediumFitness(),green,"Media");
-						plot(ag3.getGenerations(),ag3.getAbsFitness(),blue,"aptAbs");
-						
-					
-						break;
-					case 3:
-						System.out.println("Michalewicz --A");
-						break;
-					case 4:
-						System.out.println("Michalewicz --B");
-						break;
-					default:
-						break;
-					}
-					
-					
-					
-				
-				}
-				
-			});
+			
 			
 			JButton restartButton = new JButton("Reiniciar");
 			restartButton.addActionListener(new ActionListener() {
@@ -403,7 +325,7 @@ public class Mainframe extends JFrame  {
 			solutionLabel.setHorizontalAlignment(SwingConstants.LEFT);
 			
 			solutionTF = new JTextField();
-			solutionTF.setText("Here will be solution");
+			solutionTF.setText("solution here");
 			solutionTF.setEditable(false);
 			solutionTF.setColumns(10);
 			GroupLayout gl_solutionPanel = new GroupLayout(solutionPanel);
@@ -426,7 +348,85 @@ public class Mainframe extends JFrame  {
 						.addGap(11))
 			);
 			solutionPanel.setLayout(gl_solutionPanel);
-			
+executeButton.addActionListener(new ActionListener() {
+				
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					// TODO Auto-generated method stub
+		
+					int tamPoblacion = Integer.parseInt(genSizeTextField.getText());
+					int nGeneraciones = Integer.parseInt(numGenTF.getText());
+					int dim = Integer.parseInt(dimTF.getText());
+					
+					double probCruce= Double.parseDouble(crossProbabilityTF.getText());
+					double probMutacion= Double.parseDouble(mutationProbabilityTF.getText());
+				
+					int crossingType= crossTypeComboBox.getSelectedIndex();
+					int selectionType= selectionTypeComboBox.getSelectedIndex();
+					int mutationType= mutationTypeComboBox.getSelectedIndex();
+					int tamTorneo = Integer.parseInt(tamTorneoTF.getText());
+					
+					switch(problemTypeComboBox.getSelectedIndex()) {
+					case 0:
+						System.out.println("Calibracion");
+						AGCalibracion ag= new AGCalibracion(tamPoblacion,nGeneraciones,probCruce,probMutacion, tamTorneo);
+						//sets the selection, crossing and mutation parameters
+						ag.setCrossing(crossingType);
+						ag.setSelection(selectionType);
+						ag.setMutacion(mutationType);
+						
+						//runs the algoritm
+						ag.run();
+						//puts them in the graphic plot
+						plot(ag.getGenerations(), ag.getFitness(),red,"Calibre");
+						plot(ag.getGenerations(),ag.getMediumFitness(),green,"Media");
+						plot(ag.getGenerations(),ag.getAbsFitness(),blue,"aptAbs");
+						
+						break;
+					case 1:
+						System.out.println("GrieWank");
+						AlgoritmoGrieWank ag2= new AlgoritmoGrieWank(tamPoblacion,nGeneraciones,probCruce,probMutacion, tamTorneo);
+						//sets the selection, crossing and mutation parameters
+						ag2.setCrossing(crossingType);
+						ag2.setSelection(selectionType);
+						ag2.setMutacion(mutationType);
+						ag2.run();
+						//puts them in the graphic plot
+						plot(ag2.getGenerations(), ag2.getFitness(),red,"Calibre");
+						plot(ag2.getGenerations(),ag2.getMediumFitness(),green,"Media");
+						plot(ag2.getGenerations(),ag2.getAbsFitness(),blue,"aptAbs");
+						
+						break;
+					case 2:
+						System.out.println("Styblinski-tang");
+						AlgoritmoStyblinskiTang ag3= new AlgoritmoStyblinskiTang(tamPoblacion,nGeneraciones,probCruce,probMutacion, tamTorneo);
+						ag3.setCrossing(crossingType);
+						ag3.setSelection(selectionType);
+						ag3.setMutacion(mutationType);
+						ag3.run();
+					
+						plot(ag3.getGenerations(), ag3.getFitness(),red,"Calibre");
+						plot(ag3.getGenerations(),ag3.getMediumFitness(),green,"Media");
+						plot(ag3.getGenerations(),ag3.getAbsFitness(),blue,"aptAbs");
+						
+					
+						break;
+					case 3:
+						System.out.println("Michalewicz --A");
+						break;
+					case 4:
+						System.out.println("Michalewicz --B");
+						break;
+					default:
+						break;
+					}
+					
+					
+					
+				
+				}
+				
+			});
 			window = new JPanel();
 			window.setLayout(new BorderLayout());
 			
