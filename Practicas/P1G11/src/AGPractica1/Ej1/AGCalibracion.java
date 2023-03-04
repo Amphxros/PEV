@@ -4,7 +4,7 @@ import Common.Algoritmo;
 
 public class AGCalibracion extends Algoritmo {
 
-	public AGCalibracion(int tamPoblacion, int maxGeneraciones, double probCruce, double probMutation, int tamTorneo, boolean elitismo) {
+	public AGCalibracion(int tamPoblacion, int maxGeneraciones, double probCruce, double probMutation, int tamTorneo, double elitismo) {
 		super(tamPoblacion, maxGeneraciones, probCruce, probMutation, tamTorneo, elitismo);
 		// TODO Auto-generated constructor stub
 		

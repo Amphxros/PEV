@@ -95,7 +95,7 @@ public class Selection {
 		return seleccion;
 	}
 
-	private static void quickSort(Individuo[] poblacion, int begin, int end) {
+	public static void quickSort(Individuo[] poblacion, int begin, int end) {
 		if (begin < end) {
 			int partitionIndex = partition(poblacion, begin, end);
 

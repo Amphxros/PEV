@@ -24,6 +24,7 @@ public abstract class Algoritmo {
 	protected Crossing.Type crossing;
 	protected Mutation.Type mutation;
 	protected boolean isMaximize=true;
+	protected double elitismPercentage;
 	protected boolean elitism;
 
 	/**
@@ -33,13 +34,14 @@ public abstract class Algoritmo {
 	 * @param probCruce
 	 * @param probMutation
 	 */
-	public Algoritmo(int tamPoblacion, int maxGeneraciones, double probCruce, double probMutation, int tamTorneo, boolean elitismo) {
+	public Algoritmo(int tamPoblacion, int maxGeneraciones, double probCruce, double probMutation, int tamTorneo, double elitismo) {
 		this.maxGeneraciones = maxGeneraciones;
 		this.tamPoblacion = tamPoblacion;
 		this.probCruce = probCruce;
 		this.probMutacion = probMutation;
 		this.tamTorneo = tamTorneo;
-		this.elitism = elitismo;
+		this.elitismPercentage = elitismo;
+		this.elitism = elitismPercentage > 0;
 		
 		generations= new double[this.maxGeneraciones];
 		fitness= new double[this.maxGeneraciones];
@@ -172,6 +174,9 @@ public abstract class Algoritmo {
 	
 	public Individuo[] generarElite() {
 		
+		if(!elitism)
+			return null;
+		
 		final double elitePercentage = 2;
 		
 		int size = poblacion.length;
@@ -181,7 +186,7 @@ public abstract class Algoritmo {
 		Individuo[] elite = new Individuo[eliteSize];
 		
 		Individuo[] poblacionOrdenada = poblacion.clone();
-		Selection.quickSort(poblacionOrdenada, 0, poblacion.length + 1);
+		Selection.quickSort(poblacionOrdenada, 0, poblacion.length - 1);
 		
 		for(int i = 0; i < eliteSize; i++) {
 			

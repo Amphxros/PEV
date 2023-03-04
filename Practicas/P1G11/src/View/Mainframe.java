@@ -381,7 +381,7 @@ executeButton.addActionListener(new ActionListener() {
 					switch(problemTypeComboBox.getSelectedIndex()) {
 					case 0:
 						System.out.println("Calibracion");
-						AGCalibracion ag= new AGCalibracion(tamPoblacion,nGeneraciones,probCruce,probMutacion, tamTorneo);
+						AGCalibracion ag= new AGCalibracion(tamPoblacion,nGeneraciones,probCruce,probMutacion, tamTorneo, elitism);
 						//sets the selection, crossing and mutation parameters
 						ag.setCrossing(crossingType);
 						ag.setSelection(selectionType);
@@ -397,7 +397,7 @@ executeButton.addActionListener(new ActionListener() {
 						break;
 					case 1:
 						System.out.println("GrieWank");
-						AlgoritmoGrieWank ag2= new AlgoritmoGrieWank(tamPoblacion,nGeneraciones,probCruce,probMutacion, tamTorneo);
+						AlgoritmoGrieWank ag2= new AlgoritmoGrieWank(tamPoblacion,nGeneraciones,probCruce,probMutacion, tamTorneo, elitism);
 						//sets the selection, crossing and mutation parameters
 						ag2.setCrossing(crossingType);
 						ag2.setSelection(selectionType);
@@ -411,7 +411,7 @@ executeButton.addActionListener(new ActionListener() {
 						break;
 					case 2:
 						System.out.println("Styblinski-tang");
-						AlgoritmoStyblinskiTang ag3= new AlgoritmoStyblinskiTang(tamPoblacion,nGeneraciones,probCruce,probMutacion, tamTorneo);
+						AlgoritmoStyblinskiTang ag3= new AlgoritmoStyblinskiTang(tamPoblacion,nGeneraciones,probCruce,probMutacion, tamTorneo, elitism);
 						ag3.setCrossing(crossingType);
 						ag3.setSelection(selectionType);
 						ag3.setMutacion(mutationType);
@@ -425,7 +425,7 @@ executeButton.addActionListener(new ActionListener() {
 						break;
 					case 3:
 						System.out.println("Michalewicz --A");
-						 AlgoritmoMichalewiczA ag4A= new  AlgoritmoMichalewiczA(tamPoblacion,nGeneraciones,probCruce,probMutacion, tamTorneo,dim);
+						 AlgoritmoMichalewiczA ag4A= new  AlgoritmoMichalewiczA(tamPoblacion,nGeneraciones,probCruce,probMutacion, tamTorneo,dim, elitism);
 						 ag4A.setCrossing(crossingType);
 						 ag4A.setSelection(selectionType);
 						 ag4A.setMutacion(mutationType);
@@ -437,7 +437,7 @@ executeButton.addActionListener(new ActionListener() {
 						break;
 					case 4:
 						System.out.println("Michalewicz --B");
-						 AlgoritmoMichalewiczB ag4b= new  AlgoritmoMichalewiczB(tamPoblacion,nGeneraciones,probCruce,probMutacion, tamTorneo,dim);
+						 AlgoritmoMichalewiczB ag4b= new  AlgoritmoMichalewiczB(tamPoblacion,nGeneraciones,probCruce,probMutacion, tamTorneo,dim, elitism);
 						 ag4b.setCrossing(crossingType);
 						 ag4b.setSelection(selectionType);
 						 ag4b.setMutacion(mutationType);
