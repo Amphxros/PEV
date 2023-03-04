@@ -45,7 +45,7 @@ public class AlgoritmoGrieWank extends Algoritmo {
 				this.pos_mejor=i;
 			}
 		}	
-		
+		this.fitness[currGeneration]=this.elMejor.getFitness();
 		this.fitnessMed[currGeneration]=sum/this.poblacion.length;
 		
 		if(currGeneration>0) {

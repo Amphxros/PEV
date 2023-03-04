@@ -436,8 +436,7 @@ executeButton.addActionListener(new ActionListener() {
 							plot(ag4b.getGenerations(),ag4b.getFitness(),red,"Calibre");
 							plot(ag4b.getGenerations(),ag4b.getMediumFitness(),green,"Media");
 							plot(ag4b.getGenerations(),ag4b.getAbsFitness(),blue,"aptAbs");
-				
-						
+			
 						break;
 					default:
 						break;

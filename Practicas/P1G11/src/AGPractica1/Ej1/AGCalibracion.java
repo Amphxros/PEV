@@ -32,7 +32,7 @@ public class AGCalibracion extends Algoritmo {
 		}	
 		
 		this.fitnessMed[currGeneration]=sum/this.poblacion.length;
-		
+		this.fitness[currGeneration]=this.elMejor.getFitness();
 		if(currGeneration>0) {
 			this.fitnessAbs[currGeneration]+= this.fitnessAbs[currGeneration] + this.elMejor.getFitness();
 		}

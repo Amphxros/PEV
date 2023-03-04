@@ -80,6 +80,10 @@ public abstract class Algoritmo {
 		}
 		
 		
+		
+	}
+	public void setMaximized(boolean max) {
+		this.isMaximize=max;
 	}
 
 	protected abstract void createPopulation();

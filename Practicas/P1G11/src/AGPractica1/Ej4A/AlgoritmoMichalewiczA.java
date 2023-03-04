@@ -9,7 +9,9 @@ public class AlgoritmoMichalewiczA extends Algoritmo{
 			int tamTorneo,int dimension) {
 		super(tamPoblacion, maxGeneraciones, probCruce, probMutation, tamTorneo);
 		this.dimension=dimension;
+		this.isMaximize=false;
 	}
+	
 
 	@Override
 	protected void createPopulation() {
@@ -43,7 +45,7 @@ public class AlgoritmoMichalewiczA extends Algoritmo{
 				this.pos_mejor=i;
 			}
 		}	
-		
+		this.fitness[currGeneration]=this.elMejor.getFitness();
 		this.fitnessMed[currGeneration]=sum/this.poblacion.length;
 		
 		if(currGeneration>0) {
