@@ -356,8 +356,8 @@ executeButton.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 					// TODO Auto-generated method stub
 		
-					int tamPoblacion = Integer.parseInt(genSizeTextField.getText());
-					int nGeneraciones = Integer.parseInt(numGenTF.getText());
+					int tamPoblacion = Integer.parseInt(genSizeTextField.getText().replace(".", ""));
+					int nGeneraciones = Integer.parseInt(numGenTF.getText().replace(".", ""));
 					int dim = Integer.parseInt(dimTF.getText());
 					
 					double probCruce= Double.parseDouble(crossProbabilityTF.getText());
