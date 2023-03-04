@@ -68,22 +68,18 @@ public class IndividuoCalibracion extends Individuo<Boolean>{
 		
 	}
 
-	@Override
-	public boolean maximize() {
-		// TODO Auto-generated method stub
-		return true;
-	}
+
 
 	/**
 	 * 
 	 */
 	@Override
 	protected boolean mutateSelf(int pos, Random rnd, double probability) {
-		boolean changed=false;
-			if(0<=pos && pos<cromosoma.getLength()) {
-				
-			}
-		return changed;
+		if(rnd.nextDouble()<probability) {
+			this.cromosoma.setGen(new BooleanGen(rnd.nextBoolean()), pos);
+			return true;
+		}
+		return false;
 	}
 
 	/**

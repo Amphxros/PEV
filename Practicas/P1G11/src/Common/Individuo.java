@@ -51,15 +51,20 @@ public abstract class Individuo<T> {
 	}
 	
 	public void mutate(Random rnd, double probability) {
-		int index=0;
+		boolean changes = false;
 		
+		for (int i=0; i < numGenes; i++)
+			changes = mutateSelf(i, rnd, probability);
+		
+		if (changes)
+			calculateFenotype(); // Update fenotype
 	}
 	
 	
+
 	protected abstract boolean mutateSelf(int pos, Random rnd, double probability);
 	protected abstract void calculateFenotype();
 	public abstract void evaluateSelf();
-	public abstract boolean maximize();
 	
 
 	public int getCromosomeArraySize() {

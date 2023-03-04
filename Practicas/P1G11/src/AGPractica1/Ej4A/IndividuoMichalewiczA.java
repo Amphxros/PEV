@@ -30,9 +30,11 @@ public class IndividuoMichalewiczA extends Individuo<Boolean> {
 		
 	}
 
-	@Override
 	protected boolean mutateSelf(int pos, Random rnd, double probability) {
-		// TODO Auto-generated method stub
+		if(rnd.nextDouble()<probability) {
+			this.cromosoma.setGen(new BooleanGen(rnd.nextBoolean()), pos);
+			return true;
+		}
 		return false;
 	}
 
@@ -67,10 +69,6 @@ public class IndividuoMichalewiczA extends Individuo<Boolean> {
 		
 	}
 
-	@Override
-	public boolean maximize() {
-		// TODO Auto-generated method stub
-		return false;
-	}
+
 
 }

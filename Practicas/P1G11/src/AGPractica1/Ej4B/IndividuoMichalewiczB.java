@@ -50,10 +50,4 @@ public class IndividuoMichalewiczB extends Individuo<Double>{
 		setFitness(fitness);
 	}
 
-	@Override
-	public boolean maximize() {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
 }

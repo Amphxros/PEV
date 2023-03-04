@@ -30,8 +30,11 @@ public class IndividuoGrieWank extends Individuo<Boolean>{
 	}
 
 	@Override
-	protected boolean mutateSelf(int pos, Random rnd, double mutation_chance) {
-		// TODO Auto-generated method stub
+	protected boolean mutateSelf(int pos, Random rnd, double probability) {
+		if(rnd.nextDouble()<probability) {
+			this.cromosoma.setGen(new BooleanGen(rnd.nextBoolean()), pos);
+			return true;
+		}
 		return false;
 	}
 
@@ -70,10 +73,6 @@ public class IndividuoGrieWank extends Individuo<Boolean>{
 		
 	}
 
-	@Override
-	public boolean maximize() {
-		// TODO Auto-generated method stub
-		return false;
-	}
+
 
 }
