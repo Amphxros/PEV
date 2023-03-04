@@ -37,7 +37,10 @@ public class AGCalibracion extends Algoritmo {
 		this.fitnessMed[currGeneration]=sum/this.poblacion.length;
 		this.fitness[currGeneration]=this.elMejor.getFitness();
 		if(currGeneration>0) {
-			this.fitnessAbs[currGeneration]+= this.fitnessAbs[currGeneration] + this.elMejor.getFitness();
+			if(this.isMaximize)
+				this.fitnessAbs[currGeneration]= Math.max( elMejor.getFitness(), this.fitnessAbs[currGeneration - 1]);
+			else
+				this.fitnessAbs[currGeneration]= Math.min( elMejor.getFitness(), this.fitnessAbs[currGeneration - 1]);
 		}
 		else {
 			this.fitnessAbs[currGeneration]= this.elMejor.getFitness();

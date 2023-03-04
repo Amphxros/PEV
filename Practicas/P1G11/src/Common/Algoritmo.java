@@ -74,10 +74,10 @@ public abstract class Algoritmo {
 
 		for (int i = 0; i < maxGeneraciones; i++) {
 			
-			DesplazarFitnessNegativo();
-			if(!this.isMaximize) {
-				CorregirMinimizar();
-			}
+			//DesplazarFitnessNegativo();
+			//if(!this.isMaximize) {
+			//	CorregirMinimizar();
+			//}
 			
 			
 			var elite = generarElite();
