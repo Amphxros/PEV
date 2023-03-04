@@ -8,6 +8,7 @@ import AGPractica1.Ej1.AGCalibracion;
 import AGPractica1.Ej2.AlgoritmoGrieWank;
 import AGPractica1.Ej3.AlgoritmoStyblinskiTang;
 import AGPractica1.Ej4A.AlgoritmoMichalewiczA;
+import AGPractica1.Ej4B.AlgoritmoMichalewiczB;
 
 import java.awt.EventQueue;
 
@@ -426,6 +427,17 @@ executeButton.addActionListener(new ActionListener() {
 						break;
 					case 4:
 						System.out.println("Michalewicz --B");
+						 AlgoritmoMichalewiczB ag4b= new  AlgoritmoMichalewiczB(tamPoblacion,nGeneraciones,probCruce,probMutacion, tamTorneo,dim);
+						 ag4b.setCrossing(crossingType);
+						 ag4b.setSelection(selectionType);
+						 ag4b.setMutacion(mutationType);
+						 ag4b.run();
+						 
+							plot(ag4b.getGenerations(),ag4b.getFitness(),red,"Calibre");
+							plot(ag4b.getGenerations(),ag4b.getMediumFitness(),green,"Media");
+							plot(ag4b.getGenerations(),ag4b.getAbsFitness(),blue,"aptAbs");
+				
+						
 						break;
 					default:
 						break;

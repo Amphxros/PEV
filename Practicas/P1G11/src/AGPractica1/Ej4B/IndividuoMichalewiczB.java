@@ -2,17 +2,27 @@ package AGPractica1.Ej4B;
 
 import java.util.Random;
 
+import Common.Cromosoma;
 import Common.Individuo;
+import Common.Genes.RealGen;
 
 public class IndividuoMichalewiczB extends Individuo<Double>{
 
 	private final int dimension;
-	public IndividuoMichalewiczB(int dimension,double tolerance, int id, int numGenes) {
+	private double min=0;
+	private double max=Math.PI;
+	private double m=10;
+	
+	public IndividuoMichalewiczB(double tolerance, int id, int numGenes,int dimension) {
 		super(tolerance, id, numGenes);
 		this.dimension=dimension;
 		Random rnd= new Random();
-		// TODO Auto-generated constructor stub
+		this.numGenes=1;
+		this.cromosoma= new Cromosoma(this.numGenes); //cada gen es un nº real
+	
 		for(int i=0;i<numGenes;i++) {
+			RealGen r=new RealGen(rnd.nextDouble(min, max));
+			this.cromosoma.setGen(r, i);
 			
 		}
 	}
@@ -23,16 +33,21 @@ public class IndividuoMichalewiczB extends Individuo<Double>{
 		return false;
 	}
 
+	/**
+	 * Calculates the fenotype but in this case fenotype=allele
+	 */
 	@Override
 	protected void calculateFenotype() {
 		// TODO Auto-generated method stub
-		
+		fenotype= new double[this.numGenes];
+		fenotype[0]=this.cromosoma.getGen(0).getAllele(); 
 	}
 
 	@Override
 	public void evaluateSelf() {
-		// TODO Auto-generated method stub
 		
+		double fitness=Math.sin(fenotype[0]*Math.sin(Math.pow(Math.pow(fenotype[0],2),2*m)));
+		setFitness(fitness);
 	}
 
 	@Override

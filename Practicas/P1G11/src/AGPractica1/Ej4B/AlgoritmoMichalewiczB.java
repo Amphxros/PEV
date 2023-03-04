@@ -1,11 +1,11 @@
-package AGPractica1.Ej4A;
+package AGPractica1.Ej4B;
 
+import AGPractica1.Ej4A.IndividuoMichalewiczA;
 import Common.Algoritmo;
 
-public class AlgoritmoMichalewiczA extends Algoritmo{
-
+public class AlgoritmoMichalewiczB extends Algoritmo {
 	private final int dimension;
-	public AlgoritmoMichalewiczA(int tamPoblacion, int maxGeneraciones, double probCruce, double probMutation,
+	public AlgoritmoMichalewiczB(int tamPoblacion, int maxGeneraciones, double probCruce, double probMutation,
 			int tamTorneo,int dimension) {
 		super(tamPoblacion, maxGeneraciones, probCruce, probMutation, tamTorneo);
 		this.dimension=dimension;
@@ -13,18 +13,17 @@ public class AlgoritmoMichalewiczA extends Algoritmo{
 
 	@Override
 	protected void createPopulation() {
-		poblacion= new IndividuoMichalewiczA[this.tamPoblacion];
+	poblacion= new IndividuoMichalewiczA[this.tamPoblacion];
 		
 		for(int i=0;i<this.tamPoblacion;i++) {
 			poblacion[i]= new IndividuoMichalewiczA(0.1,i,2,dimension);
 		}
 		
+		
 	}
 
 	@Override
 	protected void evaluate(int currGeneration) {
-		
-
 		double sum=0.0;
 		double best_fitness;
 		if(this.isMaximize) {
@@ -53,9 +52,6 @@ public class AlgoritmoMichalewiczA extends Algoritmo{
 			this.fitnessAbs[currGeneration]= this.elMejor.getFitness();
 		}
 		//resets everything
-
-
-		
 		
 	}
 
