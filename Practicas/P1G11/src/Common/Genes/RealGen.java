@@ -2,7 +2,7 @@ package Common.Genes;
 
 public class RealGen extends Gen<Double>{
 	public RealGen(double allele) {
-	super(allele);
+		super(allele);
 	}
 	@Override
 	public String toString() {

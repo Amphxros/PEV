@@ -6,6 +6,7 @@ import org.math.plot.plots.LinePlot;
 
 import AGPractica1.Ej1.AGCalibracion;
 import AGPractica1.Ej2.AlgoritmoGrieWank;
+import AGPractica1.Ej3.AlgoritmoStyblinskiTang;
 
 import java.awt.EventQueue;
 
@@ -292,6 +293,17 @@ public class Mainframe extends JFrame  {
 						break;
 					case 2:
 						System.out.println("Styblinski-tang");
+						AlgoritmoStyblinskiTang ag3= new AlgoritmoStyblinskiTang(tamPoblacion,nGeneraciones,probCruce,probMutacion, tamTorneo);
+						ag3.setCrossing(crossingType);
+						ag3.setSelection(selectionType);
+						ag3.setMutacion(mutationType);
+						ag3.run();
+					
+						plot(ag3.getGenerations(), ag3.getFitness(),red,"Calibre");
+						plot(ag3.getGenerations(),ag3.getMediumFitness(),green,"Media");
+						plot(ag3.getGenerations(),ag3.getAbsFitness(),blue,"aptAbs");
+						
+					
 						break;
 					case 3:
 						System.out.println("Michalewicz --A");
