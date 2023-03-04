@@ -18,13 +18,15 @@ public class AlgoritmoMichalewiczA extends Algoritmo{
 		poblacion= new IndividuoMichalewiczA[this.tamPoblacion];
 		
 		for(int i=0;i<this.tamPoblacion;i++) {
-			poblacion[i]= new IndividuoMichalewiczA(0.1,i,2,this.dimension);
+			poblacion[i]= new IndividuoMichalewiczA(0.1,i,2,dimension);
 		}
 		
 	}
 
 	@Override
 	protected void evaluate(int currGeneration) {
+		
+
 		double sum=0.0;
 		double best_fitness;
 		if(this.isMaximize) {
@@ -37,7 +39,7 @@ public class AlgoritmoMichalewiczA extends Algoritmo{
 			poblacion[i].evaluateSelf();
 			sum+=poblacion[i].getFitness();
 			//calculate the best fitness
-			if((best_fitness < poblacion[i].getFitness() && this.isMaximize) ||(best_fitness > poblacion[i].getFitness() && !this.isMaximize) ) {
+			if(i==0||(best_fitness < poblacion[i].getFitness() && this.isMaximize) ||(best_fitness > poblacion[i].getFitness() && !this.isMaximize) ) {
 				best_fitness=poblacion[i].getFitness();
 				this.elMejor=poblacion[i];
 				this.pos_mejor=i;
@@ -53,7 +55,8 @@ public class AlgoritmoMichalewiczA extends Algoritmo{
 			this.fitnessAbs[currGeneration]= this.elMejor.getFitness();
 		}
 		//resets everything
-		this.elMejor=null;
+
+
 		
 		
 	}

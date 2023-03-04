@@ -5,6 +5,7 @@ import java.util.Random;
 import Common.Conversions;
 import Common.Cromosoma;
 import Common.Individuo;
+import Common.Genes.BooleanGen;
 
 public class IndividuoMichalewiczA extends Individuo<Boolean> {
 	final double min=0;
@@ -19,12 +20,14 @@ public class IndividuoMichalewiczA extends Individuo<Boolean> {
 		final int tam=this.tamGen(tolerance, min, max);
 		
 		Random rnd= new Random();
-		
-		fenotype= new double[this.numGenes];
+		this.fenotype= new double[this.numGenes];
 		this.cromosoma= new Cromosoma(tam);
-		for(int i=0;i< tam;i++) {
-			this.cromosoma.getGen(i).setAllele(rnd.nextBoolean());
+		for(int i=0;i<this.cromosoma.getLength();i++) {
+			BooleanGen g= new BooleanGen(rnd.nextBoolean());
+			this.cromosoma.setGen(g, i);	
 		}
+		calculateFenotype();
+		
 	}
 
 	@Override
