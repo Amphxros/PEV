@@ -1,7 +1,5 @@
 package Common;
 
-import AGPractica1.Ej1.IndividuoCalibracion;
-
 public abstract class Algoritmo {
 
 	protected final int tamPoblacion;
