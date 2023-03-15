@@ -67,6 +67,7 @@ public class Mainframe extends JFrame  {
 		private JPanel window;
 		
 		private JTextField numGenTF;
+		private JTextField toleranceTF;
 		private JTextField genSizeTextField;
 		private JTextField crossProbabilityTF;
 		private JTextField mutationProbabilityTF;
@@ -118,16 +119,24 @@ public class Mainframe extends JFrame  {
 			getContentPane().add(westSidePanel, BorderLayout.WEST);
 			westSidePanel.setBorder(BorderFactory.createTitledBorder("Params"));
 			
-			JLabel genSizeLabel = new JLabel("Tam. de la población");
+			JLabel genSizeLabel = new JLabel("Tam. de la poblacion");
 			genSizeLabel.setFont(new Font("Tahoma", Font.BOLD, 11));;
 			genSizeTextField = new JFormattedTextField(numberFormat);
 			genSizeTextField.setText("100");
 			
-			JLabel numGenLabel = new JLabel("Nº de generaciones");
+			JLabel numGenLabel = new JLabel("N� de generaciones");
 			numGenLabel.setFont(new Font("Tahoma", Font.BOLD, 11));
 			numGenTF = new JTextField();
 			numGenTF.setText("100");
 			numGenTF.setColumns(10);
+			
+			JLabel toleranceLabel = new JLabel("Tolerancia");
+			toleranceLabel.setFont(new Font("Tahoma", Font.BOLD, 11));
+			toleranceTF = new JTextField();
+			toleranceTF.setText("0.1");
+			toleranceTF.setColumns(10);
+			
+			
 			
 			//SELECTION PANEL
 			
@@ -135,7 +144,7 @@ public class Mainframe extends JFrame  {
 			selectionPanel.setBorder(new TitledBorder(null, "Seleccion", TitledBorder.LEADING, TitledBorder.TOP, null, null));
 			selectionPanel.setLayout(new GridLayout(0, 2, 0, 0));
 			
-			JLabel selectionTL = new JLabel("Tipo de selección");
+			JLabel selectionTL = new JLabel("Tipo de seleccion");
 			selectionTL.setHorizontalAlignment(SwingConstants.LEFT);
 			selectionPanel.add(selectionTL);
 			
@@ -165,6 +174,8 @@ public class Mainframe extends JFrame  {
 			JComboBox crossTypeComboBox = new JComboBox();
 			crossTypeComboBox.setModel(new DefaultComboBoxModel(new String[] {
 				"Cruce Monopunto",
+				"",
+				"Cruce Uniforme"
 				
 				}
 			));
@@ -200,7 +211,7 @@ public class Mainframe extends JFrame  {
 			
 			JComboBox mutationTypeComboBox = new JComboBox();
 			mutationTypeComboBox.setModel(new DefaultComboBoxModel(new String[] {
-				"Mutación básica"
+				"Mutacion basica"
 				}
 			));
 			mutationPanel.add(mutationTypeComboBox);
@@ -209,7 +220,7 @@ public class Mainframe extends JFrame  {
 			mutationPanel.add(mutationProbLabel);
 			
 			mutationProbabilityTF = new JTextField();
-			mutationProbabilityTF.setText("60.0");
+			mutationProbabilityTF.setText("5.0");
 			mutationProbabilityTF.setColumns(10);
 			mutationPanel.add(mutationProbabilityTF);
 
@@ -280,10 +291,16 @@ public class Mainframe extends JFrame  {
 							.addComponent(mutationPanel, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 234, Short.MAX_VALUE)
 							.addComponent(crossPanel, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
 							.addComponent(selectionPanel, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 234, Short.MAX_VALUE)
+							
 							.addComponent(numGenTF, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 234, Short.MAX_VALUE)
 							.addComponent(numGenLabel, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 234, Short.MAX_VALUE)
+							
 							.addComponent(genSizeTextField, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 234, Short.MAX_VALUE)
 							.addComponent(genSizeLabel, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 234, Short.MAX_VALUE)
+							
+							.addComponent(toleranceTF, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 234, Short.MAX_VALUE)
+							.addComponent(toleranceLabel, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 234, Short.MAX_VALUE)
+							
 							.addComponent(executeButton, GroupLayout.DEFAULT_SIZE, 234, Short.MAX_VALUE)
 							.addComponent(problemPanel, GroupLayout.DEFAULT_SIZE, 234, Short.MAX_VALUE))
 						.addGap(10))
@@ -297,9 +314,16 @@ public class Mainframe extends JFrame  {
 						.addComponent(genSizeTextField, GroupLayout.PREFERRED_SIZE, 20, GroupLayout.PREFERRED_SIZE)
 						.addPreferredGap(ComponentPlacement.UNRELATED)
 						.addComponent(numGenLabel)
-						.addPreferredGap(ComponentPlacement.RELATED)
+							.addPreferredGap(ComponentPlacement.RELATED)
 						.addComponent(numGenTF, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
 						.addPreferredGap(ComponentPlacement.UNRELATED)
+						
+
+						.addComponent(toleranceLabel, GroupLayout.PREFERRED_SIZE, 16, GroupLayout.PREFERRED_SIZE)
+						.addPreferredGap(ComponentPlacement.UNRELATED)
+						.addComponent(toleranceTF, GroupLayout.PREFERRED_SIZE, 20, GroupLayout.PREFERRED_SIZE)
+						.addPreferredGap(ComponentPlacement.UNRELATED)
+						
 						.addComponent(selectionPanel, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
 						.addPreferredGap(ComponentPlacement.UNRELATED)
 						.addComponent(crossPanel, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
@@ -376,7 +400,10 @@ public class Mainframe extends JFrame  {
 					double elitism= Double.parseDouble(elitismTF.getText());
 					double probCruce= Double.parseDouble(crossProbabilityTF.getText());
 					double probMutacion= Double.parseDouble(mutationProbabilityTF.getText());
-				
+		
+					double tolerance= Double.parseDouble(toleranceTF.getText());
+					
+					
 					int crossingType= crossTypeComboBox.getSelectedIndex();
 					int selectionType= selectionTypeComboBox.getSelectedIndex();
 					int mutationType= mutationTypeComboBox.getSelectedIndex();
@@ -385,75 +412,18 @@ public class Mainframe extends JFrame  {
 					switch(problemTypeComboBox.getSelectedIndex()) {
 					case 0:
 						System.out.println("Calibracion");
-						AGCalibracion ag= new AGCalibracion(tamPoblacion,nGeneraciones,probCruce,probMutacion, tamTorneo, elitism);
-						//sets the selection, crossing and mutation parameters
-						ag.setCrossing(crossingType);
-						ag.setSelection(selectionType);
-						ag.setMutacion(mutationType);
-						
-						//runs the algoritm
-						ag.run();
-						//puts them in the graphic plot
-						plot(ag.getGenerations(), ag.getFitness(),red,"Calibre");
-						plot(ag.getGenerations(),ag.getMediumFitness(),green,"Media");
-						plot(ag.getGenerations(),ag.getAbsFitness(),blue,"aptAbs");
-						solutionTF.setText("Best is " + ag.getBestPosition() + ": " + ag.getBestIndividuo());
 						break;
 					case 1:
 						System.out.println("GrieWank");
-						AlgoritmoGrieWank ag2= new AlgoritmoGrieWank(tamPoblacion,nGeneraciones,probCruce,probMutacion, tamTorneo, elitism);
-						//sets the selection, crossing and mutation parameters
-						ag2.setCrossing(crossingType);
-						ag2.setSelection(selectionType);
-						ag2.setMutacion(mutationType);
-						ag2.run();
-						//puts them in the graphic plot
-						plot(ag2.getGenerations(), ag2.getFitness(),red,"Calibre");
-						plot(ag2.getGenerations(),ag2.getMediumFitness(),green,"Media");
-						plot(ag2.getGenerations(),ag2.getAbsFitness(),blue,"aptAbs");
-						solutionTF.setText("Best is " + ag2.getBestPosition() + ": " + ag2.getBestIndividuo());
 						break;
 					case 2:
 						System.out.println("Styblinski-tang");
-						AlgoritmoStyblinskiTang ag3= new AlgoritmoStyblinskiTang(tamPoblacion,nGeneraciones,probCruce,probMutacion, tamTorneo, elitism);
-						ag3.setCrossing(crossingType);
-						ag3.setSelection(selectionType);
-						ag3.setMutacion(mutationType);
-						ag3.run();
-					
-						plot(ag3.getGenerations(), ag3.getFitness(),red,"Calibre");
-						plot(ag3.getGenerations(),ag3.getMediumFitness(),green,"Media");
-						plot(ag3.getGenerations(),ag3.getAbsFitness(),blue,"aptAbs");
-						
-						solutionTF.setText("Best is " + ag3.getBestPosition() + ": " + ag3.getBestIndividuo());
-					
 						break;
 					case 3:
 						System.out.println("Michalewicz --A");
-						 AlgoritmoMichalewiczA ag4A= new  AlgoritmoMichalewiczA(tamPoblacion,nGeneraciones,probCruce,probMutacion, tamTorneo,dim, elitism);
-						 ag4A.setCrossing(crossingType);
-						 ag4A.setSelection(selectionType);
-						 ag4A.setMutacion(mutationType);
-						 ag4A.run();
-						 
-							plot(ag4A.getGenerations(),ag4A.getFitness(),red,"Calibre");
-							plot(ag4A.getGenerations(),ag4A.getMediumFitness(),green,"Media");
-							plot(ag4A.getGenerations(),ag4A.getAbsFitness(),blue,"aptAbs");
-							solutionTF.setText("Best is " + ag4A.getBestPosition() + ": " + ag4A.getBestIndividuo());
-							break;
+						break;
 					case 4:
 						System.out.println("Michalewicz --B");
-						 AlgoritmoMichalewiczB ag4b= new  AlgoritmoMichalewiczB(tamPoblacion,nGeneraciones,probCruce,probMutacion, tamTorneo,dim, elitism);
-						 ag4b.setCrossing(crossingType);
-						 ag4b.setSelection(selectionType);
-						 ag4b.setMutacion(mutationType);
-						 ag4b.run();
-						 
-							plot(ag4b.getGenerations(),ag4b.getFitness(),red,"Calibre");
-							plot(ag4b.getGenerations(),ag4b.getMediumFitness(),green,"Media");
-							plot(ag4b.getGenerations(),ag4b.getAbsFitness(),blue,"aptAbs");
-							
-							solutionTF.setText("Best is " + ag4b.getBestPosition() + ": " + ag4b.getBestIndividuo());
 						break;
 					default:
 						break;
