@@ -7,7 +7,7 @@ import Common.Individuo;
 import Common.Genes.BooleanGen;
 import Common.Genes.RealGen;
 
-public class IndividuoMichalewiczB extends Individuo<Double>{
+public class IndividuoMichalewiczB extends Individuo<Double, Double>{
 
 	private final int dimension;
 	private double min=0;
@@ -43,7 +43,7 @@ public class IndividuoMichalewiczB extends Individuo<Double>{
 	@Override
 	protected void calculateFenotype() {
 		// TODO Auto-generated method stub
-		fenotype= new double[this.numGenes];
+		fenotype= new Double[this.numGenes];
 		fenotype[0]=this.cromosoma.getGen(0).getAllele(); 
 	}
 

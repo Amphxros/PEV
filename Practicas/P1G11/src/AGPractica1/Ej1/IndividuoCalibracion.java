@@ -8,7 +8,7 @@ import Common.Individuo;
 import Common.Genes.BooleanGen;
 import Common.Genes.Gen;
 
-public class IndividuoCalibracion extends Individuo<Boolean>{
+public class IndividuoCalibracion extends Individuo<Boolean, Double>{
 
 	// x1 = 11.625 y x2 = 5.726 x1∈ [-3.0,12.1] x2∈ [4.1,5.8]
 	private final double minX1=-3.000;
@@ -26,7 +26,7 @@ public class IndividuoCalibracion extends Individuo<Boolean>{
 		tamX1 =this.tamGen(this.tolerance, minX1, maxX1);
 		tamX2 =this.tamGen(this.tolerance, minX2, maxX2);
 		
-		fenotype= new double[2];
+		fenotype= new Double[2];
 		fenotype[0]=fenotype[1]=Double.MIN_VALUE;
 		this.cromosoma= new Cromosoma(tamX1 + tamX2);
 		Random rnd= new Random();

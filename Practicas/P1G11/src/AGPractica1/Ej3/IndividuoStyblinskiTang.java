@@ -7,7 +7,7 @@ import Common.Cromosoma;
 import Common.Individuo;
 import Common.Genes.BooleanGen;
 
-public class IndividuoStyblinskiTang extends Individuo<Boolean>{
+public class IndividuoStyblinskiTang extends Individuo<Boolean, Double>{
 
 	final double min=-5;
 	final double max=5;
@@ -16,7 +16,7 @@ public class IndividuoStyblinskiTang extends Individuo<Boolean>{
 	public IndividuoStyblinskiTang(double tolerance, int id, int numGenes) {
 		super(tolerance, id, numGenes);
 		// TODO Auto-generated constructor stub
-		this.fenotype= new double[dimension];
+		this.fenotype= new Double[dimension];
 		final int tamGenes = this.tamGen(tolerance, min, max);
 
 		Random rnd= new Random();
@@ -41,7 +41,7 @@ public class IndividuoStyblinskiTang extends Individuo<Boolean>{
 	@Override
 	protected void calculateFenotype() {
 		// TODO Auto-generated method stub
-		fenotype= new double[dimension];
+		fenotype= new Double[dimension];
 		for(int i=0;i<fenotype.length;i++) {
 			fenotype[i]= min + (max - min) * (Conversions.binaryToDecimal(this.cromosoma)/this.getCromosomeArraySize()) -1;
 		}

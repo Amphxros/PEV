@@ -7,7 +7,7 @@ import Common.Cromosoma;
 import Common.Individuo;
 import Common.Genes.BooleanGen;
 
-public class IndividuoGrieWank extends Individuo<Boolean>{
+public class IndividuoGrieWank extends Individuo<Boolean, Double>{
 
 	final double min = -600.0;
 	final double max = 600.0;
@@ -16,7 +16,7 @@ public class IndividuoGrieWank extends Individuo<Boolean>{
 	public IndividuoGrieWank(double tolerance, int id, int numGenes) {
 		super(tolerance, id, numGenes);
 		
-		this.fenotype= new double[dimension];
+		this.fenotype= new Double[dimension];
 		final int tamGenes = this.tamGen(tolerance, min, max);
 
 		Random rnd= new Random();
@@ -40,14 +40,14 @@ public class IndividuoGrieWank extends Individuo<Boolean>{
 
 	@Override
 	protected void calculateFenotype() {
-		fenotype= new double[dimension];
+		fenotype= new Double[dimension];
 		for(int i=0;i<fenotype.length;i++) {
 			fenotype[i]= min + (max - min) * (Conversions.binaryToDecimal(this.cromosoma)/this.getCromosomeArraySize()) -1;
 		}
 	}
 
 	/**
-	 * Calculate the fitness in this case f(x)= ∑ (xi^2 /4000)  - ∏(cos (xi/√i)) +1 
+	 *  Calculate the fitness in this case f(x)= ∑ (xi^2 /4000)  - ∏(cos (xi/√i)) +1 
 	 */
 	@Override
 	public void evaluateSelf() {
@@ -57,8 +57,8 @@ public class IndividuoGrieWank extends Individuo<Boolean>{
 		if(dimension==this.fenotype.length) {
 			double first=0, second=0; 
 			for(int i=0; i<dimension;i++) {
-				first+=Math.pow(fenotype[i],2)/4000; //∑ (xi^2 /4000) 
-				second+=Math.cos(fenotype[i]/Math.sqrt(i + 1)); // ∏(cos (xi/√i)) 
+				first+=Math.pow(fenotype[i],2)/4000; //âˆ‘ (xi^2 /4000) 
+				second+=Math.cos(fenotype[i]/Math.sqrt(i + 1)); // âˆ�(cos (xi/âˆši)) 
 			}
 			
 			fitness_=first - second;

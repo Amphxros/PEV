@@ -7,7 +7,7 @@ import Common.Cromosoma;
 import Common.Individuo;
 import Common.Genes.BooleanGen;
 
-public class IndividuoMichalewiczA extends Individuo<Boolean> {
+public class IndividuoMichalewiczA extends Individuo<Boolean, Double> {
 	final double min=0;
 	final double max=Math.PI;
 	final int dimension;
@@ -20,7 +20,7 @@ public class IndividuoMichalewiczA extends Individuo<Boolean> {
 		final int tam=this.tamGen(tolerance, min, max);
 		
 		Random rnd= new Random();
-		this.fenotype= new double[this.numGenes];
+		this.fenotype= new Double[this.numGenes];
 		this.cromosoma= new Cromosoma(tam);
 		for(int i=0;i<this.cromosoma.getLength();i++) {
 			BooleanGen g= new BooleanGen(rnd.nextBoolean());
@@ -40,7 +40,7 @@ public class IndividuoMichalewiczA extends Individuo<Boolean> {
 
 	@Override
 	protected void calculateFenotype() {
-		fenotype= new double[this.numGenes];
+		fenotype= new Double[this.numGenes];
 		for(int i=0;i<fenotype.length;i++) {
 			fenotype[i]= min + (max - min) * (Conversions.binaryToDecimal(this.cromosoma)/this.getCromosomeArraySize()) -1;
 		}

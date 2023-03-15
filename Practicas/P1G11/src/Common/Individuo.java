@@ -5,7 +5,7 @@ import java.util.Random;
 
 import Common.Genes.Gen;
 
-public abstract class Individuo<T> {
+public abstract class Individuo<T, U> {
 
 	
 	protected double[] tamGenes;
@@ -14,7 +14,7 @@ public abstract class Individuo<T> {
 	private double punct;
 	private double punctAcum;
 	
-	protected double[] fenotype; //fenotipo
+	protected U[] fenotype; //fenotipo
 	protected double fitness; //fitness
 	protected int id; //id for different functions
 	protected double tolerance;
@@ -90,7 +90,7 @@ public abstract class Individuo<T> {
 		this.tolerance = tolerance;
 	}
 	
-	public double[] getFenotype() {
+	public U[] getFenotype() {
 		return fenotype;
 	}
 

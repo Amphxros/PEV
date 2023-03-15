@@ -136,6 +136,11 @@ public class Mainframe extends JFrame  {
 			toleranceTF.setText("0.1");
 			toleranceTF.setColumns(10);
 			
+			JLabel dimensionLabel = new JLabel("Dimension");
+			dimensionLabel.setHorizontalAlignment(SwingConstants.LEFT);
+			
+			dimTF= new JTextField();
+			dimTF.setText("2");
 			
 			
 			//SELECTION PANEL
@@ -224,13 +229,7 @@ public class Mainframe extends JFrame  {
 			mutationProbabilityTF.setColumns(10);
 			mutationPanel.add(mutationProbabilityTF);
 
-			JLabel dimensionLabel = new JLabel("Dimension");
-			dimensionLabel.setHorizontalAlignment(SwingConstants.LEFT);
 			
-			dimTF= new JTextField();
-			dimTF.setText("2");
-			mutationPanel.add(dimensionLabel);
-			mutationPanel.add(dimTF);
 			
 			//PROBLEM PANEL
 			
@@ -301,6 +300,9 @@ public class Mainframe extends JFrame  {
 							.addComponent(toleranceTF, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 234, Short.MAX_VALUE)
 							.addComponent(toleranceLabel, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 234, Short.MAX_VALUE)
 							
+							.addComponent(dimTF, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 234, Short.MAX_VALUE)
+							.addComponent(dimensionLabel, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 234, Short.MAX_VALUE)
+							
 							.addComponent(executeButton, GroupLayout.DEFAULT_SIZE, 234, Short.MAX_VALUE)
 							.addComponent(problemPanel, GroupLayout.DEFAULT_SIZE, 234, Short.MAX_VALUE))
 						.addGap(10))
@@ -313,6 +315,7 @@ public class Mainframe extends JFrame  {
 						.addPreferredGap(ComponentPlacement.UNRELATED)
 						.addComponent(genSizeTextField, GroupLayout.PREFERRED_SIZE, 20, GroupLayout.PREFERRED_SIZE)
 						.addPreferredGap(ComponentPlacement.UNRELATED)
+					
 						.addComponent(numGenLabel)
 							.addPreferredGap(ComponentPlacement.RELATED)
 						.addComponent(numGenTF, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
@@ -322,6 +325,11 @@ public class Mainframe extends JFrame  {
 						.addComponent(toleranceLabel, GroupLayout.PREFERRED_SIZE, 16, GroupLayout.PREFERRED_SIZE)
 						.addPreferredGap(ComponentPlacement.UNRELATED)
 						.addComponent(toleranceTF, GroupLayout.PREFERRED_SIZE, 20, GroupLayout.PREFERRED_SIZE)
+						.addPreferredGap(ComponentPlacement.UNRELATED)
+						
+						.addComponent(dimensionLabel, GroupLayout.PREFERRED_SIZE, 16, GroupLayout.PREFERRED_SIZE)
+						.addPreferredGap(ComponentPlacement.UNRELATED)
+						.addComponent(dimTF, GroupLayout.PREFERRED_SIZE, 20, GroupLayout.PREFERRED_SIZE)
 						.addPreferredGap(ComponentPlacement.UNRELATED)
 						
 						.addComponent(selectionPanel, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)

@@ -56,7 +56,7 @@ public class Crossing {
 	public static <T> void MultiPointCrossOver(Individuo[] population, double probability, int numPoints) {
 		
 	}
-	public static <T> Individuo[] UniformCrossOver(Individuo<T>[] population, double probability) {
+	public static <T,U> Individuo[] UniformCrossOver(Individuo[] population, double probability) {
 		Individuo[] crossed= new Individuo[population.length];
 		for(int i=0;i<crossed.length;i++) {
 			var childA= population[i];
@@ -84,7 +84,7 @@ public class Crossing {
 		return crossed;
 		
 	}
-	public static <T> Individuo[] AritmeticCrossOver(Individuo<T>[] population, double probability) {
+	public static <T,U> Individuo[] AritmeticCrossOver(Individuo[] population, double probability) {
 		return population;
 	}
 
