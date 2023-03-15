@@ -363,7 +363,8 @@ public class Mainframe extends JFrame  {
 						.addGap(11))
 			);
 			solutionPanel.setLayout(gl_solutionPanel);
-executeButton.addActionListener(new ActionListener() {
+			
+			executeButton.addActionListener(new ActionListener() {
 				
 				@Override
 				public void actionPerformed(ActionEvent e) {
