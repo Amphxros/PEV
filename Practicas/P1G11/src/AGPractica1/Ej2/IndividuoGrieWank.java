@@ -57,8 +57,8 @@ public class IndividuoGrieWank extends Individuo<Boolean, Double>{
 		if(dimension==this.fenotype.length) {
 			double first=0, second=0; 
 			for(int i=0; i<dimension;i++) {
-				first+=Math.pow(fenotype[i],2)/4000; //âˆ‘ (xi^2 /4000) 
-				second+=Math.cos(fenotype[i]/Math.sqrt(i + 1)); // âˆ�(cos (xi/âˆši)) 
+				first+=Math.pow(fenotype[i],2)/4000; //∑ (xi^2 /4000) 
+				second+=Math.cos(fenotype[i]/Math.sqrt(i + 1)); // ∏(cos (xi/√i)) 
 			}
 			
 			fitness_=first - second;

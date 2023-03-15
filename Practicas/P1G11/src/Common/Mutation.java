@@ -4,7 +4,8 @@ import java.util.Random;
 
 public class Mutation {
 	public enum Type{
-		Uniform, NonUniform
+		Uniform,
+		NonUniform
 	}
 	
 	public static Individuo[] mutateUniform(Individuo[] population, double probMutation) {

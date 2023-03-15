@@ -6,7 +6,12 @@ import java.util.Collections;
 public class Selection {
 
 	public enum Type {
-		Proporcional, MuestreoUniversalEstoclastico, Truncamiento, TorneoDeterministico, TorneoProbabilistico, Ranking,
+		Proporcional,
+		MuestreoUniversalEstoclastico,
+		Truncamiento,
+		TorneoDeterministico,
+		TorneoProbabilistico,
+		Ranking,
 		Restos
 	}
 

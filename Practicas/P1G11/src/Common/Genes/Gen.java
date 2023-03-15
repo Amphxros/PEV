@@ -27,6 +27,10 @@ public abstract class Gen<T>{
 		this.allele= allele;
 	}
 	
+	public void copyAlelle(Gen<T> gene) {
+		gene.setAllele(this.allele);
+	}
+	
 
 	public void setAllele(boolean b,T allele) {
 		if(b) {

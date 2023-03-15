@@ -37,11 +37,28 @@ public abstract class Individuo<T, U> {
 		return cromosoma;
 	}
 	
+	/**
+	 * Copys the cromosome ind
+	 * @param ind
+	 */
+	public void get(Individuo ind) {
+		ind.setTolerance(tolerance);
+		ind.setFitness(fitness);
+		ind.setID(id);
+		
+		for(int i=0;i<numGenes;i++) {
+			ind.cromosoma.setGen(cromosoma.getGen(i), i);
+		}
+	}
+	
 	public T getGen(int pos) {
 		return (T) cromosoma.getGen(pos);
 	}
 	public int getID() {
 		return this.id;
+	}
+	public void setID(int id) {
+		this.id=id;
 	}
 	public void print() {
 		for(int i=0;i<this.getCromosomeArraySize();i++) {
