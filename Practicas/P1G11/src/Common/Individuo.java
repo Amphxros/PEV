@@ -8,16 +8,18 @@ import Common.Genes.Gen;
 public abstract class Individuo<T, U> {
 
 	
-	protected double[] tamGenes;
 	protected Cromosoma<T> cromosoma;
 	protected int numGenes;
-	private double punct;
-	private double punctAcum;
+
+	protected double tolerance;
 	
 	protected U[] fenotype; //fenotipo
-	protected double fitness; //fitness
+
+	private double fitness; //fitness
+	private double fitnessAbs; //absolute fitness
+
 	protected int id; //id for different functions
-	protected double tolerance;
+	
 
 	public Individuo(double tolerance, int id, int numGenes) {
 		this.numGenes=numGenes;
@@ -25,6 +27,8 @@ public abstract class Individuo<T, U> {
 		this.tolerance=tolerance;
 		this.id=id;
 		this.numGenes=numGenes;
+		this.fitness=0;
+		this.fitnessAbs=0;
 		
 	}
 	
@@ -61,6 +65,9 @@ public abstract class Individuo<T, U> {
 		this.id=id;
 	}
 	public void print() {
+		
+		System.out.print("Individuo " +this.id+ " Fitness:" + getFitness() + " ");
+		
 		for(int i=0;i<this.getCromosomeArraySize();i++) {
 			System.out.print(this.cromosoma.getGen(i).toString());
 		}
@@ -97,7 +104,9 @@ public abstract class Individuo<T, U> {
 	
 	public void setFitness(double fitness){
 		this.fitness = fitness;
+		this.fitnessAbs+=fitness;
 	}
+	
 	
 	public double getTolerance() {
 		return tolerance;
@@ -109,6 +118,10 @@ public abstract class Individuo<T, U> {
 	
 	public U[] getFenotype() {
 		return fenotype;
+	}
+	
+	public double getFitnessAbs() {
+		return this.fitnessAbs;
 	}
 
 } 

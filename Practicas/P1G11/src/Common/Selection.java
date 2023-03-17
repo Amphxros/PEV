@@ -20,14 +20,14 @@ public class Selection {
 		int size = poblacion.length;
 		double totalFitness = 0;
 		for (int i = 0; i < size; i++) {
-			totalFitness += poblacion[i].fitness;
+			totalFitness += poblacion[i].getFitness();
 		}
 
 		// Calculo probabilidad ponderada
 		double probabilidadPonderada[] = new double[size];
 		for (int i = 0; i < size; i++) {
 
-			probabilidadPonderada[i] = poblacion[i].fitness/ totalFitness;
+			probabilidadPonderada[i] = poblacion[i].getFitness()/ totalFitness;
 		}
 		
 		return probabilidadPonderada;
@@ -50,9 +50,7 @@ public class Selection {
 			double r = Math.random();
 
 			int c = 0;
-			// Buscar el primer elemento del array de probabilidad que no sea mayor que el
-			// valor
-			// aleatorio
+			// Buscar el primer elemento del array de probabilidad que no sea mayor que el valor aleatorio
 			while (r > probabilidadPonderada[c]) {
 
 				r -= probabilidadPonderada[c];

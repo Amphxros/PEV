@@ -49,13 +49,13 @@ public class IndividuoMichalewiczA extends Individuo<Boolean, Double> {
 
 	@Override
 	public void evaluateSelf() {
-		final double fitness_;
+		double fitness_;
 		if(fenotype.length==this.numGenes) {
 			fitness_=0;
 			double pi=Math.PI;
 			for(int i=0;i<fenotype.length;i++) {
 				double aux=Math.pow(fenotype[i], 2)/pi;
-				fitness+=Math.sin(fenotype[i])*Math.sin(Math.pow(aux,2*m));
+				fitness_+=Math.sin(fenotype[i])*Math.sin(Math.pow(aux,2*m));
 			}
 			
 			this.setFitness(-fitness_);
