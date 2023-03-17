@@ -30,8 +30,6 @@ public class IndividuoCalibracion extends Individuo<Boolean, Double>{
 		fenotype[0]=fenotype[1]=Double.MIN_VALUE;
 		this.cromosoma= new Cromosoma(tamX1 + tamX2);
 		Random rnd= new Random();
-	
-		//Nota: Num genes realmente no se usa pues depende del tamaño que se calcule entre el maximo y el minimo
 		
 		for(int i = 0 ;i<  tamX1 + tamX2;i++) {
 			BooleanGen g= new BooleanGen(rnd.nextBoolean());
