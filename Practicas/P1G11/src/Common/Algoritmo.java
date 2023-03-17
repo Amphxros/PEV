@@ -1,6 +1,5 @@
 package Common;
 
-
 public abstract class Algoritmo {
 
 	protected final int tamPoblacion;
@@ -11,7 +10,6 @@ public abstract class Algoritmo {
 	protected final double[] fitnessMed; // eje y3
 
 	protected final int maxGeneraciones;
-	protected final double tolerance;
 	protected double probCruce;
 	protected double probMutacion;
 	protected int tamTorneo;
@@ -25,9 +23,15 @@ public abstract class Algoritmo {
 	protected double elitismPercentage;
 	protected boolean elitism;
 
-		public Algoritmo(double tolerance,int tamPoblacion, int maxGeneraciones, double probCruce, double probMutation, int tamTorneo,
+	/**
+	 * 
+	 * @param tamPoblacion
+	 * @param maxGeneraciones
+	 * @param probCruce
+	 * @param probMutation
+	 */
+	public Algoritmo(int tamPoblacion, int maxGeneraciones, double probCruce, double probMutation, int tamTorneo,
 			double elitismo) {
-		this.tolerance=tolerance;
 		this.maxGeneraciones = maxGeneraciones;
 		this.tamPoblacion = tamPoblacion;
 		this.probCruce = probCruce;
@@ -36,7 +40,6 @@ public abstract class Algoritmo {
 		this.elitismPercentage = elitismo;
 		this.elitism = elitismPercentage > 0;
 
-		
 		generations = new double[this.maxGeneraciones];
 		fitness = new double[this.maxGeneraciones];
 		fitnessAbs = new double[this.maxGeneraciones];
@@ -44,7 +47,7 @@ public abstract class Algoritmo {
 
 		for (int i = 0; i < this.maxGeneraciones; i++) {
 			generations[i] = i;
-			fitness[i] = 0;
+			fitness[i] = 1;
 			fitnessAbs[i] = 0;
 			fitnessMed[i] = 0;
 		}
@@ -220,74 +223,39 @@ public abstract class Algoritmo {
 
 	public void CorregirMinimizar() {
 
-		double max = poblacion[0].fitness;
+		double max = poblacion[0].getFitness();
 		for (int i = 1; i < poblacion.length; i++) {
 
-			if (poblacion[i].fitness > max)
-				max = poblacion[i].fitness;
+			if (poblacion[i].getFitness() > max)
+				max = poblacion[i].getFitness();
 		}
 
 		max = max * 1.05;
 
 		for (int i = 0; i < poblacion.length; i++) {
-			poblacion[i].fitness = max - poblacion[i].fitness;
+			poblacion[i].setFitness(max - poblacion[i].getFitness());
 		}
 	}
 
 	public void DesplazarFitnessNegativo() {
 
-		double min = poblacion[0].fitness;
+		double min = poblacion[0].getFitness();
 
 		for (int i = 1; i < poblacion.length; i++) {
 
-			if (poblacion[i].fitness < min)
-				min = poblacion[i].fitness;
+			if (poblacion[i].getFitness() < min)
+				min = poblacion[i].getFitness();
 		}
 
 		if(min < 0) {
 			for(int i = 0; i < poblacion.length; i++) {
-				poblacion[i].fitness += Math.abs(min);
+				poblacion[i].setFitness( poblacion[i].getFitness() + Math.abs(min));
 			}
 		}
 		
 	}
 
-	protected void evaluate(int currGeneration) {
-		double sum=0.0;
-		double best_fitness;
-
-		//resets everything
-		this.elMejor=null;
-		if(this.isMaximize) {
-			best_fitness=Double.MIN_VALUE;
-		}
-		else {
-			best_fitness=Double.MAX_VALUE;
-		}
-		for(int i=0;i<poblacion.length;i++) {
-			poblacion[i].evaluateSelf();
-			sum+=poblacion[i].getFitness();
-			//calculate the best fitness
-			if((best_fitness < poblacion[i].getFitness() && this.isMaximize) ||(best_fitness > poblacion[i].getFitness() && !this.isMaximize) ) {
-				best_fitness=poblacion[i].getFitness();
-				this.elMejor=poblacion[i];
-				this.pos_mejor=i;
-			}
-		}	
-		
-		this.fitnessMed[currGeneration]=sum/this.poblacion.length;
-		this.fitness[currGeneration]=this.elMejor.getFitness();
-		if(currGeneration>0) {
-			if(this.isMaximize)
-				this.fitnessAbs[currGeneration]= Math.max( elMejor.getFitness(), this.fitnessAbs[currGeneration - 1]);
-			else
-				this.fitnessAbs[currGeneration]= Math.min( elMejor.getFitness(), this.fitnessAbs[currGeneration - 1]);
-		}
-		else {
-			this.fitnessAbs[currGeneration]= this.elMejor.getFitness();
-		}
-		
-	}
+	protected abstract void evaluate(int currGeneration);
 
 	public double[] getGenerations() {
 		return this.generations;

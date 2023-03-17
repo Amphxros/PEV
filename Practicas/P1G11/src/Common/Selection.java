@@ -108,11 +108,11 @@ public class Selection {
 	}
 
 	private static int partition(Individuo[] poblacion, int begin, int end) {
-		double pivot = poblacion[end].fitness;
+		double pivot = poblacion[end].getFitness();
 		int i = (begin - 1);
 
 		for (int j = begin; j < end; j++) {
-			if (poblacion[j].fitness > pivot) {
+			if (poblacion[j].getFitness() > pivot) {
 				i++;
 
 				Individuo swapTemp = poblacion[i];
@@ -178,7 +178,7 @@ public class Selection {
 			int seleccionado = muestra[0];
 			for (int c = 1; c < k; c++) {
 
-				if (poblacion[muestra[c]].fitness > poblacion[seleccionado].fitness) {
+				if (poblacion[muestra[c]].getFitness() > poblacion[seleccionado].getFitness()) {
 					seleccionado = muestra[c];
 				}
 			}
@@ -212,7 +212,7 @@ public class Selection {
 
 				for (int c = 1; c < k; c++) {
 
-					if (poblacion[muestra[c]].fitness > poblacion[seleccionado].fitness) {
+					if (poblacion[muestra[c]].getFitness() > poblacion[seleccionado].getFitness()) {
 						seleccionado = muestra[c];
 					}
 				}
@@ -221,7 +221,7 @@ public class Selection {
 
 				for (int c = 1; c < k; c++) {
 
-					if (poblacion[muestra[c]].fitness < poblacion[seleccionado].fitness) {
+					if (poblacion[muestra[c]].getFitness()< poblacion[seleccionado].getFitness()) {
 						seleccionado = muestra[c];
 					}
 				}
