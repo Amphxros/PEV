@@ -6,7 +6,12 @@ import java.util.Collections;
 public class Selection {
 
 	public enum Type {
-		Proporcional, MuestreoUniversalEstoclastico, Truncamiento, TorneoDeterministico, TorneoProbabilistico, Ranking,
+		Proporcional,
+		MuestreoUniversalEstoclastico,
+		Truncamiento,
+		TorneoDeterministico,
+		TorneoProbabilistico,
+		Ranking,
 		Restos
 	}
 
@@ -15,14 +20,14 @@ public class Selection {
 		int size = poblacion.length;
 		double totalFitness = 0;
 		for (int i = 0; i < size; i++) {
-			totalFitness += poblacion[i].fitness;
+			totalFitness += poblacion[i].getFitness();
 		}
 
 		// Calculo probabilidad ponderada
 		double probabilidadPonderada[] = new double[size];
 		for (int i = 0; i < size; i++) {
 
-			probabilidadPonderada[i] = poblacion[i].fitness/ totalFitness;
+			probabilidadPonderada[i] = poblacion[i].getFitness()/ totalFitness;
 		}
 		
 		return probabilidadPonderada;
@@ -45,9 +50,7 @@ public class Selection {
 			double r = Math.random();
 
 			int c = 0;
-			// Buscar el primer elemento del array de probabilidad que no sea mayor que el
-			// valor
-			// aleatorio
+			// Buscar el primer elemento del array de probabilidad que no sea mayor que el valor aleatorio
 			while (r > probabilidadPonderada[c]) {
 
 				r -= probabilidadPonderada[c];
@@ -105,11 +108,11 @@ public class Selection {
 	}
 
 	private static int partition(Individuo[] poblacion, int begin, int end) {
-		double pivot = poblacion[end].fitness;
+		double pivot = poblacion[end].getFitness();
 		int i = (begin - 1);
 
 		for (int j = begin; j < end; j++) {
-			if (poblacion[j].fitness > pivot) {
+			if (poblacion[j].getFitness() > pivot) {
 				i++;
 
 				Individuo swapTemp = poblacion[i];
@@ -175,7 +178,7 @@ public class Selection {
 			int seleccionado = muestra[0];
 			for (int c = 1; c < k; c++) {
 
-				if (poblacion[muestra[c]].fitness > poblacion[seleccionado].fitness) {
+				if (poblacion[muestra[c]].getFitness() > poblacion[seleccionado].getFitness()) {
 					seleccionado = muestra[c];
 				}
 			}
@@ -209,7 +212,7 @@ public class Selection {
 
 				for (int c = 1; c < k; c++) {
 
-					if (poblacion[muestra[c]].fitness > poblacion[seleccionado].fitness) {
+					if (poblacion[muestra[c]].getFitness() > poblacion[seleccionado].getFitness()) {
 						seleccionado = muestra[c];
 					}
 				}
@@ -218,7 +221,7 @@ public class Selection {
 
 				for (int c = 1; c < k; c++) {
 
-					if (poblacion[muestra[c]].fitness < poblacion[seleccionado].fitness) {
+					if (poblacion[muestra[c]].getFitness()< poblacion[seleccionado].getFitness()) {
 						seleccionado = muestra[c];
 					}
 				}

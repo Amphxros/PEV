@@ -8,21 +8,10 @@ import Common.Genes.Gen;
 public class Crossing {
 	
 	public enum Type{
-		Mono,
-		Multiple,
-		Uniform,
-		Aritmetic,
-		PMX,
-		OX,
-		OXVarA,
-		OXVarB,
-		CX,
-		ERX,
-		CO,
-		Own
+		Mono, Multiple, Uniform, Aritmetic, Linear, Geometric, SBX
 	}
 	
-	public static <T,U> Individuo[] MonopointCrossOver(Individuo[] population, double probability, int numPoints) {
+	public static <T> Individuo[] MonopointCrossOver(Individuo[] population, double probability, int numPoints) {
 	
 		Individuo[] crossed= new Individuo[population.length];
 		Random rnd= new Random();
@@ -67,7 +56,7 @@ public class Crossing {
 	public static <T> void MultiPointCrossOver(Individuo[] population, double probability, int numPoints) {
 		
 	}
-	public static <T,U> Individuo[] UniformCrossOver(Individuo<T,U>[] population, double probability) {
+	public static <T,U> Individuo[] UniformCrossOver(Individuo[] population, double probability) {
 		Individuo[] crossed= new Individuo[population.length];
 		for(int i=0;i<crossed.length;i++) {
 			var childA= population[i];
@@ -95,11 +84,7 @@ public class Crossing {
 		return crossed;
 		
 	}
-	public static <T,U> Individuo[] AritmeticCrossOver(Individuo<T,U>[] population, double probability) {
-		return population;
-	}
-	
-	public static <T,U> Individuo[] PartialPairingCrossOver(Individuo<T,U>[] population, double probability) {
+	public static <T,U> Individuo[] AritmeticCrossOver(Individuo[] population, double probability) {
 		return population;
 	}
 

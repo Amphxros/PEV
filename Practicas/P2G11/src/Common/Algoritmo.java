@@ -223,33 +223,33 @@ public abstract class Algoritmo {
 
 	public void CorregirMinimizar() {
 
-		double max = poblacion[0].fitness;
+		double max = poblacion[0].getFitness();
 		for (int i = 1; i < poblacion.length; i++) {
 
-			if (poblacion[i].fitness > max)
-				max = poblacion[i].fitness;
+			if (poblacion[i].getFitness() > max)
+				max = poblacion[i].getFitness();
 		}
 
 		max = max * 1.05;
 
 		for (int i = 0; i < poblacion.length; i++) {
-			poblacion[i].fitness = max - poblacion[i].fitness;
+			poblacion[i].setFitness(max - poblacion[i].getFitness());
 		}
 	}
 
 	public void DesplazarFitnessNegativo() {
 
-		double min = poblacion[0].fitness;
+		double min = poblacion[0].getFitness();
 
 		for (int i = 1; i < poblacion.length; i++) {
 
-			if (poblacion[i].fitness < min)
-				min = poblacion[i].fitness;
+			if (poblacion[i].getFitness() < min)
+				min = poblacion[i].getFitness();
 		}
 
 		if(min < 0) {
 			for(int i = 0; i < poblacion.length; i++) {
-				poblacion[i].fitness += Math.abs(min);
+				poblacion[i].setFitness( poblacion[i].getFitness() + Math.abs(min));
 			}
 		}
 		
