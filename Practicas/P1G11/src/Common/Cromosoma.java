@@ -49,7 +49,7 @@ public class Cromosoma<T>{
 	
 	/**
 	 * @return the value of the alleles
-	 * ex: 0 1 0 0 for fenotype 4
+	 * ex: "0100" for fenotype 4
 	 */
 	public String getString() {
 		String s="";

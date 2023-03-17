@@ -17,13 +17,15 @@ public abstract class Individuo<T, U> {
 
 	private double fitness; //fitness
 	private double fitnessAbs; //absolute fitness
+	
+	protected double punt; // puntRelat = aptitud / sumaAptitud
+	protected double puntAbs; // para seleccion
 
 	protected int id; //id for different functions
 	
 
 	public Individuo(double tolerance, int id, int numGenes) {
-		this.numGenes=numGenes;
-		
+		this.numGenes=numGenes;	
 		this.tolerance=tolerance;
 		this.id=id;
 		this.numGenes=numGenes;
@@ -31,7 +33,13 @@ public abstract class Individuo<T, U> {
 		this.fitnessAbs=0;
 		
 	}
-	
+	/**
+	 * Calculates the tam
+	 * @param tolerance
+	 * @param min
+	 * @param max
+	 * @return
+	 */
 	public int tamGen(double tolerance, double min, double max)
 	{
 		return (int) (Math.log10(((max - min) / tolerance) + 1) / Math.log10(2));
@@ -39,20 +47,6 @@ public abstract class Individuo<T, U> {
 	
 	public Cromosoma<T> getCromosomes() {
 		return cromosoma;
-	}
-	
-	/**
-	 * Copys the cromosome ind
-	 * @param ind
-	 */
-	public void get(Individuo ind) {
-		ind.setTolerance(tolerance);
-		ind.setFitness(fitness);
-		ind.setID(id);
-		
-		for(int i=0;i<numGenes;i++) {
-			ind.cromosoma.setGen(cromosoma.getGen(i), i);
-		}
 	}
 	
 	public T getGen(int pos) {
@@ -86,7 +80,19 @@ public abstract class Individuo<T, U> {
 			calculateFenotype(); // Update fenotype
 	}
 	
-	
+
+	public void copyCromosome(Individuo ind) {
+		for (int i = 0; i < this.numGenes; i++)
+			this.cromosoma.setGen(ind.cromosoma.getGen(i),i);
+		
+		this.fitness= ind.getFitness();
+		this.numGenes=ind.getCromosomeArraySize();
+		this.tolerance= ind.getTolerance();
+		this.fitnessAbs=ind.getFitnessAbs();
+		this.id=ind.getID();
+		
+		
+	}
 
 	protected abstract boolean mutateSelf(int pos, Random rnd, double probability);
 	protected abstract void calculateFenotype();
@@ -107,6 +113,10 @@ public abstract class Individuo<T, U> {
 		this.fitnessAbs+=fitness;
 	}
 	
+	public void setFitnessAbs(double fitnessAbs){
+		this.fitnessAbs=fitnessAbs;
+	}
+	
 	
 	public double getTolerance() {
 		return tolerance;
@@ -122,6 +132,14 @@ public abstract class Individuo<T, U> {
 	
 	public double getFitnessAbs() {
 		return this.fitnessAbs;
+	}
+	
+	public double getPunct() {
+		return this.punt;
+	}
+	
+	public void setPunct(double punct) {
+		this.punt=punct;
 	}
 
 } 
