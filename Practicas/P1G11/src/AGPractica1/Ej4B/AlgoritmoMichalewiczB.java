@@ -5,9 +5,9 @@ import Common.Algoritmo;
 
 public class AlgoritmoMichalewiczB extends Algoritmo {
 	private final int dimension;
-	public AlgoritmoMichalewiczB(int tamPoblacion, int maxGeneraciones, double probCruce, double probMutation,
+	public AlgoritmoMichalewiczB(double tolerance,int tamPoblacion, int maxGeneraciones, double probCruce, double probMutation,
 			int tamTorneo,int dimension, double elitismo) {
-		super(tamPoblacion, maxGeneraciones, probCruce, probMutation, tamTorneo, elitismo);
+		super(tolerance,tamPoblacion, maxGeneraciones, probCruce, probMutation, tamTorneo, elitismo);
 		this.dimension=dimension;
 		this.isMaximize=false;
 	}
@@ -17,7 +17,7 @@ public class AlgoritmoMichalewiczB extends Algoritmo {
 	poblacion= new IndividuoMichalewiczA[this.tamPoblacion];
 		
 		for(int i=0;i<this.tamPoblacion;i++) {
-			poblacion[i]= new IndividuoMichalewiczA(0.1,i,2,dimension);
+			poblacion[i]= new IndividuoMichalewiczA(this.tolerance,i,2,dimension);
 		}
 		
 		

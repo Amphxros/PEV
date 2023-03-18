@@ -51,6 +51,8 @@ import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.JButton;
+import javax.swing.JCheckBox;
+
 import java.awt.Component;
 import java.awt.Font;
 import java.awt.Frame;
@@ -75,6 +77,7 @@ public class Mainframe extends JFrame  {
 		private JTextField dimTF;	
 		private JTextField elitismTF;
 		private JTextField toleranceTF;
+		private JCheckBox maximize;
 		private Plot2DPanel plot;
 		
 		NumberFormat numberFormat = NumberFormat.getNumberInstance(Locale.getDefault());
@@ -208,18 +211,18 @@ public class Mainframe extends JFrame  {
 			mutationPanel.setBorder(new TitledBorder("Mutacion"));
 			mutationPanel.setLayout(new GridLayout(0, 2, 3, 0));
 			
-			JLabel mutationTypeLabel = new JLabel("Tipo de mutación");
+			JLabel mutationTypeLabel = new JLabel("Tipo de mutacion");
 			mutationTypeLabel.setHorizontalAlignment(SwingConstants.LEFT);
 			mutationPanel.add(mutationTypeLabel);
 			
 			JComboBox mutationTypeComboBox = new JComboBox();
 			mutationTypeComboBox.setModel(new DefaultComboBoxModel(new String[] {
-				"Mutación básica"
+				"Mutacion basica"
 				}
 			));
 			mutationPanel.add(mutationTypeComboBox);
 			
-			JLabel mutationProbLabel = new JLabel("% Mutación");
+			JLabel mutationProbLabel = new JLabel("% Mutacion");
 			mutationPanel.add(mutationProbLabel);
 			
 			mutationProbabilityTF = new JTextField();
@@ -227,7 +230,10 @@ public class Mainframe extends JFrame  {
 			mutationProbabilityTF.setColumns(10);
 			mutationPanel.add(mutationProbabilityTF);
 
-			
+			JLabel maximizeLabel= new JLabel("Maximizar:");
+			mutationPanel.add(maximizeLabel);
+			maximize= new JCheckBox();
+			mutationPanel.add(maximize);
 			
 			//PROBLEM PANEL
 			
@@ -363,6 +369,7 @@ public class Mainframe extends JFrame  {
 			
 			JPanel solutionPanel = new JPanel();
 			centerPanel.add(solutionPanel);
+		
 			
 			JLabel solutionLabel = new JLabel("Solution:");
 			solutionLabel.setFont(new Font("Tahoma", Font.BOLD, 11));
@@ -408,16 +415,19 @@ public class Mainframe extends JFrame  {
 					double elitism= Double.parseDouble(elitismTF.getText());
 					double probCruce= Double.parseDouble(crossProbabilityTF.getText());
 					double probMutacion= Double.parseDouble(mutationProbabilityTF.getText());
-				
+					double tolerance= Double.parseDouble(toleranceTF.getText());
+					
 					int crossingType= crossTypeComboBox.getSelectedIndex();
 					int selectionType= selectionTypeComboBox.getSelectedIndex();
 					int mutationType= mutationTypeComboBox.getSelectedIndex();
 					int tamTorneo = Integer.parseInt(tamTorneoTF.getText());
 					
+					boolean maximizeFunct= maximize.isSelected();
+					
 					switch(problemTypeComboBox.getSelectedIndex()) {
 					case 0:
 						System.out.println("Calibracion");
-						AGCalibracion ag= new AGCalibracion(tamPoblacion,nGeneraciones,probCruce,probMutacion, tamTorneo, elitism);
+						AGCalibracion ag= new AGCalibracion(tolerance,tamPoblacion,nGeneraciones,probCruce,probMutacion, tamTorneo, elitism);
 						//sets the selection, crossing and mutation parameters
 						ag.setCrossing(crossingType);
 						ag.setSelection(selectionType);
@@ -433,7 +443,7 @@ public class Mainframe extends JFrame  {
 						break;
 					case 1:
 						System.out.println("GrieWank");
-						AlgoritmoGrieWank ag2= new AlgoritmoGrieWank(tamPoblacion,nGeneraciones,probCruce,probMutacion, tamTorneo, elitism);
+						AlgoritmoGrieWank ag2= new AlgoritmoGrieWank(tolerance,tamPoblacion,nGeneraciones,probCruce,probMutacion, tamTorneo, elitism);
 						//sets the selection, crossing and mutation parameters
 						ag2.setCrossing(crossingType);
 						ag2.setSelection(selectionType);
@@ -447,7 +457,7 @@ public class Mainframe extends JFrame  {
 						break;
 					case 2:
 						System.out.println("Styblinski-tang");
-						AlgoritmoStyblinskiTang ag3= new AlgoritmoStyblinskiTang(tamPoblacion,nGeneraciones,probCruce,probMutacion, tamTorneo, elitism);
+						AlgoritmoStyblinskiTang ag3= new AlgoritmoStyblinskiTang(tolerance,tamPoblacion,nGeneraciones,probCruce,probMutacion, tamTorneo, elitism);
 						ag3.setCrossing(crossingType);
 						ag3.setSelection(selectionType);
 						ag3.setMutacion(mutationType);
@@ -462,7 +472,7 @@ public class Mainframe extends JFrame  {
 						break;
 					case 3:
 						System.out.println("Michalewicz --A");
-						 AlgoritmoMichalewiczA ag4A= new  AlgoritmoMichalewiczA(tamPoblacion,nGeneraciones,probCruce,probMutacion, tamTorneo,dim, elitism);
+						 AlgoritmoMichalewiczA ag4A= new  AlgoritmoMichalewiczA(tolerance,tamPoblacion,nGeneraciones,probCruce,probMutacion, tamTorneo,dim, elitism);
 						 ag4A.setCrossing(crossingType);
 						 ag4A.setSelection(selectionType);
 						 ag4A.setMutacion(mutationType);
@@ -475,7 +485,7 @@ public class Mainframe extends JFrame  {
 							break;
 					case 4:
 						System.out.println("Michalewicz --B");
-						 AlgoritmoMichalewiczB ag4b= new  AlgoritmoMichalewiczB(tamPoblacion,nGeneraciones,probCruce,probMutacion, tamTorneo,dim, elitism);
+						 AlgoritmoMichalewiczB ag4b= new  AlgoritmoMichalewiczB(tolerance,tamPoblacion,nGeneraciones,probCruce,probMutacion, tamTorneo,dim, elitism);
 						 ag4b.setCrossing(crossingType);
 						 ag4b.setSelection(selectionType);
 						 ag4b.setMutacion(mutationType);

@@ -9,6 +9,7 @@ public abstract class Algoritmo {
 	protected final double[] fitnessAbs; // eje y2
 	protected final double[] fitnessMed; // eje y3
 
+	protected final double tolerance;
 	protected final int maxGeneraciones;
 	protected double probCruce;
 	protected double probMutacion;
@@ -30,8 +31,9 @@ public abstract class Algoritmo {
 	 * @param probCruce
 	 * @param probMutation
 	 */
-	public Algoritmo(int tamPoblacion, int maxGeneraciones, double probCruce, double probMutation, int tamTorneo,
+	public Algoritmo(double tolerance, int tamPoblacion, int maxGeneraciones, double probCruce, double probMutation, int tamTorneo,
 			double elitismo) {
+		this.tolerance=tolerance;
 		this.maxGeneraciones = maxGeneraciones;
 		this.tamPoblacion = tamPoblacion;
 		this.probCruce = probCruce;
@@ -51,7 +53,6 @@ public abstract class Algoritmo {
 			fitnessAbs[i] = 0;
 			fitnessMed[i] = 0;
 		}
-
 	}
 
 	public void setSelection(int index) {
@@ -258,8 +259,6 @@ public abstract class Algoritmo {
 	protected void evaluate(int currGeneration) {
 
 		double sum=0.0;
-		//resets everything
-		this.elMejor=null;
 		double best_fitness;
 		if(this.isMaximize) {
 			best_fitness=Double.MIN_VALUE;
@@ -271,9 +270,10 @@ public abstract class Algoritmo {
 			poblacion[i].evaluateSelf();
 			sum+=poblacion[i].getFitness();
 			//calculate the best fitness
-			if((best_fitness < poblacion[i].getFitness() && this.isMaximize) ||(best_fitness > poblacion[i].getFitness() && !this.isMaximize) ) {
+			if((best_fitness < poblacion[i].getFitness() && this.isMaximize) ||
+				(best_fitness > poblacion[i].getFitness() && !this.isMaximize) ) {
 				best_fitness=poblacion[i].getFitness();
-				this.elMejor=poblacion[i];
+				this.elMejor= poblacion[i];
 				this.pos_mejor=i;
 			}
 		}	

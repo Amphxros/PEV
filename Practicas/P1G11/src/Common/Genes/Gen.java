@@ -15,7 +15,6 @@ public abstract class Gen<T>{
 		
 	}
 	
-	
 	public T getAllele() {
 		return allele;
 	}

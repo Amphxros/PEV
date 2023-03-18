@@ -26,18 +26,18 @@ public class IndividuoCalibracion extends Individuo<Boolean, Double>{
 		tamX1 =this.tamGen(this.tolerance, minX1, maxX1);
 		tamX2 =this.tamGen(this.tolerance, minX2, maxX2);
 		
-		fenotype= new Double[2];
-		fenotype[0]=fenotype[1]=Double.MIN_VALUE;
 		this.cromosoma= new Cromosoma(tamX1 + tamX2);
+		
 		Random rnd= new Random();
 		
 		for(int i = 0 ;i<  tamX1 + tamX2;i++) {
 			BooleanGen g= new BooleanGen(rnd.nextBoolean());
-			//System.out.print(g.toString());
 			this.cromosoma.setGen(g, i);
 		}
 		
 		calculateFenotype();
+		
+
 	
 	}
 
@@ -86,7 +86,7 @@ public class IndividuoCalibracion extends Individuo<Boolean, Double>{
 	@Override
 	protected void calculateFenotype() {
 		// TODO Auto-generated method stub
-		
+		this.fenotype= new Double[2];
 		Cromosoma cromosome1 = new Cromosoma(tamX1);
 		Cromosoma cromosome2 = new Cromosoma(tamX2);
 		
