@@ -38,7 +38,7 @@ public class RealGen extends Gen{
 	@Override
 	public String toString() {
 		// TODO Auto-generated method stub
-		return null;
+		return Double.toString(allele);
 	}
 	
 

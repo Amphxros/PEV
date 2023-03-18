@@ -16,7 +16,7 @@ public class Mutation {
 			double r= rnd.nextDouble();
 			mutated[i]= population[i];
 			if(r <= probMutation) {
-				mutated[i].mutate(rnd, probMutation);
+				mutated[i].mutateSelf(i, rnd, probMutation);
 			}
 		}
 		

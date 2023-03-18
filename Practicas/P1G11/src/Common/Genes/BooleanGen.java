@@ -2,17 +2,22 @@ package Common.Genes;
 
 import java.util.Random;
 
+/**
+ * Binary gen
+ * @author Amph
+ *
+ */
 public class BooleanGen extends Gen{
 
 	boolean[] alelles;
 	public BooleanGen(double min, double max, double tolerance) {
 		super(min, max, tolerance);
 		// TODO Auto-generated constructor stub
-		this.calculaLongitud();
+		this.calculateLength();
 		this.alelles= new boolean[this.length];
 	}
 
-	private void calculaLongitud(){
+	private void calculateLength(){
 		this.length = (int) Math.ceil(Math.log(1 + (max-min)/tolerance)/Math.log(2));
 	}
 	@Override
@@ -46,6 +51,11 @@ public class BooleanGen extends Gen{
 	public boolean[] getAlelles() {
 		return this.alelles;
 	}
+	
+	public boolean getAlelle(int position) {
+		return this.alelles[position];
+	}
+
 
 	public void setAlelles(boolean[] alelles) {
 		this.alelles=alelles;

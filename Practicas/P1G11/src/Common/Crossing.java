@@ -3,6 +3,7 @@ package Common;
 import java.util.ArrayList;
 import java.util.Random;
 
+import Common.Genes.BooleanGen;
 import Common.Genes.Gen;
 
 public class Crossing {
@@ -11,11 +12,12 @@ public class Crossing {
 		Mono, Multiple, Uniform, Aritmetic, Linear, Geometric, SBX
 	}
 	
-	public static <T> Individuo[] MonopointCrossOver(Individuo[] population, double probability, int numPoints) {
+	public static Individuo[] MonopointCrossOver(Individuo[] population, double probability, int numPoints) {
 	
 		Individuo[] crossed= new Individuo[population.length];
 		Random rnd= new Random();
 		
+		//int numGenes= population[0].get
 		for(int i=0;i<population.length;i++) {
 			double prob= rnd.nextDouble();
 			
@@ -23,26 +25,33 @@ public class Crossing {
 				Individuo childA= population[i];
 				Individuo childB= population[i + 1];
 				
-				int length= childA.getCromosomeArraySize();
+				int length= childA.cromosoma.getLength();
 				double aux= 1 + rnd.nextDouble()*(length-2);
 				int point=(int)aux;
 				
 				for(int j=point;j<length;j++) {
 					//swap genes
-					var genA= (Gen<T>)childA.getCromosomes().getGen(j);
-					var auxA=genA.getAllele();
+					BooleanGen genA= (BooleanGen)(childA.cromosoma.genes[j]);
+					var alleleA=genA.getAlelle(j);
 					
-					var genB= (Gen<T>)childB.getCromosomes().getGen(j);
-					var auxB=genB.getAllele();
+					BooleanGen genB= (BooleanGen)(childB.cromosoma.genes[j]);
+					var alleleB=genB.getAlelle(j);
+					if(alleleA)
+						genB.insert(1, j);
+					else
+						genB.insert(0, j);
 					
-					genA.setAllele(auxB);
-					genB.setAllele(auxA);
+					
+					if(alleleB)
+						genA.insert(1, j);
+					else
+						genA.insert(0, j);
+					
 					
 					
 					
 				}
-				//set the crossed ones
-				crossed[i]=childA;
+				//set the crossed ones;
 				crossed[i+1]=childB;
 				i++;
 			}
@@ -62,17 +71,25 @@ public class Crossing {
 			var childA= population[i];
 			var childB=population[i + 1];
 			Random rnd= new Random();
-			for(int j=0;j<childA.getCromosomeArraySize();i++) {
+			for(int j=0;j<childA.cromosoma.getLength();i++) { //CHANGE IT
 				double rand=rnd.nextDouble();
 				if(rand<probability) {
-					var genA= (Gen<T>)childA.getCromosomes().getGen(j);
-					var auxA=genA.getAllele();
 					
-					var genB= (Gen<T>)childB.getCromosomes().getGen(j);
-					var auxB=genB.getAllele();
+					BooleanGen genA= (BooleanGen)(childA.cromosoma.genes[j]);
+					var alleleA=genA.getAlelle(j);
 					
-					genA.setAllele(auxB);
-					genB.setAllele(auxA);
+					BooleanGen genB= (BooleanGen)(childB.cromosoma.genes[j]);
+					var alleleB=genB.getAlelle(j);
+					if(alleleA)
+						genB.insert(1, j);
+					else
+						genB.insert(0, j);
+					
+					
+					if(alleleB)
+						genA.insert(1, j);
+					else
+						genA.insert(0, j);
 					
 				}
 			}

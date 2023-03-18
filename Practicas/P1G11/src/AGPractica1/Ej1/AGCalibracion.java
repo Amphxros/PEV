@@ -15,7 +15,7 @@ public class AGCalibracion extends Algoritmo {
 		poblacion= new IndividuoCalibracion[this.tamPoblacion];
 		
 		for(int i=0;i<this.tamPoblacion; i++) {
-			poblacion[i]= new IndividuoCalibracion(this.tolerance,i,2); //TODO change this a bit
+			poblacion[i]= new IndividuoCalibracion(this.tolerance,i,2); 
 		}
 
 	

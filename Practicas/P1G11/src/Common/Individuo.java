@@ -28,6 +28,7 @@ public abstract class Individuo<T,U> {
 		this.numGenes=numGenes;
 		this.min=new double[this.numGenes];
 		this.max= new double[this.numGenes];
+		this.cromosoma= new Cromosoma(numGenes,tolerance, min, max);
 	}
 	
 	public Individuo(double tolerance,int id, int numGenes, double[] min, double[]max) {
@@ -43,16 +44,16 @@ public abstract class Individuo<T,U> {
 	public void startCromosome() {
 		this.cromosoma.initCromosome();
 	}
-	
-	
+
 	public void crossOver(Individuo parent, int position) {
 		
 	}
 	
 	public abstract void evaluateSelf();
-	public abstract boolean mutateSelf(int pos, Random rnd, double probability);	
-	protected abstract void calculateFenotype();
 	
+	public abstract boolean mutateSelf(int pos, Random rnd, double probability);	
+	
+	protected abstract void calculateFenotype();
 	
 	public void copySelf(Individuo ind) {
 		this.cromosoma.copy(ind.cromosoma);
@@ -65,6 +66,11 @@ public abstract class Individuo<T,U> {
 		this.max=ind.max;
 		
 	}
+	
+	public int getNumGenes() {
+		return this.numGenes;
+	}
+	
 	
 	
 	public double getFitness() {
@@ -98,6 +104,17 @@ public abstract class Individuo<T,U> {
 	
 	public void setPunct(double punct) {
 		this.punct=punct;
+	}
+	
+	public double getTolerance() {
+		return this.tolerance;
+	}
+	public void setTolerance(double tolerance) {
+		this.tolerance=tolerance;
+	}
+	
+	public int getLcrom() {
+		return this.lcrom;
 	}
 
 	

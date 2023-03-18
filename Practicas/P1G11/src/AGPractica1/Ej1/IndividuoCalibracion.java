@@ -10,7 +10,7 @@ import Common.Genes.Gen;
 
 public class IndividuoCalibracion extends Individuo<Boolean,Double>{
 
-	// x1 = 11.625 y x2 = 5.726 x1∈ [-3.0,12.1] x2∈ [4.1,5.8]
+	// x1 = 11.625 y x2 = 5.726 x1 [-3.0,12.1] x2 [4.1,5.8]
 		private final double minX1=-3.000;
 		private final double maxX1=12.100;
 
@@ -24,25 +24,26 @@ public class IndividuoCalibracion extends Individuo<Boolean,Double>{
 	
 	public IndividuoCalibracion(double tolerance, int id, int numGenes) {
 		super(tolerance, id, numGenes);
-		// TODO Auto-generated constructor stub
+		createCromosome();
+		calculateFenotype();
+		
 	}
 	
 	@Override
 	public void createCromosome() {
 		for(int i=0;i<this.numGenes;i++) {
 			this.cromosoma.genes[i]= new BooleanGen(min[i],max[i],this.tolerance);
+		
 		}
+		this.cromosoma.initCromosome();
 		
 	}
 	@Override
 	public void evaluateSelf() {
 		// TODO Auto-generated method stub
-		this.fenotype= new Double[this.numGenes];
+		calculateFenotype();
 		double x1=this.cromosoma.genes[0].fenotype();
 		double x2=this.cromosoma.genes[1].fenotype();
-		this.fenotype[0]=x1;
-		this.fenotype[1]=x2;
-		
 		setFitness(f(x1,x2));
 		
 	}
@@ -58,7 +59,11 @@ public class IndividuoCalibracion extends Individuo<Boolean,Double>{
 	@Override
 	protected void calculateFenotype() {
 		// TODO Auto-generated method stub
-		
+		this.fenotype= new Double[this.numGenes];
+		double x1=this.cromosoma.genes[0].fenotype();
+		double x2=this.cromosoma.genes[1].fenotype();
+		this.fenotype[0]=x1;
+		this.fenotype[1]=x2;
 	}
 	
 }

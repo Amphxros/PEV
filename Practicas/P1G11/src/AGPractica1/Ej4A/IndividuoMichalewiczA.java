@@ -8,6 +8,7 @@ import Common.Individuo;
 import Common.Genes.BooleanGen;
 
 public class IndividuoMichalewiczA extends Individuo<Boolean, Double> {
+	
 	final double min=0;
 	final double max=Math.PI;
 	final int dimension;
@@ -16,58 +17,38 @@ public class IndividuoMichalewiczA extends Individuo<Boolean, Double> {
 	public IndividuoMichalewiczA(double tolerance, int id, int numGenes,int dimension) {
 		super(tolerance, id, numGenes);
 		this.dimension=dimension;
-		
-		final int tam=this.tamGen(tolerance, min, max);
-		
-		Random rnd= new Random();
-		this.fenotype= new Double[this.numGenes];
-		this.cromosoma= new Cromosoma(tam);
-		for(int i=0;i<this.cromosoma.getLength();i++) {
-			BooleanGen g= new BooleanGen(rnd.nextBoolean());
-			this.cromosoma.setGen(g, i);	
-		}
-		calculateFenotype();
-		
+		// TODO Auto-generated constructor stub
 	}
-
-	protected boolean mutateSelf(int pos, Random rnd, double probability) {
-		if(rnd.nextDouble()<probability) {
-			this.cromosoma.setGen(new BooleanGen(rnd.nextBoolean()), pos);
-			return true;
-		}
-		return false;
-	}
-
+	
 	@Override
-	protected void calculateFenotype() {
-		fenotype= new Double[this.numGenes];
-		for(int i=0;i<fenotype.length;i++) {
-			fenotype[i]= min + (max - min) * (Conversions.binaryToDecimal(this.cromosoma)/this.getCromosomeArraySize()) -1;
+	public void createCromosome() {
+		// TODO Auto-generated method stub
+		for(int i=0;i<this.numGenes;i++) {
+			this.cromosoma.genes[i]= new BooleanGen(min,max,this.tolerance);
 		}
-		
 	}
-
 	@Override
 	public void evaluateSelf() {
-		double fitness_;
-		if(fenotype.length==this.numGenes) {
-			fitness_=0;
-			double pi=Math.PI;
-			for(int i=0;i<fenotype.length;i++) {
-				double aux=Math.pow(fenotype[i], 2)/pi;
-				fitness_+=Math.sin(fenotype[i])*Math.sin(Math.pow(aux,2*m));
-			}
-			
-			this.setFitness(-fitness_);
-		}
-		else {
-			fitness_= Double.MIN_VALUE;
-			this.setFitness(fitness_);
-			System.out.println("Ejer 4: Wrong fitness params.");
-			
-		}
+		// TODO Auto-generated method stub
 		
 	}
+	
+	private double f(double x) {
+		return x;
+		
+	}
+	@Override
+	public boolean mutateSelf(int pos, Random rnd, double probability) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+	@Override
+	protected void calculateFenotype() {
+		// TODO Auto-generated method stub
+		
+	}
+	
+	
 
 
 

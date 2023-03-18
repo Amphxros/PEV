@@ -103,7 +103,7 @@ public abstract class Algoritmo {
 	}
 	
 	public String getBestIndividuo() {
-		return this.elMejor.cromosoma.getString();
+		return this.elMejor.cromosoma.toString();
 	}
 	
 
@@ -217,7 +217,7 @@ public abstract class Algoritmo {
 
 		for (int i = 0; i < eliteSize; i++) {
 
-			poblacion[elite[i].getID()]= elite[i];
+			poblacion[i]= elite[i];
 		}
 	}
 
