@@ -8,6 +8,7 @@ public class AlgoritmoGrieWank extends Algoritmo {
 	public AlgoritmoGrieWank(double tolerance,int tamPoblacion, int maxGeneraciones, double probCruce, double probMutation, int tamTorneo, double elitismo) {
 		super(tolerance,tamPoblacion, maxGeneraciones, probCruce, probMutation, tamTorneo, elitismo);
 		// TODO Auto-generated constructor stub
+		
 	}
 
 	@Override

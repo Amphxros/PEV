@@ -5,11 +5,11 @@ import java.util.Random;
 public abstract class Individuo<T,U> {
 	protected Cromosoma<T> cromosoma;
 	
-	protected double fitness;
-	protected double fitnessAbs;
+	protected double fitness=0;
+	protected double fitnessAbs=0;
 	
-	protected double punct;
-	protected double punctAbs;
+	protected double punct=0;
+	protected double punctAbs=0;
 	
 	protected int lcrom;
 	protected int numGenes;
@@ -78,7 +78,11 @@ public abstract class Individuo<T,U> {
 	}
 	
 	public void setFitness(double fitness) {
+		if(fitness>this.fitnessAbs) {
+			this.setFitnessAbs(fitness);
+		}
 		this.fitness=fitness;
+		
 	}
 	
 
@@ -94,8 +98,8 @@ public abstract class Individuo<T,U> {
 		return this.fitnessAbs;
 	}
 		
-	public void setFitnessAbs(double fitnessAbs) {
-		this.fitnessAbs=fitnessAbs;
+	public void setFitnessAbs(double fitness) {
+		this.fitnessAbs=fitness;
 	}
 	
 	public double getPunct() {

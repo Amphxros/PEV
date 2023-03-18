@@ -257,37 +257,42 @@ public abstract class Algoritmo {
 
 	protected void evaluate(int currGeneration) {
 
-		double sum=0.0;
-		double best_fitness;
-		if(this.isMaximize) {
-			best_fitness=Double.MIN_VALUE;
-		}
-		else {
-			best_fitness=Double.MAX_VALUE;
-		}
-		for(int i=0;i<poblacion.length;i++) {
-			poblacion[i].evaluateSelf();
-			sum+=poblacion[i].getFitness();
-			//calculate the best fitness
-			if((best_fitness < poblacion[i].getFitness() && this.isMaximize) ||
-				(best_fitness > poblacion[i].getFitness() && !this.isMaximize) ) {
-				best_fitness=poblacion[i].getFitness();
-				this.elMejor= poblacion[i];
-				this.pos_mejor=i;
-			}
-		}	
-		this.fitness[currGeneration]=this.elMejor.getFitness();
-		this.fitnessMed[currGeneration]=sum/this.poblacion.length;
+		poblacion[0].evaluateSelf();
+		double best_fitness=poblacion[0].getFitness();
+		double best_fitness_abs=poblacion[0].getFitnessAbs();
 		
-		if(currGeneration>0) {
-			if(this.isMaximize)
-				this.fitnessAbs[currGeneration]= Math.max( elMejor.getFitness(), this.fitnessAbs[currGeneration - 1]);
-			else
-				this.fitnessAbs[currGeneration]= Math.min( elMejor.getFitness(), this.fitnessAbs[currGeneration - 1]);
+		double sum_fitness=poblacion[0].getFitness();
+		double sum_score=0.0;
+		
+		for(int i = 1; i < this.tamPoblacion; i++) {
+			poblacion[i].evaluateSelf();
+			double fit=poblacion[i].getFitness();
+			sum_fitness+=fit;
+			if((this.isMaximize && fit>best_fitness) || 
+				(!this.isMaximize && fit<best_fitness)) {
+				best_fitness=fit;
+				pos_mejor=i;
+			}
 		}
-		else {
-			this.fitnessAbs[currGeneration]= this.elMejor.getFitness();
+	
+		for(int i = 0; i < this.tamPoblacion; i++) {
+			double div=this.poblacion[i].getFitness()/sum_fitness;
+			this.poblacion[i].setPunct(div);
+			sum_score+=this.poblacion[i].getPunct();
+			
 		}
+		
+		for(int i = 0; i < this.tamPoblacion; i++) {
+			double fit= this.poblacion[i].getFitnessAbs();
+			if((this.isMaximize && fit>best_fitness_abs) || 
+					(!this.isMaximize && fit<best_fitness_abs)) {
+				best_fitness_abs=fit;
+			}
+		}
+		
+		this.fitnessMed[currGeneration]=sum_fitness/this.poblacion.length;
+		this.fitness[currGeneration]=best_fitness;
+		this.fitnessAbs[currGeneration]=best_fitness_abs;
 	}
 
 	public double[] getGenerations() {
