@@ -192,8 +192,7 @@ public abstract class Algoritmo {
 		if (!elitism)
 			return null;
 
-		final double elitePercentage = 2;
-
+		final double elitePercentage = this.elitismPercentage;
 		int size = poblacion.length;
 
 		int eliteSize = (int) Math.floor(size * elitePercentage / 100.0f);
@@ -218,7 +217,7 @@ public abstract class Algoritmo {
 
 		for (int i = 0; i < eliteSize; i++) {
 
-			poblacion[i] = elite[i];
+			poblacion[elite[i].getID()]= elite[i];
 		}
 	}
 

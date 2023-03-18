@@ -1,51 +1,17 @@
 package Common.Genes;
 
-public abstract class Gen<T>{
-	protected T allele;
-	protected int dimGen;
-	protected Gen() {}
+public abstract class Gen{
+	double min,max,tolerance;
+	int length;
 	
-	public Gen(Gen<T> other) {
-		this.allele=other.allele;
-		this.dimGen=other.dimGen;
+	public Gen(double min, double max, double tolerance) {
+		this.min=min;
+		this.max=max;
+		this.tolerance=tolerance;
 	}
-	
-	public Gen(T allele) {
-		this.allele=allele;
-		
-	}
-	
-	public T getAllele() {
-		return allele;
-	}
-	public int length() {
-		return dimGen;
-	}
-	
-	public void setAllele(T allele) {
-		this.allele= allele;
-	}
-	
-	public void copyAlelle(Gen<T> gene) {
-		gene.setAllele(this.allele);
-	}
-	
-
-	public void setAllele(boolean b,T allele) {
-		if(b) {
-			this.allele= allele;
-		}
-	}
-	
-	public abstract String toString();
-	
-	public boolean equals(Object o) {
-		if(o.getClass() == this.getClass()) {
-			if (this.getAllele() == ((Gen<T>)o).getAllele()) {
-				return true;
-			}
-		}
-		
-		return false;
-	}
+	public abstract void startGen();
+	public abstract double fenotype();
+	public abstract void copyGen(Gen gen);
+	public abstract void insert(int i, int position);
+	public abstract String toString(); 
 }
