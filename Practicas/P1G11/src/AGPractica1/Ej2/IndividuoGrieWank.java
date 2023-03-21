@@ -15,7 +15,10 @@ public class IndividuoGrieWank extends Individuo<Boolean, Double>{
 	
 	public IndividuoGrieWank(double tolerance, int id, int numGenes) {
 		super(tolerance, id, numGenes);
-		// TODO Auto-generated constructor stub
+		createCromosome();
+		calculateFenotype();
+		super.lcrom= this.getLength();
+		this.setType(2);
 	}
 
 	@Override

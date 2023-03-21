@@ -77,6 +77,21 @@ public class Cromosoma<T>{
 		return this.chromosome_length;
 	}
 	
+	public void setAllele(int index,int value) {
+		int numGenes= this.genes.length;
+		if(numGenes==0) {
+			this.genes[0].insert(value,index);
+		}
+		else {
+			int[] lengths=new int[numGenes];
+			for(int i=0;i<lengths.length;i++) {
+				lengths[i]=this.genes[i].getLength();
+			}
+		}
+		
+	
+		
+	}
 		
 	
 	

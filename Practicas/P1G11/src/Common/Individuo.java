@@ -2,8 +2,11 @@ package Common;
 
 import java.util.Random;
 
+import Common.Genes.BooleanGen;
+
 public abstract class Individuo<T,U> {
 	protected Cromosoma<T> cromosoma;
+	
 	
 	protected double fitness=0;
 	protected double fitnessAbs=0;
@@ -15,12 +18,18 @@ public abstract class Individuo<T,U> {
 	protected int numGenes;
 	protected double tolerance;
 	protected double adaptation;
+
 	protected int id;
+	protected int typeFunct;
 	
 	protected double[] min;
 	protected double[] max;
 	
 	protected U[] fenotype;
+	
+	private int posGen=0;
+	private int indGen=0;
+	
 	
 	public Individuo(double tolerance,int id, int numGenes) {
 		this.tolerance=tolerance;
@@ -47,6 +56,23 @@ public abstract class Individuo<T,U> {
 
 	public void crossOver(Individuo parent, int position) {
 		
+		obtenIndGen(position);
+		//this.cromosoma.genes[indGen]).getAllele(posGen)-1), posGen))
+		var aux=(BooleanGen)parent.cromosoma.genes[indGen];
+		int i=0;
+		if(aux.getAlelle(posGen -1)) i=1;
+		this.cromosoma.genes[indGen].insert(i, posGen);
+	}
+	
+
+	private void obtenIndGen(int pos){
+		indGen = 0;
+		int posAcum = this.cromosoma.genes[indGen].getLength();
+		while (posAcum <= pos && posAcum < lcrom) {
+			indGen++;
+			posAcum +=this.cromosoma.genes[indGen].getLength();
+		}
+		posGen = pos-(posAcum-this.cromosoma.genes[indGen].getLength());
 	}
 	
 	public abstract void evaluateSelf();
@@ -129,6 +155,12 @@ public abstract class Individuo<T,U> {
 		return l;
 	}
 	
+	public void setType(int type) {
+		this.typeFunct=type;
+	}
+	public int getType() {
+		return this.typeFunct;
+	}
 	
 	
 }

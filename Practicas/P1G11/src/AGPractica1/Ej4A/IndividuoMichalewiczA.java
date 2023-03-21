@@ -17,7 +17,10 @@ public class IndividuoMichalewiczA extends Individuo<Boolean, Double> {
 	public IndividuoMichalewiczA(double tolerance, int id, int numGenes,int dimension) {
 		super(tolerance, id, numGenes);
 		this.dimension=dimension;
-		// TODO Auto-generated constructor stub
+		createCromosome();
+		calculateFenotype();
+		super.lcrom= this.getLength();
+		this.setType(4);
 	}
 	
 	@Override

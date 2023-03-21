@@ -15,7 +15,10 @@ public class IndividuoStyblinskiTang extends Individuo<Boolean, Double>{
 	
 	public IndividuoStyblinskiTang(double tolerance, int id, int numGenes) {
 		super(tolerance, id, numGenes);
-		// TODO Auto-generated constructor stub
+		createCromosome();
+		calculateFenotype();
+		super.lcrom= this.getLength();
+		this.setType(3);
 	}
 	
 	@Override
