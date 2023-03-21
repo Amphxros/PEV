@@ -2,6 +2,7 @@ package AGPractica1.Ej3;
 
 
 import Common.Algoritmo;
+import Common.IndividuoFactory;
 
 public class AlgoritmoStyblinskiTang extends Algoritmo {
 
@@ -15,8 +16,10 @@ public class AlgoritmoStyblinskiTang extends Algoritmo {
 	protected void createPopulation() {
 		poblacion= new IndividuoStyblinskiTang[this.tamPoblacion];
 		
-		for(int i=0;i<this.tamPoblacion; i++) {
-			poblacion[i]= new IndividuoStyblinskiTang(this.tolerance,i,2); //TODO change this a bit
+		for(int i=0;i<this.tamPoblacion; i++) 
+		{
+			poblacion[i]= IndividuoFactory.getIndividuo(3,i,tolerance,2);
+			poblacion[i].startCromosome();
 		}
 	}
 

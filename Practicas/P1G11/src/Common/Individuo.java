@@ -121,6 +121,14 @@ public abstract class Individuo<T,U> {
 		return this.lcrom;
 	}
 
+	public int getLength(){
+		int l = 0;
+		for (int i = 0; i < this.getNumGenes(); i++){
+			l += this.cromosoma.genes[i].getLength();
+		}
+		return l;
+	}
+	
 	
 	
 }

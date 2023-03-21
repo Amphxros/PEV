@@ -3,6 +3,7 @@ package Common;
 import java.util.ArrayList;
 import java.util.Random;
 
+import AGPractica1.Ej4B.IndividuoMichalewiczB;
 import Common.Genes.BooleanGen;
 import Common.Genes.Gen;
 
@@ -101,8 +102,9 @@ public class Crossing {
 		return crossed;
 		
 	}
-	public static <T,U> Individuo[] AritmeticCrossOver(Individuo[] population, double probability) {
-		return population;
+	public static <T,U> void AritmeticCrossOver(Individuo padre1,Individuo padre2, Individuo hijo1,Individuo hijoB) {
+		double alpha=0.5;
+		
 	}
 
 }

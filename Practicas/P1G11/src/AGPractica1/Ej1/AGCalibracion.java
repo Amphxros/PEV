@@ -1,6 +1,7 @@
 package AGPractica1.Ej1;
 
 import Common.Algoritmo;
+import Common.IndividuoFactory;
 
 public class AGCalibracion extends Algoritmo {
 
@@ -15,7 +16,8 @@ public class AGCalibracion extends Algoritmo {
 		poblacion= new IndividuoCalibracion[this.tamPoblacion];
 		
 		for(int i=0;i<this.tamPoblacion; i++) {
-			poblacion[i]= new IndividuoCalibracion(this.tolerance,i,2); 
+			poblacion[i]= IndividuoFactory.getIndividuo(1,i,tolerance,2);
+			poblacion[i].startCromosome();
 		}
 
 	

@@ -18,7 +18,7 @@ public class BooleanGen extends Gen{
 	}
 
 	private void calculateLength(){
-		this.length = (int) Math.ceil(Math.log(1 + (max-min)/tolerance)/Math.log(2));
+		this.length = (int) (Math.log10(((max - min) / this.tolerance) + 1) / Math.log10(2));
 	}
 	@Override
 	public void startGen() {

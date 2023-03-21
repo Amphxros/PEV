@@ -26,6 +26,7 @@ public class IndividuoCalibracion extends Individuo<Boolean,Double>{
 		super(tolerance, id, numGenes);
 		createCromosome();
 		calculateFenotype();
+		super.lcrom= this.getLength();
 		
 	}
 	

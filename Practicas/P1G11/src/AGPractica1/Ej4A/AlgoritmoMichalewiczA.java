@@ -1,6 +1,7 @@
 package AGPractica1.Ej4A;
 
 import Common.Algoritmo;
+import Common.IndividuoFactory;
 
 public class AlgoritmoMichalewiczA extends Algoritmo{
 
@@ -18,7 +19,8 @@ public class AlgoritmoMichalewiczA extends Algoritmo{
 		poblacion= new IndividuoMichalewiczA[this.tamPoblacion];
 		
 		for(int i=0;i<this.tamPoblacion;i++) {
-			poblacion[i]= new IndividuoMichalewiczA(this.tolerance,i,2,dimension);
+			poblacion[i]= IndividuoFactory.getIndividuo(4,i,tolerance,2);
+			poblacion[i].startCromosome();
 		}
 		
 	}

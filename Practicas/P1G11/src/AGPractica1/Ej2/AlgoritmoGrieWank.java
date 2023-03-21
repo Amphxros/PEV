@@ -2,6 +2,7 @@ package AGPractica1.Ej2;
 
 
 import Common.Algoritmo;
+import Common.IndividuoFactory;
 
 public class AlgoritmoGrieWank extends Algoritmo {
 
@@ -16,8 +17,8 @@ public class AlgoritmoGrieWank extends Algoritmo {
 		poblacion= new IndividuoGrieWank[this.tamPoblacion];
 		
 		for(int i=0;i<this.tamPoblacion; i++) {
-			poblacion[i]= new IndividuoGrieWank(this.tolerance,i,2); //TODO change this a bit
-			
+			poblacion[i]= IndividuoFactory.getIndividuo(2,i,tolerance,2);
+			poblacion[i].startCromosome();
 			
 		}
 		
