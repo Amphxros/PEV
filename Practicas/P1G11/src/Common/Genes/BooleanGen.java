@@ -43,8 +43,9 @@ public class BooleanGen extends Gen{
 		this.tolerance=gen.tolerance;
 		
 		for(int i=0;i<this.length;i++) {
-			this.alelles[i]=((BooleanGen)gen).alelles[i];
+			this.alelles[i]=((BooleanGen)gen).getAlelles()[i];
 		}
+		
 		
 	}
 	

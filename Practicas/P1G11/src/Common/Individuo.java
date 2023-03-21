@@ -82,7 +82,6 @@ public abstract class Individuo<T,U> {
 	protected abstract void calculateFenotype();
 	
 	public void copySelf(Individuo ind) {
-		this.cromosoma.copy(ind.cromosoma);
 		this.tolerance=ind.tolerance;
 		this.fitness=ind.fitness;
 		this.fitnessAbs=ind.fitnessAbs;
@@ -90,6 +89,9 @@ public abstract class Individuo<T,U> {
 		this.punctAbs=ind.punctAbs;
 		this.min=ind.min;
 		this.max=ind.max;
+		
+		this.cromosoma.copy(ind.cromosoma);
+		
 		
 	}
 	

@@ -29,6 +29,7 @@ public class IndividuoMichalewiczA extends Individuo<Boolean, Double> {
 		for(int i=0;i<this.numGenes;i++) {
 			this.cromosoma.genes[i]= new BooleanGen(min,max,this.tolerance);
 		}
+		this.startCromosome();
 	}
 	@Override
 	public void evaluateSelf() {

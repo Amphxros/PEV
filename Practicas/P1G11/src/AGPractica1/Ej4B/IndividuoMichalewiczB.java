@@ -17,12 +17,21 @@ public class IndividuoMichalewiczB extends Individuo<Double, Double>{
 	public IndividuoMichalewiczB(double tolerance, int id, int numGenes, int dimension) {
 		super(tolerance, id, numGenes);
 		this.dimension=dimension;
-		// TODO Auto-generated constructor stub
+		createCromosome();
+		calculateFenotype();
+		super.lcrom= this.getLength();
+		this.setType(5);
 	}
 	@Override
 	public void createCromosome() {
 		// TODO Auto-generated method stub
-		this.cromosoma.initCromosome();
+		for(int i=0;i<this.numGenes;i++) {
+			this.cromosoma.genes[i]= new RealGen(min,max,this.tolerance);
+		
+		}
+		
+		this.startCromosome();
+		
 	}
 	@Override
 	public void evaluateSelf() {

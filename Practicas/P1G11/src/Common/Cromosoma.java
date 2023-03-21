@@ -64,14 +64,20 @@ public class Cromosoma<T>{
 	
 	public void copy(Cromosoma cromosoma) {
 		this.chromosome_length=cromosoma.chromosome_length;
-		this.genes= new Gen[this.chromosome_length];
+		this.min=cromosoma.min;
+		this.max=cromosoma.max;
+		this.genes= new Gen[cromosoma.chromosome_length];
+		this.initCromosome();
 		for(int i=0;i<this.chromosome_length;i++) {
-			genes[i].copyGen(cromosoma.genes[i]);
+			var aux=(BooleanGen)cromosoma.genes[i];
+			int k=0;
+			if(aux.getAlelle(i))k=1;
+			this.genes[i].insert(k, i);
 		}
 		
 		this.tolerance=cromosoma.tolerance;
 		
-	}
+	} 
 	
 	public int getLength() {
 		return this.chromosome_length;

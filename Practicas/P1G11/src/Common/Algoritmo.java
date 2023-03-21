@@ -4,6 +4,8 @@ public abstract class Algoritmo {
 
 	protected final int tamPoblacion;
 	protected Individuo[] poblacion;
+	protected Individuo[] elite;
+	
 	protected final double[] fitness;
 	protected final double[] generations; // eje x
 	protected final double[] fitnessAbs; // eje y2
@@ -49,10 +51,11 @@ public abstract class Algoritmo {
 
 		for (int i = 0; i < this.maxGeneraciones; i++) {
 			generations[i] = i;
-			fitness[i] = 1;
+			fitness[i] = 0;
 			fitnessAbs[i] = 0;
 			fitnessMed[i] = 0;
 		}
+		
 	}
 
 	public void setSelection(int index) {
@@ -69,6 +72,9 @@ public abstract class Algoritmo {
 
 	public void run() {
 		createPopulation();
+		if(this.elitism) {
+			this.createElite();
+		}
 		evaluate(0);
 
 		for (int i = 0; i < maxGeneraciones; i++) {
@@ -77,9 +83,6 @@ public abstract class Algoritmo {
 			if(!this.isMaximize) {
 				CorregirMinimizar();
 			}
-			
-			
-			var elite = generarElite();
 			
 			var selected = selection();
 			var crossed = crossOver(selected);
@@ -145,7 +148,11 @@ public abstract class Algoritmo {
 			seleccionados = Selection.Restos(poblacion);
 			break;
 		}
-
+		if(this.elitism) {
+			for(int i=0;i<this.elite.length;i++) {
+				this.elite[i].copySelf(this.poblacion[i]);
+			}
+		}
 		return seleccionados;
 
 	}
@@ -187,29 +194,6 @@ public abstract class Algoritmo {
 		return mutated;
 	}
 
-	public Individuo[] generarElite() {
-
-		if (!elitism)
-			return null;
-
-		final double elitePercentage = this.elitismPercentage;
-		int size = poblacion.length;
-
-		int eliteSize = (int) Math.floor(size * elitePercentage / 100.0f);
-
-		Individuo[] elite = new Individuo[eliteSize];
-
-		Individuo[] poblacionOrdenada = poblacion.clone();
-		Selection.quickSort(poblacionOrdenada, 0, poblacion.length - 1);
-
-		for (int i = 0; i < eliteSize; i++) {
-
-			elite[i] = poblacionOrdenada[i];
-		}
-
-		return elite;
-
-	}
 
 	public void introducirElite(Individuo[] elite) {
 
@@ -217,7 +201,7 @@ public abstract class Algoritmo {
 
 		for (int i = 0; i < eliteSize; i++) {
 
-			poblacion[i]= elite[i];
+			poblacion[i].copySelf(elite[i]);
 		}
 	}
 
@@ -260,10 +244,10 @@ public abstract class Algoritmo {
 		poblacion[0].evaluateSelf();
 		double best_fitness=poblacion[0].getFitness();
 		double best_fitness_abs=poblacion[0].getFitnessAbs();
-		
+		this.pos_mejor=0;
 		double sum_fitness=poblacion[0].getFitness();
 		double sum_score=0.0;
-		
+	
 		for(int i = 1; i < this.tamPoblacion; i++) {
 			poblacion[i].evaluateSelf();
 			double fit=poblacion[i].getFitness();
@@ -274,6 +258,7 @@ public abstract class Algoritmo {
 				pos_mejor=i;
 			}
 		}
+		this.elMejor=poblacion[this.pos_mejor];
 	
 		for(int i = 0; i < this.tamPoblacion; i++) {
 			double div=this.poblacion[i].getFitness()/sum_fitness;
@@ -311,8 +296,6 @@ public abstract class Algoritmo {
 		return this.fitnessMed;
 	}
 
-	protected void createElite() {
-		// TODO Auto-generated method stub
-
-	}
+	protected abstract void createElite();
+	
 }

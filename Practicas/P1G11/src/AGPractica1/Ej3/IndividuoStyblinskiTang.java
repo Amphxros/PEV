@@ -23,8 +23,12 @@ public class IndividuoStyblinskiTang extends Individuo<Boolean, Double>{
 	
 	@Override
 	public void createCromosome() {
-		// TODO Auto-generated method stub
+		for(int i=0;i<this.numGenes;i++) {
+			this.cromosoma.genes[i]= new BooleanGen(min,max,this.tolerance);
 		
+		}
+		this.startCromosome();
+	
 	}
 	@Override
 	public void evaluateSelf() {
