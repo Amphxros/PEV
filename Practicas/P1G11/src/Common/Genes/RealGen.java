@@ -8,6 +8,13 @@ public class RealGen extends Gen{
 		this.length=1;
 		// TODO Auto-generated constructor stub
 	}
+	
+	public RealGen(double value) {
+		super(0, 0, 0);
+		this.length=1;
+		this.allele=value;
+	}
+	
 	@Override
 	public void startGen() {
 		allele =  this.min + (this.max - this.min)* Math.random();

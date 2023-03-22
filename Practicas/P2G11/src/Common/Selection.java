@@ -48,11 +48,9 @@ public class Selection {
 		for (int i = 0; i < size; i++) {
 
 			double r = Math.random();
-
 			int c = 0;
 			// Buscar el primer elemento del array de probabilidad que no sea mayor que el valor aleatorio
 			while (r > probabilidadPonderada[c]) {
-
 				r -= probabilidadPonderada[c];
 				c++;
 			}

@@ -2,61 +2,109 @@ package Common;
 
 import java.util.ArrayList;
 
+import Common.Genes.BooleanGen;
 import Common.Genes.Gen;
-
+import Common.Genes.RealGen;
+/**
+ * 
+ * @author Amph
+ *
+ */
 public class Cromosoma<T>{
-	int[] tamGenes;
-	private Gen<T>[] genes;
-	/**
-	 * Constructor
-	 * @param numGenes tam of the gene array
-	 */
-	public Cromosoma(int numGenes) {
-		genes=(Gen<T>[]) new Gen[numGenes]; 
-	}
+	public Gen[] genes;
+	protected int chromosome_length;
+	protected double tolerance;
+	protected double[] min;
+	protected double[] max;
 	
-	/**
-	 * @param pos position of the gene 
-	 * @return the gene in pos position
-	 */
-	public Gen<T> getGen(int pos) {
-		return this.genes[pos];
-	}
 	
-	/**
-	 * Sets the allele of the gene
-	 * @param gen
-	 * @param pos
-	 */
-	public void setGen(Gen<T> gen, int pos) {
-		this.genes[pos]=(Gen<T>)gen;
-	}
-	
-	/**
-	 * 
-	 * @return the size of the array
-	 */
-	public int getLength() {
-		return this.genes.length;
-	}
-	
-	/**
-	 * @return the array of genes
-	 */
-	public Gen<T>[] getCromosome(){
-		return (Gen<T>[]) genes;
-	}
-	
-	/**
-	 * @return the value of the alleles
-	 * ex: "0100" for fenotype 4
-	 */
-	public String getString() {
-		String s="";
-		for(int i=0;i<this.getLength();i++) {
-			s+=this.genes[i].toString();
+	public Cromosoma(int tamCromosoma, double tolerance, double[]mins,double[]maxs ) {
+		this.chromosome_length=tamCromosoma;
+		this.tolerance=tolerance;
+		
+		this.genes= new Gen[this.chromosome_length];
+		this.min= new double[this.chromosome_length];
+		this.max=new double [this.chromosome_length];
+		
+		for(int i=0;i<this.chromosome_length;i++) {
+			this.min[i]=mins[i];
+			this.max[i]=maxs[i];
 		}
-		return s;
 	}
+	public Cromosoma( double tolerance, double min,double max ) {
+		this.tolerance=tolerance;
+		this.chromosome_length=1;
+		this.genes= new Gen[this.chromosome_length];
+		this.min= new double[this.chromosome_length];
+		this.max=new double [this.chromosome_length];
+		
+		for(int i=0;i<this.chromosome_length;i++) {
+			this.min[i]=min;
+			this.max[i]=max;
+		}
+	}
+	
+	/**
+	 * Fills the genes in the chromosome
+	 */
+	public void initCromosome() {
+		for (int i = 0; i < this.chromosome_length; i++) {
+			genes[i].startGen();
+		}
+	}
+	
+	public void createGenes(int indGen){ 
+		genes[indGen] = new BooleanGen(min[indGen],max[indGen],tolerance);
+	}
+	
+	public void createGenes(int min,int max){ 
+		genes[0]= new RealGen(min,max,this.tolerance);
+	}
+	
+	
+	public void copy(Cromosoma cromosoma) {
+		this.chromosome_length=cromosoma.chromosome_length;
+		this.min=cromosoma.min;
+		this.max=cromosoma.max;
+		this.genes= new Gen[cromosoma.chromosome_length];
+		this.initCromosome();
+		for(int i=0;i<this.chromosome_length;i++) {
+			var aux=(BooleanGen)cromosoma.genes[i];
+			int k=0;
+			if(aux.getAlelle(i))k=1;
+			this.genes[i].insert(k, i);
+		}
+		
+		this.tolerance=cromosoma.tolerance;
+		
+	} 
+	
+	public int getLength() {
+		return this.chromosome_length;
+	}
+	
+	public void setAllele(int index,int value) {
+		int numGenes= this.genes.length;
+		if(numGenes==0) {
+			this.genes[0].insert(value,index);
+		}
+		else {
+			int[] lengths=new int[numGenes];
+			int i=0;
+			int aux=index;
+			while(i<numGenes&& aux>0) {
+				lengths[i]=this.genes[i].getLength();
+				aux-=lengths[i];
+				i++;
+			}
+			this.genes[i].insert(value, Math.abs(aux));
+		
+		}
+		
+	
+		
+	}
+		
+	
 	
 }

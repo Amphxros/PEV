@@ -1,6 +1,8 @@
 package View;
 import javax.swing.JFrame;
 import javax.swing.WindowConstants;
+import org.math.plot.Plot2DPanel;
+import org.math.plot.plots.LinePlot;
 
 
 import java.awt.EventQueue;
@@ -35,8 +37,6 @@ import javax.swing.JFormattedTextField;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.border.TitledBorder;
 
-import org.math.plot.Plot2DPanel;
-
 import javax.swing.SwingConstants;
 import javax.swing.SwingUtilities;
 import javax.swing.border.EtchedBorder;
@@ -46,6 +46,8 @@ import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.JButton;
+import javax.swing.JCheckBox;
+
 import java.awt.Component;
 import java.awt.Font;
 import java.awt.Frame;
@@ -70,6 +72,7 @@ public class Mainframe extends JFrame  {
 		private JTextField dimTF;	
 		private JTextField elitismTF;
 		private JTextField toleranceTF;
+		private JCheckBox maximize;
 		private Plot2DPanel plot;
 		
 		NumberFormat numberFormat = NumberFormat.getNumberInstance(Locale.getDefault());
@@ -174,13 +177,7 @@ public class Mainframe extends JFrame  {
 			JComboBox crossTypeComboBox = new JComboBox();
 			crossTypeComboBox.setModel(new DefaultComboBoxModel(new String[] {
 				"Cruce Monopunto",
-				"Cruce Multipunto",
-				"Cruce Uniforme",
-				"Emparejamiento parcial (PMX)",
-				"Orden (OX)",
-				"Ciclos (CX)", 
-				"Recombinación de rutas (ERX)", 
-				"Codificación Ordinal (CO)"
+				
 				}
 			));
 			
@@ -209,19 +206,13 @@ public class Mainframe extends JFrame  {
 			mutationPanel.setBorder(new TitledBorder("Mutacion"));
 			mutationPanel.setLayout(new GridLayout(0, 2, 3, 0));
 			
-			JLabel mutationTypeLabel = new JLabel("Tipo de mutaciÃ³n");
+			JLabel mutationTypeLabel = new JLabel("Tipo de mutacion");
 			mutationTypeLabel.setHorizontalAlignment(SwingConstants.LEFT);
 			mutationPanel.add(mutationTypeLabel);
 			
 			JComboBox mutationTypeComboBox = new JComboBox();
 			mutationTypeComboBox.setModel(new DefaultComboBoxModel(new String[] {
-				"Mutacion basica",
-				"Inserción",
-				"Intercambio",
-				"Inversión",
-				"Heurística",
-				"Custom"
-
+				"Mutacion basica"
 				}
 			));
 			mutationPanel.add(mutationTypeComboBox);
@@ -230,11 +221,14 @@ public class Mainframe extends JFrame  {
 			mutationPanel.add(mutationProbLabel);
 			
 			mutationProbabilityTF = new JTextField();
-			mutationProbabilityTF.setText("5.0");
+			mutationProbabilityTF.setText("60.0");
 			mutationProbabilityTF.setColumns(10);
 			mutationPanel.add(mutationProbabilityTF);
 
-			
+			JLabel maximizeLabel= new JLabel("Maximizar:");
+			mutationPanel.add(maximizeLabel);
+			maximize= new JCheckBox();
+			mutationPanel.add(maximize);
 			
 			//PROBLEM PANEL
 			
@@ -275,9 +269,10 @@ public class Mainframe extends JFrame  {
 				@Override
 				public void actionPerformed(ActionEvent e) {
 					// TODO Auto-generated method stub
+					replot();
 					
+					System.out.println("Reiniciar");
 				}
-
 				
 			});
 			
@@ -369,6 +364,7 @@ public class Mainframe extends JFrame  {
 			
 			JPanel solutionPanel = new JPanel();
 			centerPanel.add(solutionPanel);
+		
 			
 			JLabel solutionLabel = new JLabel("Solution:");
 			solutionLabel.setFont(new Font("Tahoma", Font.BOLD, 11));
@@ -403,14 +399,33 @@ public class Mainframe extends JFrame  {
 			solutionPanel.setLayout(gl_solutionPanel);
 			
 			executeButton.addActionListener(new ActionListener() {
-
+				
 				@Override
 				public void actionPerformed(ActionEvent e) {
 					// TODO Auto-generated method stub
+		
+					int tamPoblacion = Integer.parseInt(genSizeTextField.getText().replace(".", ""));
+					int nGeneraciones = Integer.parseInt(numGenTF.getText().replace(".", ""));
+					int dim = Integer.parseInt(dimTF.getText());
+					double elitism= Double.parseDouble(elitismTF.getText());
+					double probCruce= Double.parseDouble(crossProbabilityTF.getText());
+					double probMutacion= Double.parseDouble(mutationProbabilityTF.getText());
+					double tolerance= Double.parseDouble(toleranceTF.getText());
 					
+					int crossingType= crossTypeComboBox.getSelectedIndex();
+					int selectionType= selectionTypeComboBox.getSelectedIndex();
+					int mutationType= mutationTypeComboBox.getSelectedIndex();
+					int tamTorneo = Integer.parseInt(tamTorneoTF.getText());
+					
+					boolean maximizeFunct= maximize.isSelected();
+					
+				
+					
+					
+					
+				
 				}
-			
-			
+				
 			});
 			window = new JPanel();
 			window.setLayout(new BorderLayout());

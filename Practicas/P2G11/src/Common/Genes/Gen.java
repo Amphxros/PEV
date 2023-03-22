@@ -1,52 +1,54 @@
 package Common.Genes;
 
-public abstract class Gen<T>{
-	protected T allele;
-	protected int dimGen;
-	protected Gen() {}
+/**
+ * Basic Gen with min , max and tolerance to calculate the size of the alleles
+ * @author Amph
+ *
+ */
+public abstract class Gen{
+	double min,max,tolerance;
+	int length;
 	
-	public Gen(Gen<T> other) {
-		this.allele=other.allele;
-		this.dimGen=other.dimGen;
+	
+	public Gen(double min, double max, double tolerance) {
+		this.min=min;
+		this.max=max;
+		this.tolerance=tolerance;
 	}
 	
-	public Gen(T allele) {
-		this.allele=allele;
-		
+	/**
+	 * 
+	 * @return the size of the gen
+	 */
+	public int getLength() {
+		return this.length;
 	}
 	
+	/**
+	 * Fill the array / values of the gen
+	 */
+	public abstract void startGen();
+	/**
+	 * 
+	 * @return the calculated fenotype based on the genotype
+	 */
+	public abstract double fenotype();
+	/**
+	 * Copys the values of the gen
+	 * @param gen {@link Gen} to copy from
+	 */
+	public abstract void copyGen(Gen gen);
+	/**
+	 * inserts the value i in the position of the array
+	 * @param i
+	 * @param position
+	 */
+	public abstract void insert(int i, int position);
 	
-	public T getAllele() {
-		return allele;
-	}
-	public int length() {
-		return dimGen;
-	}
+	/**
+	 * 
+	 */
+	public abstract String toString(); 
 	
-	public void setAllele(T allele) {
-		this.allele= allele;
-	}
 	
-	public void copyAlelle(Gen<T> gene) {
-		gene.setAllele(this.allele);
-	}
-	
-
-	public void setAllele(boolean b,T allele) {
-		if(b) {
-			this.allele= allele;
-		}
-	}
-	
-	public abstract String toString();
-	
-	public boolean equals(Object o) {
-		if(o.getClass() == this.getClass()) {
-			if (this.getAllele() == ((Gen<T>)o).getAllele()) {
-				return true;
-			}
-		}
-		
-		return false;
-	}
 }

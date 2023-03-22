@@ -4,11 +4,14 @@ public abstract class Algoritmo {
 
 	protected final int tamPoblacion;
 	protected Individuo[] poblacion;
+	protected Individuo[] elite;
+	
 	protected final double[] fitness;
 	protected final double[] generations; // eje x
 	protected final double[] fitnessAbs; // eje y2
 	protected final double[] fitnessMed; // eje y3
 
+	protected final double tolerance;
 	protected final int maxGeneraciones;
 	protected double probCruce;
 	protected double probMutacion;
@@ -30,8 +33,9 @@ public abstract class Algoritmo {
 	 * @param probCruce
 	 * @param probMutation
 	 */
-	public Algoritmo(int tamPoblacion, int maxGeneraciones, double probCruce, double probMutation, int tamTorneo,
+	public Algoritmo(double tolerance, int tamPoblacion, int maxGeneraciones, double probCruce, double probMutation, int tamTorneo,
 			double elitismo) {
+		this.tolerance=tolerance;
 		this.maxGeneraciones = maxGeneraciones;
 		this.tamPoblacion = tamPoblacion;
 		this.probCruce = probCruce;
@@ -47,11 +51,11 @@ public abstract class Algoritmo {
 
 		for (int i = 0; i < this.maxGeneraciones; i++) {
 			generations[i] = i;
-			fitness[i] = 1;
+			fitness[i] = 0;
 			fitnessAbs[i] = 0;
 			fitnessMed[i] = 0;
 		}
-
+		
 	}
 
 	public void setSelection(int index) {
@@ -68,6 +72,9 @@ public abstract class Algoritmo {
 
 	public void run() {
 		createPopulation();
+		if(this.elitism) {
+			this.createElite();
+		}
 		evaluate(0);
 
 		for (int i = 0; i < maxGeneraciones; i++) {
@@ -76,9 +83,6 @@ public abstract class Algoritmo {
 			if(!this.isMaximize) {
 				CorregirMinimizar();
 			}
-			
-			
-			var elite = generarElite();
 			
 			var selected = selection();
 			var crossed = crossOver(selected);
@@ -102,7 +106,7 @@ public abstract class Algoritmo {
 	}
 	
 	public String getBestIndividuo() {
-		return this.elMejor.cromosoma.getString();
+		return this.elMejor.cromosoma.toString();
 	}
 	
 
@@ -144,7 +148,11 @@ public abstract class Algoritmo {
 			seleccionados = Selection.Restos(poblacion);
 			break;
 		}
-
+		if(this.elitism) {
+			for(int i=0;i<this.elite.length;i++) {
+				this.elite[i].copySelf(this.poblacion[i]);
+			}
+		}
 		return seleccionados;
 
 	}
@@ -186,30 +194,6 @@ public abstract class Algoritmo {
 		return mutated;
 	}
 
-	public Individuo[] generarElite() {
-
-		if (!elitism)
-			return null;
-
-		final double elitePercentage = 2;
-
-		int size = poblacion.length;
-
-		int eliteSize = (int) Math.floor(size * elitePercentage / 100.0f);
-
-		Individuo[] elite = new Individuo[eliteSize];
-
-		Individuo[] poblacionOrdenada = poblacion.clone();
-		Selection.quickSort(poblacionOrdenada, 0, poblacion.length - 1);
-
-		for (int i = 0; i < eliteSize; i++) {
-
-			elite[i] = poblacionOrdenada[i];
-		}
-
-		return elite;
-
-	}
 
 	public void introducirElite(Individuo[] elite) {
 
@@ -217,7 +201,7 @@ public abstract class Algoritmo {
 
 		for (int i = 0; i < eliteSize; i++) {
 
-			poblacion[i] = elite[i];
+			poblacion[i].copySelf(elite[i]);
 		}
 	}
 
@@ -255,7 +239,46 @@ public abstract class Algoritmo {
 		
 	}
 
-	protected abstract void evaluate(int currGeneration);
+	protected void evaluate(int currGeneration) {
+
+		poblacion[0].evaluateSelf();
+		double best_fitness=poblacion[0].getFitness();
+		double best_fitness_abs=poblacion[0].getFitnessAbs();
+		this.pos_mejor=0;
+		double sum_fitness=poblacion[0].getFitness();
+		double sum_score=0.0;
+	
+		for(int i = 1; i < this.tamPoblacion; i++) {
+			poblacion[i].evaluateSelf();
+			double fit=poblacion[i].getFitness();
+			sum_fitness+=fit;
+			if((this.isMaximize && fit>best_fitness) || 
+				(!this.isMaximize && fit<best_fitness)) {
+				best_fitness=fit;
+				pos_mejor=i;
+			}
+		}
+		this.elMejor=poblacion[this.pos_mejor];
+	
+		for(int i = 0; i < this.tamPoblacion; i++) {
+			double div=this.poblacion[i].getFitness()/sum_fitness;
+			this.poblacion[i].setPunct(div);
+			sum_score+=this.poblacion[i].getPunct();
+			
+		}
+		
+		for(int i = 0; i < this.tamPoblacion; i++) {
+			double fit= this.poblacion[i].getFitnessAbs();
+			if((this.isMaximize && fit>best_fitness_abs) || 
+					(!this.isMaximize && fit<best_fitness_abs)) {
+				best_fitness_abs=fit;
+			}
+		}
+		
+		this.fitnessMed[currGeneration]=sum_fitness/this.poblacion.length;
+		this.fitness[currGeneration]=best_fitness;
+		this.fitnessAbs[currGeneration]=best_fitness_abs;
+	}
 
 	public double[] getGenerations() {
 		return this.generations;
@@ -273,8 +296,6 @@ public abstract class Algoritmo {
 		return this.fitnessMed;
 	}
 
-	protected void createElite() {
-		// TODO Auto-generated method stub
-
-	}
+	protected abstract void createElite();
+	
 }

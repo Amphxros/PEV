@@ -1,145 +1,168 @@
 package Common;
 
-import java.util.ArrayList;
 import java.util.Random;
 
-import Common.Genes.Gen;
+import Common.Genes.BooleanGen;
 
-public abstract class Individuo<T, U> {
-
-	
+public abstract class Individuo<T,U> {
 	protected Cromosoma<T> cromosoma;
+	
+	
+	protected double fitness=0;
+	protected double fitnessAbs=0;
+	
+	protected double punct=0;
+	protected double punctAbs=0;
+	
+	protected int lcrom;
 	protected int numGenes;
-
 	protected double tolerance;
-	
-	protected U[] fenotype; //fenotipo
+	protected double adaptation;
 
-	private double fitness; //fitness
-	private double fitnessAbs; //absolute fitness
+	protected int id;
+	protected int typeFunct;
 	
-	protected double punt; // puntRelat = aptitud / sumaAptitud
-	protected double puntAbs; // para seleccion
-
-	protected int id; //id for different functions
+	protected double[] min;
+	protected double[] max;
 	
-
-	public Individuo(double tolerance, int id, int numGenes) {
-		this.numGenes=numGenes;	
+	protected U[] fenotype;
+	
+	private int posGen=0;
+	private int indGen=0;
+	
+	
+	public Individuo(double tolerance,int id, int numGenes) {
 		this.tolerance=tolerance;
 		this.id=id;
 		this.numGenes=numGenes;
-		this.fitness=0;
-		this.fitnessAbs=0;
-		
-	}
-	/**
-	 * Calculates the tam
-	 * @param tolerance
-	 * @param min
-	 * @param max
-	 * @return
-	 */
-	public int tamGen(double tolerance, double min, double max)
-	{
-		return (int) (Math.log10(((max - min) / tolerance) + 1) / Math.log10(2));
+		this.min=new double[this.numGenes];
+		this.max= new double[this.numGenes];
+		this.cromosoma= new Cromosoma(numGenes,tolerance, min, max);
 	}
 	
-	public Cromosoma<T> getCromosomes() {
-		return cromosoma;
-	}
-	
-	public T getGen(int pos) {
-		return (T) cromosoma.getGen(pos);
-	}
-	public int getID() {
-		return this.id;
-	}
-	public void setID(int id) {
+	public Individuo(double tolerance,int id, int numGenes, double[] min, double[]max) {
+		this.tolerance=tolerance;
 		this.id=id;
+		this.numGenes=numGenes;
+		this.min=min;
+		this.max= max;
 	}
-	public void print() {
-		
-		System.out.print("Individuo " +this.id+ " Fitness:" + getFitness() + " ");
-		
-		for(int i=0;i<this.getCromosomeArraySize();i++) {
-			System.out.print(this.cromosoma.getGen(i).toString());
-		}
-		System.out.print(" ");
-	}
+
+	public abstract void createCromosome();
 	
-	public void mutate(Random rnd, double probability) {
-		boolean mutated = false;
+	public void startCromosome() {
+		this.cromosoma.initCromosome();
+	}
+
+	public void crossOver(Individuo parent, int position) {
 		
-		for (int i=0; i < numGenes ; i++) {
-			if(!mutated) {
-				mutated = mutateSelf(i, rnd, probability);
-			}
-		}
-		if (mutated)
-			calculateFenotype(); // Update fenotype
+		obtenIndGen(position);
+		//this.cromosoma.genes[indGen]).getAllele(posGen)-1), posGen))
+		var aux=(BooleanGen)parent.cromosoma.genes[indGen];
+		int i=0;
+		if(aux.getAlelle(posGen -1)) i=1;
+		this.cromosoma.genes[indGen].insert(i, posGen);
 	}
 	
 
-	public void copyCromosome(Individuo ind) {
-		for (int i = 0; i < this.numGenes; i++)
-			this.cromosoma.setGen(ind.cromosoma.getGen(i),i);
-		
-		this.fitness= ind.getFitness();
-		this.numGenes=ind.getCromosomeArraySize();
-		this.tolerance= ind.getTolerance();
-		this.fitnessAbs=ind.getFitnessAbs();
-		this.id=ind.getID();
-		
-		
+	private void obtenIndGen(int pos){
+		indGen = 0;
+		int posAcum = this.cromosoma.genes[indGen].getLength();
+		while (posAcum <= pos && posAcum < lcrom) {
+			indGen++;
+			posAcum +=this.cromosoma.genes[indGen].getLength();
+		}
+		posGen = pos-(posAcum-this.cromosoma.genes[indGen].getLength());
 	}
-
-	protected abstract boolean mutateSelf(int pos, Random rnd, double probability);
-	protected abstract void calculateFenotype();
+	
 	public abstract void evaluateSelf();
 	
-
-	public int getCromosomeArraySize() {
-		return cromosoma.getLength();
+	public abstract boolean mutateSelf(int pos, Random rnd, double probability);	
+	
+	protected abstract void calculateFenotype();
+	
+	public void copySelf(Individuo ind) {
+		this.tolerance=ind.tolerance;
+		this.fitness=ind.fitness;
+		this.fitnessAbs=ind.fitnessAbs;
+		this.punct=ind.punct;
+		this.punctAbs=ind.punctAbs;
+		this.min=ind.min;
+		this.max=ind.max;
+		
+		this.cromosoma.copy(ind.cromosoma);
+		
+		
+	}
+	
+	public int getNumGenes() {
+		return this.numGenes;
 	}
 	
 	
-	public double getFitness(){
+	
+	public double getFitness() {
 		return this.fitness;
 	}
 	
-	public void setFitness(double fitness){
-		this.fitness = fitness;
-		this.fitnessAbs+=fitness;
+	public void setFitness(double fitness) {
+		if(fitness>this.fitnessAbs) {
+			this.setFitnessAbs(fitness);
+		}
+		this.fitness=fitness;
+		
 	}
 	
-	public void setFitnessAbs(double fitnessAbs){
-		this.fitnessAbs=fitnessAbs;
-	}
-	
-	
-	public double getTolerance() {
-		return tolerance;
-	}
 
-	public void setTolerance(double tolerance) {
-		this.tolerance = tolerance;
+	public double getAdaptation() {
+		return this.adaptation;
 	}
 	
-	public U[] getFenotype() {
-		return fenotype;
+	public void setAdaptation(double adpt) {
+		this.adaptation=adpt;
 	}
 	
 	public double getFitnessAbs() {
 		return this.fitnessAbs;
 	}
+		
+	public void setFitnessAbs(double fitness) {
+		this.fitnessAbs=fitness;
+	}
 	
 	public double getPunct() {
-		return this.punt;
+		return this.punct;
 	}
 	
 	public void setPunct(double punct) {
-		this.punt=punct;
+		this.punct=punct;
+	}
+	
+	public double getTolerance() {
+		return this.tolerance;
+	}
+	public void setTolerance(double tolerance) {
+		this.tolerance=tolerance;
+	}
+	
+	public int getLcrom() {
+		return this.lcrom;
 	}
 
-} 
+	public int getLength(){
+		int l = 0;
+		for (int i = 0; i < this.getNumGenes(); i++){
+			l += this.cromosoma.genes[i].getLength();
+		}
+		return l;
+	}
+	
+	public void setType(int type) {
+		this.typeFunct=type;
+	}
+	public int getType() {
+		return this.typeFunct;
+	}
+	
+	
+}
