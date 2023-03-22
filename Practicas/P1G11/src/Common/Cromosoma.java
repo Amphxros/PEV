@@ -90,9 +90,15 @@ public class Cromosoma<T>{
 		}
 		else {
 			int[] lengths=new int[numGenes];
-			for(int i=0;i<lengths.length;i++) {
+			int i=0;
+			int aux=index;
+			while(i<numGenes&& aux>0) {
 				lengths[i]=this.genes[i].getLength();
+				aux-=lengths[i];
+				i++;
 			}
+			this.genes[i].insert(value, Math.abs(aux));
+		
 		}
 		
 	
