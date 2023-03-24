@@ -1,6 +1,8 @@
-package P2;
+package Common;
 
-public class P2Data {
+public class CityData {
+	
+	//distances between citys
 	private final static int[][] _DIST = {
 			{},
 			{171},
@@ -31,4 +33,61 @@ public class P2Data {
 			{473,	482,	219,	644,	436,	997,	939,	781,	506,	265,	713,	388,	187,	1153,	615,	1097,	129,	602,	313,	941,	209,	877,	1009,	880,	1055,	544},
 			{150,	75,	219,	516,	675,	590,	796,	638,	654,	613,	306,	357,	444,	1010,	292,	690,	278,	459,	628,	611,	340,	734,	583,	694,	912,	401,	407}
 			};
+	
+	//names of the citys
+	private static String[] CITY_NAMES= {
+			"Albacete",
+			"Alicante",
+			"Almeria",
+			"Avila", 
+			"Badajoz",
+			"Barcelona", 
+			"Bilbao",
+			"Burgos",
+			"Caceres",
+			"Cadiz",
+			"Castellon",
+			"Ciudad Real",
+			"Cordoba",
+			"A Coruna",
+			"Cuenca",
+			"Gerona",
+			"Granada",
+			"Guadalajara",
+			"Huelva",
+			"Huesca",
+			"Jaen",
+			"Leon",
+			"Lerida",
+			"Logrono",
+			"Lugo",
+			"Madrid",
+			"Malaga",
+			"Murcia"
+		};
+	
+	public static String getName(int city) {
+		return CITY_NAMES[city];
+		
+	}
+	/**
+	 * 
+	 * @param cityA origin city
+	 * @param cityB destiny city
+	 * @return the distance between cityA and cityB
+	 */
+	public static int getDistance(int cityA, int cityB) {
+		int cityAux=cityA;
+		if(cityA<cityB) {
+			cityA=cityB;
+			cityB=cityAux;
+		}
+		else if(cityA==cityB) {
+			System.out.println("Wrong params: "+ cityA +" = "+ cityB);
+			return 0;
+		}
+		
+		return _DIST[cityA][cityB];
+	}
+
 }
