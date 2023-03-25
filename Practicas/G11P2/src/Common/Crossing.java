@@ -46,11 +46,46 @@ public class Crossing {
 					children[i+1].genes[j].setAllele(population[i+1].genes[j].getAllele());
 				}
 				
+				boolean conflict=false;
+				int indA,indB, j;
+				
+				for(int k=pointB;k>=pointB || k<pointA; k=(k+1)% numGenes) {
+					indA=k;
+					
+					do {
+						j = pointA;
+						do { // comprobamos si padre1 -> ciudad[i] ya esta en el hijo
+							conflict = children[i].genes[j].getAllele() == population[i].genes[pointA].getAllele();
+							j++;
+						} while (!conflict && j < pointB);
+						if (conflict) indA = j-1;
+					} while (conflict);
+					
+					children[i].genes[k].setAllele(population[i].genes[indA].getAllele());
+
+					// hijo 2
+					indB = i;
+					do {
+						j = pointA;
+						do {
+							conflict = children[i+1].genes[j].getAllele() ==population[i+1].genes[pointA].getAllele();
+							j++;
+						} while (!conflict && j < pointB);
+						if (conflict) indB = j-1;
+					} while (conflict);
+					children[i+1].genes[k].setAllele(population[i+1].genes[indB].getAllele());
+					
+				}
+				population[i].copy(children[i]);
+				population[i+1].copy(children[i+1]);
+				i++;
+				
 			}
 			else {
 				for(int k=0;k<numGenes;k++) {
 					children[i].genes[k].setAllele(population[i].genes[k].getAllele());
 				}
+				population[i].copy(children[i]);
 			}
 		}
 		
