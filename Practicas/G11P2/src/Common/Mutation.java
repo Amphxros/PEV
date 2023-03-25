@@ -224,7 +224,17 @@ public class Mutation {
 	
 	
 	public static Cromosoma[] mutateOwn(Cromosoma[] population, double probMutation) {
-		return null;
+		int numGenes= population[0].getNumGenes();
+		Random rnd= new Random();
+		for(int i=0;i<population.length;i++) {
+			double prob=rnd.nextDouble();
+			boolean mut=false;
+			if(probMutation>prob) {
+				
+			}
+		}
+		return population;
+		
 	}
 	
 }

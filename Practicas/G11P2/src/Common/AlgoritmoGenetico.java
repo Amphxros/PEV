@@ -97,7 +97,41 @@ public class AlgoritmoGenetico {
 	}
 	
 	private Cromosoma[] selection() {
-		return null;	
+		Cromosoma[]  seleccionados=null;
+		switch (seleccion) {
+
+		case Proporcional:
+			seleccionados = Selection.Proporcional(population);
+			break;
+		case MuestreoUniversalEstoclastico:
+			seleccionados = Selection.MuestreoUniversalEstoclastico(population);
+			break;
+		case Truncamiento:
+			seleccionados = Selection.Truncamiento(population);
+			break;
+		case TorneoDeterministico:
+
+			seleccionados = Selection.TorneoDeterministico(population, this.tamTournament);
+			break;
+		case TorneoProbabilistico:
+
+			double p = 0.5;
+			seleccionados = Selection.TorneoProbabilistico(population, this.tamTournament, p);
+			break;
+		case Ranking:
+
+			seleccionados = Selection.Ranking(population);
+			break;
+		case Restos:
+			seleccionados = Selection.Restos(population);
+			break;
+		}
+		if(this.elitism) {
+			for(int i=0;i<this.elite.length;i++) {
+				this.elite[i].copy(this.population[i]);
+			}
+		}
+		return seleccionados;
 	}
 	
 	private Cromosoma[] crossOver(Cromosoma[] crossed) {
