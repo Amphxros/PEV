@@ -67,6 +67,13 @@ public class Cromosoma<T>{
 		this.min=cromosoma.min;
 		this.max=cromosoma.max;
 		this.genes= new Gen[cromosoma.chromosome_length];
+		
+		for(int i = 0; i < this.chromosome_length; i++) {
+			
+			this.genes[i] = new BooleanGen(min[i],max[i],tolerance);
+			this.genes[i].copyGen(cromosoma.genes[i]);
+		}
+		
 		this.initCromosome();
 		for(int i=0;i<this.chromosome_length;i++) {
 			var aux=(BooleanGen)cromosoma.genes[i];

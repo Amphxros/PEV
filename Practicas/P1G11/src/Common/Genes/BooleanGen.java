@@ -41,7 +41,7 @@ public class BooleanGen extends Gen{
 		this.max=gen.max;
 		this.min=gen.min;
 		this.tolerance=gen.tolerance;
-		
+		this.alelles= new boolean[gen.length];
 		for(int i=0;i<this.length;i++) {
 			this.alelles[i]=((BooleanGen)gen).getAlelles()[i];
 		}

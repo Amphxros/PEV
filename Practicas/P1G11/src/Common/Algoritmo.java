@@ -26,6 +26,8 @@ public abstract class Algoritmo {
 	protected double elitismPercentage;
 	protected boolean elitism;
 
+	protected int indiceAlgoritmo = 1;
+	
 	/**
 	 * 
 	 * @param tamPoblacion
@@ -116,10 +118,34 @@ public abstract class Algoritmo {
 
 	protected abstract void createPopulation();
 
+	
+	
+	protected Individuo[] clonarPoblacion() {
+		
+		
+		Individuo[] clone = new Individuo[poblacion.length];
+		
+		
+		
+		for(int i = 0; i < poblacion.length; i++) {
+			
+			
+			clone[i]=IndividuoFactory.getIndividuo(indiceAlgoritmo,i,tolerance,2);
+			clone[i].copySelf(poblacion[i]);
+		}
+		
+		
+		
+		return clone;
+	}
+	
+	
 	protected Individuo[] selection() {
 
 		Individuo[] seleccionados = null;
 
+		Individuo[] poblacion = clonarPoblacion();
+		
 		switch (seleccion) {
 
 		case Proporcional:

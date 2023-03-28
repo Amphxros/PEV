@@ -226,7 +226,7 @@ public class Mainframe extends JFrame  {
 			mutationPanel.add(mutationProbLabel);
 			
 			mutationProbabilityTF = new JTextField();
-			mutationProbabilityTF.setText("60.0");
+			mutationProbabilityTF.setText("2.0");
 			mutationProbabilityTF.setColumns(10);
 			mutationPanel.add(mutationProbabilityTF);
 
