@@ -11,6 +11,8 @@ public class AlgoritmoStyblinskiTang extends Algoritmo {
 			int tamTorneo, double elitismo) {
 		super(tolerance,tamPoblacion, maxGeneraciones, probCruce, probMutation, tamTorneo, elitismo);
 		// TODO Auto-generated constructor stub
+		indiceAlgoritmo = 3;
+		numeroGenes = 2;
 	}
 
 	@Override

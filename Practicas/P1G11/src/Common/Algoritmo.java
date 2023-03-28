@@ -27,6 +27,7 @@ public abstract class Algoritmo {
 	protected boolean elitism;
 
 	protected int indiceAlgoritmo = 1;
+	protected int numeroGenes = 2;
 	
 	/**
 	 * 
@@ -130,7 +131,7 @@ public abstract class Algoritmo {
 		for(int i = 0; i < poblacion.length; i++) {
 			
 			
-			clone[i]=IndividuoFactory.getIndividuo(indiceAlgoritmo,i,tolerance,2);
+			clone[i]=IndividuoFactory.getIndividuo(indiceAlgoritmo,i,tolerance, numeroGenes);
 			clone[i].copySelf(poblacion[i]);
 		}
 		

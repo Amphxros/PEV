@@ -12,6 +12,9 @@ public class AlgoritmoMichalewiczB extends Algoritmo {
 		super(tolerance,tamPoblacion, maxGeneraciones, probCruce, probMutation, tamTorneo, elitismo);
 		this.dimension=dimension;
 		this.isMaximize=false;
+		
+		indiceAlgoritmo = 5;
+		numeroGenes = 2;
 	}
 
 	@Override

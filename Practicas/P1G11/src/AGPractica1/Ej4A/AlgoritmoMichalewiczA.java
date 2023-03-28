@@ -13,6 +13,8 @@ public class AlgoritmoMichalewiczA extends Algoritmo{
 		this.dimension=dimension;
 		this.isMaximize=false;
 		
+		indiceAlgoritmo = 4;
+		numeroGenes = 2;
 	}
 	
 
