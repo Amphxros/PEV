@@ -16,6 +16,14 @@ public class Selection {
 	}
 
 	
+	static Individuo[] ClonarPoblacion() {
+		
+		Individuo[] clone;
+		
+		return null;
+	}
+	
+	
 	static double[] ProbabilidadPonderada(Individuo[] poblacion) {
 		int size = poblacion.length;
 		double totalFitness = 0;

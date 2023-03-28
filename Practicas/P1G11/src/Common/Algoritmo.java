@@ -79,10 +79,10 @@ public abstract class Algoritmo {
 
 		for (int i = 0; i < maxGeneraciones; i++) {
 			
-			DesplazarFitnessNegativo();
-			if(!this.isMaximize) {
-				CorregirMinimizar();
-			}
+			//DesplazarFitnessNegativo();
+			//if(!this.isMaximize) {
+			//	CorregirMinimizar();
+			//}
 			
 			var selected = selection();
 			var crossed = crossOver(selected);
@@ -242,6 +242,7 @@ public abstract class Algoritmo {
 	protected void evaluate(int currGeneration) {
 
 		poblacion[0].evaluateSelf();
+		
 		double best_fitness=poblacion[0].getFitness();
 		double best_fitness_abs=poblacion[0].getFitnessAbs();
 		this.pos_mejor=0;
@@ -277,6 +278,11 @@ public abstract class Algoritmo {
 		
 		this.fitnessMed[currGeneration]=sum_fitness/this.poblacion.length;
 		this.fitness[currGeneration]=best_fitness;
+		
+		if(currGeneration > 0 && this.fitnessAbs[currGeneration -1] > best_fitness_abs) {
+			best_fitness_abs = this.fitnessAbs[currGeneration -1];
+		}
+		
 		this.fitnessAbs[currGeneration]=best_fitness_abs;
 	}
 
