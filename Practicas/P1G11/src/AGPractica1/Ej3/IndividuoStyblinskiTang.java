@@ -32,7 +32,8 @@ public class IndividuoStyblinskiTang extends Individuo<Boolean, Double>{
 	}
 	@Override
 	public void evaluateSelf() {
-		// TODO Auto-generated method stub
+		calculateFenotype();
+		this.setFitness(0.5*(fenotype[0] + fenotype[1]));
 		
 	}
 	@Override
@@ -42,7 +43,14 @@ public class IndividuoStyblinskiTang extends Individuo<Boolean, Double>{
 	}
 	@Override
 	protected void calculateFenotype() {
-		// TODO Auto-generated method stub
+		fenotype= new Double[this.numGenes];
+		double sum=0;
+		for(int i=0;i<this.dimension;i++) {
+			double d=this.cromosoma.genes[i].fenotype();
+			sum=Math.pow(d, 4) - 16*Math.pow(d, 2) + 5*d; 
+			this.fenotype[i]=sum;
+		}
+		
 		
 	}
 	

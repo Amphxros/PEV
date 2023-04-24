@@ -14,9 +14,10 @@ public class IndividuoMichalewiczB extends Individuo<Double, Double>{
 	private double min=0;
 	private double max=Math.PI;
 	private double m=10;
-	public IndividuoMichalewiczB(double tolerance, int id, int numGenes, int dimension) {
-		super(tolerance, id, numGenes);
+	public IndividuoMichalewiczB(double tolerance, int id, int dimension) {
+		super(tolerance, id, dimension);
 		this.dimension=dimension;
+		
 		createCromosome();
 		calculateFenotype();
 		super.lcrom= this.getLength();
@@ -46,7 +47,10 @@ public class IndividuoMichalewiczB extends Individuo<Double, Double>{
 	@Override
 	protected void calculateFenotype() {
 		// TODO Auto-generated method stub
-		
+		fenotype= new Double[this.dimension];
+		for(int i=0;i<this.dimension;i++) {
+			this.fenotype[i]=this.cromosoma.genes[i].fenotype();
+		}
 	}
 	
 	

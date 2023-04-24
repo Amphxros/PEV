@@ -33,14 +33,15 @@ public class IndividuoMichalewiczA extends Individuo<Boolean, Double> {
 	}
 	@Override
 	public void evaluateSelf() {
-		// TODO Auto-generated method stub
-		
+		calculateFenotype();
+		double fit=0.0;
+		for(int i=0;i<this.dimension;i++) {
+			fit+=this.fenotype[i];
+		}
+		this.setFitness(-fit);
 	}
 	
-	private double f(double x) {
-		return x;
-		
-	}
+	
 	@Override
 	public boolean mutateSelf(int pos, Random rnd, double probability) {
 		// TODO Auto-generated method stub
@@ -48,8 +49,12 @@ public class IndividuoMichalewiczA extends Individuo<Boolean, Double> {
 	}
 	@Override
 	protected void calculateFenotype() {
-		// TODO Auto-generated method stub
-		
+		this.fenotype= new Double[this.numGenes];
+		for(int i=0;i<this.dimension;i++) {
+			
+			double d=this.cromosoma.genes[i].fenotype();
+			this.fenotype[i]=Math.sin(d)*Math.sin(Math.pow(2, m)*(i*Math.pow(d, 2)/Math.PI));
+		}
 	}
 	
 	

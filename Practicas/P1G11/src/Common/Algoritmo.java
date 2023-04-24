@@ -191,7 +191,8 @@ public abstract class Algoritmo {
 		case Mono:
 			crossed = Crossing.MonopointCrossOver(poblacion, probCruce, 1);
 			break;
-		case Multiple:
+		case Aritmetic:
+			crossed= Crossing.AritmeticCrossOver(poblacion, probCruce);
 			break;
 		case Uniform:
 			crossed = Crossing.UniformCrossOver(poblacion, probCruce);

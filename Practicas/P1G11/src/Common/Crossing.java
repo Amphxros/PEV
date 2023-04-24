@@ -11,13 +11,10 @@ import Common.Genes.Gen;
 public class Crossing {
 	
 	public enum Type{
-		Mono, 
-		Multiple, 
+		Mono,  
 		Uniform, 
-		Aritmetic, 
-		Linear, 
-		Geometric, 
-		SBX
+		Aritmetic 
+		
 	}
 	
 	public static Individuo[] MonopointCrossOver(Individuo[] population, double probability, int numPoints) {
@@ -70,32 +67,32 @@ public class Crossing {
 		double tolerance= population[0].getTolerance();
 		int numGenes= population[0].getNumGenes();
 		
-		for(int i=0;i<crossed.length;i++) {
+		for(int i=1;i<population.length;i++) {
 			Individuo childA= IndividuoFactory.getIndividuo(type, i, tolerance, numGenes);
 			Individuo childB= IndividuoFactory.getIndividuo(type, i, tolerance, numGenes);
 			
-			for(int j=0;j<population[0].getLength();j++) {
+			for(int j=0;j<numGenes;j++) {
 				int prob=(int)Math.random()*2;
 				if(prob==1) {
 
-					childB.crossOver(population[i+1], j);
+					childB.crossOver(population[i-1], j);
 					childA.crossOver(population[i], j);
 				}
 				else {
-					childA.crossOver(population[i+1], j);
+					childA.crossOver(population[i-11], j);
 					childB.crossOver(population[i], j);
 				}
 			}
 			
-			crossed[i]=childA;
-			crossed[i+1]=childB;
+			crossed[i-1]=childA;
+			crossed[i]=childB;
 			i++;
 			
 		}
 		return crossed;
 		
 	}
-	public static <T,U> void AritmeticCrossOver(Individuo[] population, double probability) {
+	public static <T,U>  Individuo[] AritmeticCrossOver(Individuo[] population, double probability) {
 		double alpha=0.5;
 		Individuo[] crossed= new Individuo[population.length];
 		
@@ -107,11 +104,11 @@ public class Crossing {
 			Individuo childA= IndividuoFactory.getIndividuo(type, i, tolerance, numGenes);
 			Individuo childB= IndividuoFactory.getIndividuo(type, i, tolerance, numGenes);
 			
-			for(int j=0;j<population[0].getLength();j++) {
+			for(int j=0;j<numGenes;j++) {
 				int prob=(int)Math.random()*2;
 				alpha=Math.random();
 				var auxA=(RealGen)childA.cromosoma.genes[j];
-				var auxB=(RealGen)childA.cromosoma.genes[j];
+				var auxB=(RealGen)childB.cromosoma.genes[j];
 				
 				auxA.setAllele(auxA.fenotype()*alpha + auxB.fenotype()*(1-alpha));
 				auxB.setAllele(auxB.fenotype()*alpha + auxA.fenotype()*(1-alpha));
@@ -123,6 +120,8 @@ public class Crossing {
 			i++;
 			
 		}
+		
+		return crossed;
 		
 	
 	}

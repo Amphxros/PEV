@@ -134,7 +134,7 @@ public class AlgoritmoGenetico {
 		return seleccionados;
 	}
 	
-	private Cromosoma[] crossOver(Cromosoma[] crossed) {
+	private Cromosoma[] crossOver(Cromosoma[] selected) {
 		switch(crossing) {
 
 		case PMX:

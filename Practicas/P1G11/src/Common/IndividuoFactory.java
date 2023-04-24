@@ -33,7 +33,7 @@ public class IndividuoFactory {
 		case 4: 
 			return new IndividuoMichalewiczA(tolerance, idFuncion, nGenes,2);
 		case 5: 
-			return new IndividuoMichalewiczB(tolerance, idFuncion, nGenes,2);
+			return new IndividuoMichalewiczB(tolerance, idFuncion, nGenes);
 		
 		}
 		return null;

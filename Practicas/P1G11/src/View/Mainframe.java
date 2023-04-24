@@ -182,6 +182,8 @@ public class Mainframe extends JFrame  {
 			JComboBox crossTypeComboBox = new JComboBox();
 			crossTypeComboBox.setModel(new DefaultComboBoxModel(new String[] {
 				"Cruce Monopunto",
+				"Cruce Aritmetico",
+				"Cruce Uniforme",
 				
 				}
 			));
