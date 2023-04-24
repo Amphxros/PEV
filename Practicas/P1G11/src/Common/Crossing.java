@@ -72,7 +72,7 @@ public class Crossing {
 			Individuo childB= IndividuoFactory.getIndividuo(type, i, tolerance, numGenes);
 			
 			for(int j=0;j<numGenes;j++) {
-				int prob=(int)Math.random()*2;
+				int prob=(int)Math.random()*2; //[0,2)
 				if(prob==1) {
 
 					childB.crossOver(population[i-1], j);
