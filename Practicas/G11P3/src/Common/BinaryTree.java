@@ -4,7 +4,7 @@ import java.util.Random;
 
 /**
  * @author Amph
- *
+ * Equivalent to Chromosome class but instead of a array is in a binary tree structure
  */
 public class BinaryTree {
 	public String[] Functions= {
@@ -23,14 +23,15 @@ public class BinaryTree {
 	
 	protected String root = null;
 	
-	protected BinaryTree left = null;
-	protected BinaryTree right = null;
+	protected BinaryTree left = null; //left child
+	protected BinaryTree right = null; //right child
 	
 	protected int numNodes = 0;
 	protected int depth = 0;
 	
 	private boolean amIRoot=false;
 	private boolean amILeaf=false;
+	
 	private Random rnd;
 	public BinaryTree(boolean root) {
 		this.amIRoot=root;
@@ -50,14 +51,16 @@ public class BinaryTree {
 				this.root=Terminals[index];
 			
 			}
+			//recursive case
 			else {
 				index=(int)rnd.nextInt(0,Functions.length);
 				this.root=Functions[index];
 				
-			
+				//create children
 				this.left=new BinaryTree(false);//child so not a root
 				this.right=new BinaryTree(false);//child so not a root
 				
+				//initialize children
 				this.left.init(depth-1);
 				this.right.init(depth-1);
 			}
